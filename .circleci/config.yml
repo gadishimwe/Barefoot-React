@@ -1,0 +1,6 @@
+version: 2.0
+jobs:
+  build:
+    environment:
+      CC_TEST_REPORTER_ID: b411abe63b7caf76db8f6bd6470e650906f552ecfb0833516f0c74b961939be4
+    working_directory: ~/the_spinners-frontend
