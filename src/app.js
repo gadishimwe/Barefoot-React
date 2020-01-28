@@ -1,3 +1,4 @@
+/* eslint-disable import/no-unresolved */
 import React from 'react';
 import './app.scss';
 import { library } from '@fortawesome/fontawesome-svg-core';
