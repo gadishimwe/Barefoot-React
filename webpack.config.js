@@ -17,10 +17,12 @@ module.exports = {
                 }
             },
             {
-                test: /\.css$/,
+                test: /\.s(a|c)ss$/,
+                exclude: /\.module.(s(a|c)ss)$/,
                 use: [
-                    {loader: 'style-loader'},
-                    {loader: 'css-loader'}
+                    { loader: 'style-loader' },
+                    { loader: 'css-loader' },
+                    { loader: 'sass-loader' }
                 ]
             },
             {
@@ -38,5 +40,8 @@ module.exports = {
         new HtmlWebpackPlugin({
             template: './public/index.html',
         })
-    ]
+    ],
+    resolve: {
+        extensions: ['.js', '.jsx', '.scss']
+    }
 }
