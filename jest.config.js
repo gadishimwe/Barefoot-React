@@ -10,6 +10,6 @@ module.exports = {
 	testEnvironment: 'jest-environment-jsdom',
 	testMatch: ['**/__tests__/**/*.[jt]s?(x)', '**/?(*.)+(spec|test).[tj]s?(x)'],
 	setupFilesAfterEnv: ['<rootDir>/setupEnzyme.js'],
-	setupFiles: ['./src/setupTests.js'],
+	setupFiles: ['./src/setupTests.js', 'jest-localstorage-mock'],
 	snapshotSerializers: ['enzyme-to-json/serializer'],
 };
