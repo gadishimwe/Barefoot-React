@@ -3,4 +3,16 @@ jobs:
   build:
     environment:
       CC_TEST_REPORTER_ID: b411abe63b7caf76db8f6bd6470e650906f552ecfb0833516f0c74b961939be4
+    docker:
+      - image: circleci/node:10.16.3  
     working_directory: ~/the_spinners-frontend
+    steps:
+      - checkout
+      - run: 
+          name: Install packages
+          command: |
+            npm install
+      - run:
+          name: Run the test
+          command: |
+            npm test      
