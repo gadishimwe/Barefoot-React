@@ -7,4 +7,4 @@ cache:
 install:
   - npm install
 script:
-  - npm test -- --coverage 
+  - npm test -- --coverage -u

@@ -6,7 +6,8 @@ export const updateProfile = ({
     residence,
     preferredLanguage: language,
     preferredCurrency: currency,
-    // birthDate
+    birthDate,
+    profilePicture: image
 }) => dispatch => {
     dispatch({
         type: UPDATE_PROFILE,
@@ -15,9 +16,11 @@ export const updateProfile = ({
             residence,
             preferredLanguage: language,
             preferredCurrency: currency,
-            // birthDate
+            birthDate,
+            profilePicture: image
         })
     })
-}
+};
+
 
 

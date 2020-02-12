@@ -1,3 +1,7 @@
+/* eslint-disable react/jsx-one-expression-per-line */
+/* eslint-disable react/jsx-closing-tag-location */
+/* eslint-disable react/no-array-index-key */
+/* eslint-disable prettier/prettier */
 import React from 'react';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
@@ -15,7 +19,7 @@ import Alert from '@material-ui/lab/Alert';
 import { useSelector, useDispatch } from 'react-redux';
 import validateSignup from '../../redux/actions/signupActions';
 import useStyles from '../../styles/signup';
-import Loading from '../common/Loading';
+import Loading from '../common/loading';
 
 export const disabledHandler = (props, state) => {
 	if (

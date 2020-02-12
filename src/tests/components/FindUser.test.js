@@ -1,3 +1,5 @@
+/* eslint-disable no-undef */
+/* eslint-disable react/react-in-jsx-scope */
 import { Provider } from 'react-redux';
 import { Formik, Form } from 'formik';
 import FindUser from '../../components/auth/FindUser';

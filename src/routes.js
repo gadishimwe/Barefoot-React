@@ -9,6 +9,7 @@ import Login from './views/Login';
 import NotFound from './views/NotFound';
 import IsLoggedIn from './helpers/IsLoggedIn';
 import Dashboard from './views/Dashboard';
+import ProfilePageEditView from './views/ProfilePageEditView';
 
 const Routes = () => {
 	const auth = useSelector(state => state.auth);
@@ -27,6 +28,12 @@ const Routes = () => {
 					exact
 					path='/dashboard'
 					component={Dashboard}
+					isAuthenticated={auth.isAuthenticated}
+				/>
+				<IsLoggedIn
+					exact
+					path='/settings/edit-profile'
+					component={ProfilePageEditView}
 					isAuthenticated={auth.isAuthenticated}
 				/>
 				<Route component={NotFound} />

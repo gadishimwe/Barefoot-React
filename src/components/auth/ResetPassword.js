@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-globals */
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Formik, Form } from 'formik';
@@ -10,7 +11,7 @@ import Paper from '@material-ui/core/Paper';
 import Alert from '@material-ui/lab/Alert';
 import useStyles from '../../styles/ResetPassword';
 import { resetPassword } from '../../redux/actions/resetPasswordAction';
-import Loading from '../common/Loading';
+import Loading from '../common/loading';
 
 const passwordSchema = yup.object({
 	newPassword: yup
@@ -43,8 +44,8 @@ const ResetPassword = () => {
 						{resetPasswordReducer.error}
 					</Alert>
 				) : (
-					''
-				)}
+						''
+					)}
 				<Typography className={classes.cardTitle}>Reset your password</Typography>
 				<Formik
 					validationSchema={passwordSchema}

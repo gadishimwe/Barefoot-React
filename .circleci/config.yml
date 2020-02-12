@@ -15,4 +15,4 @@ jobs:
       - run:
           name: Run the test
           command: |
-            npm test      
+            npm test -- -u    
