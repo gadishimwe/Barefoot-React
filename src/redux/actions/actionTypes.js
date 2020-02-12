@@ -1,0 +1,1 @@
+export const VALIDATE_SIGNUP = 'VALIDATE_SIGNUP';
