@@ -31,16 +31,16 @@ const ResetPassword = () => {
 		dispatch(resetPassword(values));
 	};
 
-	const { auth } = useSelector(state => state);
-	if (auth.message) {
-		location.href = '/login';
+	const { resetPasswordReducer } = useSelector(state => state);
+	if (resetPassword.message) {
+		window.location.href = '/login';
 	}
 	return (
 		<Grid component={Paper} elevation={6} className={classes.cards}>
 			<div className={classes.paper}>
-				{auth.error ? (
+				{resetPasswordReducer.error ? (
 					<Alert className={classes.messages} severity='error'>
-						{auth.error}
+						{resetPasswordReducer.error}
 					</Alert>
 				) : (
 					''
@@ -108,7 +108,7 @@ const ResetPassword = () => {
 									Object.keys(props.errors).length !== 0
 								}
 							>
-								{!auth.loading ? 'Reset Password' : <Loading />}
+								{!resetPasswordReducer.loading ? 'Reset Password' : <Loading />}
 							</Button>
 						</Form>
 					)}

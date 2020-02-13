@@ -26,17 +26,17 @@ const FindUser = () => {
 		dispatch(findUser(values));
 	};
 
-	const { auth } = useSelector(state => state);
-	if (auth.message) {
-		location.href = '/success';
+	const { resetPasswordReducer } = useSelector(state => state);
+	if (resetPasswordReducer.message) {
+		window.location.href = '/success';
 	}
 
 	return (
 		<Grid component={Paper} elevation={6} className={classes.cards}>
 			<div className={classes.paper}>
-				{auth.error ? (
+				{resetPasswordReducer.error ? (
 					<Alert className={classes.messages} severity='error'>
-						{auth.error}
+						{resetPasswordReducer.error}
 					</Alert>
 				) : (
 					''
@@ -84,7 +84,7 @@ const FindUser = () => {
 								color='primary'
 								disabled={!props.values.email || Object.keys(props.errors).length !== 0}
 							>
-								{!auth.loading ? 'Search Account' : <Loading />}
+								{!resetPasswordReducer.loading ? 'Search Account' : <Loading />}
 							</Button>
 						</Form>
 					)}
