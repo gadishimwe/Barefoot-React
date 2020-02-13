@@ -1,6 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const Dotenv = require('dotenv-webpack');
+const webpack = require('webpack');
+require('dotenv').config();
 
 module.exports = {
 	entry: './src/index.js',
@@ -40,9 +41,13 @@ module.exports = {
 		historyApiFallback: true,
 	},
 	plugins: [
-		new Dotenv(),
 		new HtmlWebpackPlugin({
 			template: './public/index.html',
+		}),
+		new webpack.DefinePlugin({
+			'process.env': {
+				API_URL: JSON.stringify(process.env.API_URL),
+			},
 		}),
 	],
 	resolve: {

@@ -42,7 +42,7 @@ const SignupForm = () => {
 		lastName: Yup.string()
 			.min(2, 'last name must be at least 2 characters')
 			.matches(/^[a-zA-Z .]+$/, 'last name must contain only letters')
-			.required('first name is a required field'),
+			.required('last name is a required field'),
 		email: Yup.string()
 			.email()
 			.required(),
@@ -149,7 +149,8 @@ const SignupForm = () => {
 								{error !== undefined ? (
 									<Alert severity='error'>
 										{error.map((err, index) => (
-											<div key={index}>*{err}</div>
+											<div key={index}>
+												*{err}</div>
 										))}
 									</Alert>
 								) : null}
