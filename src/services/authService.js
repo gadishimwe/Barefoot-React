@@ -7,6 +7,7 @@ export const findUserService = async ({ email }) => {
 };
 
 export const resetPasswordService = async ({ newPassword, confirmPass }) => {
+	// eslint-disable-next-line no-restricted-globals
 	const parsed = queryString.parse(location.search);
 	await localStorage.setItem('token', parsed.token);
 

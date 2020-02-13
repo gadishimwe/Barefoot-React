@@ -15,7 +15,7 @@ import * as yup from 'yup';
 import Alert from '@material-ui/lab/Alert';
 import useStyles from '../../styles/Login';
 import Helpers from '../../helpers/setAuth.helper';
-import Loading from '../common/Loading';
+import Loading from '../common/loading';
 
 import { loginUser } from '../../redux/actions/loginAction';
 
@@ -61,12 +61,7 @@ const LoginPage = () => {
 	const classes = useStyles();
 
 	return (
-		<Grid
-			component={Paper}
-			elevation={6}
-			className={classes.cards}
-			id='component-Login'
-		>
+		<Grid component={Paper} elevation={6} className={classes.cards} id='component-Login'>
 			<div className={classes.paper}>
 				<Avatar className={classes.avatar}>
 					<LockOutlinedIcon />
@@ -122,9 +117,7 @@ const LoginPage = () => {
 									props.values.password !== '' &&
 									Object.prototype.hasOwnProperty.call(props.errors, 'password')
 								}
-								helperText={
-									props.values.password !== '' && props.errors.password
-								}
+								helperText={props.values.password !== '' && props.errors.password}
 							/>
 
 							<Grid container>
@@ -150,15 +143,10 @@ const LoginPage = () => {
 								}
 							>
 								{newState.auth.loading ? (
-									<Loading
-										size={18}
-										color='secondary'
-										thickness={6}
-										id='loading'
-									/>
+									<Loading size={18} color='secondary' thickness={6} id='loading' />
 								) : (
-									'Login'
-								)}
+										'Login'
+									)}
 							</Button>
 							{mes.length !== 0 && mes !== undefined && (
 								<Alert severity={mes[0].type} id='feedback'>
@@ -180,10 +168,7 @@ const LoginPage = () => {
 						/>
 					</IconButton>
 					<IconButton>
-						<FontAwesomeIcon
-							icon={['fab', 'google']}
-							style={{ fontSize: 37, color: '#DB4437' }}
-						/>
+						<FontAwesomeIcon icon={['fab', 'google']} style={{ fontSize: 37, color: '#DB4437' }} />
 					</IconButton>
 				</Grid>
 				<Grid>

@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Test On Loading Component render() Should Render Loading Component 1`] = `
+<div
+  className="lds-ellipsis"
+>
+  <div />
+  <div />
+  <div />
+  <div />
+</div>
+`;

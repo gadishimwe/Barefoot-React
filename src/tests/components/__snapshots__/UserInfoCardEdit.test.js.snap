@@ -1,0 +1,361 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Test On UserInfoCardEdit Component render() Should Render UserInfoCardEdit Component 1`] = `
+<ForwardRef(Card)
+  className="makeStyles-root-1"
+  classes={
+    Object {
+      "root": "MuiCard-root",
+    }
+  }
+>
+  <WithStyles(ForwardRef(CardContent))
+    className="makeStyles-contents-8"
+    style={
+      Object {
+        "textAlign": "center",
+      }
+    }
+  >
+    <form
+      autoComplete="off"
+      className="makeStyles-root-1"
+      noValidate={true}
+      onSubmit={[Function]}
+    >
+      <div
+        className="makeStyles-formDiv-10"
+      >
+        <div
+          style={
+            Object {
+              "display": "flex",
+              "textAlign": "center",
+            }
+          }
+        >
+          <div
+            style={
+              Object {
+                "margin": "auto",
+                "width": "500px",
+              }
+            }
+          >
+            <WithStyles(ForwardRef(TextField))
+              className="makeStyles-formInput-9"
+              disabled={true}
+              id="firstname"
+              label="First name"
+              size="small"
+              variant="outlined"
+            />
+          </div>
+        </div>
+        <div
+          style={
+            Object {
+              "display": "flex",
+              "textAlign": "center",
+            }
+          }
+        >
+          <div
+            style={
+              Object {
+                "margin": "auto",
+                "width": "500px",
+              }
+            }
+          >
+            <WithStyles(ForwardRef(TextField))
+              className="makeStyles-formInput-9"
+              disabled={true}
+              id="lastname"
+              label="Last name"
+              size="small"
+              variant="outlined"
+            />
+          </div>
+        </div>
+        <div
+          style={
+            Object {
+              "display": "flex",
+              "textAlign": "center",
+            }
+          }
+        >
+          <div
+            style={
+              Object {
+                "margin": "auto",
+                "width": "500px",
+              }
+            }
+          >
+            <WithStyles(ForwardRef(TextField))
+              className="makeStyles-formInput-9"
+              disabled={true}
+              id="email"
+              label="Email"
+              size="small"
+              variant="outlined"
+            />
+          </div>
+        </div>
+        <div
+          style={
+            Object {
+              "display": "flex",
+              "textAlign": "center",
+            }
+          }
+        >
+          <div
+            style={
+              Object {
+                "margin": "auto",
+                "width": "500px",
+              }
+            }
+          >
+            <WithStyles(ForwardRef(FormControl))
+              className="makeStyles-formControl-12"
+              size="small"
+              variant="outlined"
+            >
+              <WithStyles(ForwardRef(InputLabel))
+                htmlFor="outlined-gender-native-simple"
+              >
+                Gender
+              </WithStyles(ForwardRef(InputLabel))>
+              <WithStyles(ForwardRef(Select))
+                className="gender"
+                inputProps={
+                  Object {
+                    "id": "outlined-gender-native-simple",
+                    "name": "gender",
+                  }
+                }
+                label="gender-input"
+                labelWidth={0}
+                native={true}
+                onChange={[Function]}
+              >
+                <option
+                  value=""
+                />
+                <option
+                  value="M"
+                >
+                  Male
+                </option>
+                <option
+                  value="F"
+                >
+                  Female
+                </option>
+              </WithStyles(ForwardRef(Select))>
+            </WithStyles(ForwardRef(FormControl))>
+          </div>
+        </div>
+        <div
+          style={
+            Object {
+              "display": "flex",
+              "textAlign": "center",
+            }
+          }
+        >
+          <div
+            style={
+              Object {
+                "margin": "auto",
+                "width": "500px",
+              }
+            }
+          >
+            <WithStyles(ForwardRef(FormControl))
+              className="makeStyles-formControl-12"
+              size="small"
+              variant="outlined"
+            >
+              <WithStyles(ForwardRef(InputLabel))
+                htmlFor="outlined-language-native-simple"
+              >
+                Language
+              </WithStyles(ForwardRef(InputLabel))>
+              <WithStyles(ForwardRef(Select))
+                className="language"
+                inputProps={
+                  Object {
+                    "id": "outlined-language-native-simple",
+                    "name": "language",
+                  }
+                }
+                labelWidth={0}
+                native={true}
+                onChange={[Function]}
+              >
+                <option
+                  value=""
+                />
+                <option
+                  value="english"
+                >
+                  English
+                </option>
+                <option
+                  value="french"
+                >
+                  French
+                </option>
+              </WithStyles(ForwardRef(Select))>
+            </WithStyles(ForwardRef(FormControl))>
+          </div>
+        </div>
+        <div
+          style={
+            Object {
+              "display": "flex",
+              "textAlign": "center",
+            }
+          }
+        >
+          <div
+            style={
+              Object {
+                "margin": "auto",
+                "width": "500px",
+              }
+            }
+          >
+            <WithStyles(ForwardRef(FormControl))
+              className="makeStyles-formControl-12"
+              size="small"
+              variant="outlined"
+            >
+              <WithStyles(ForwardRef(InputLabel))
+                htmlFor="outlined-currency-native-simple"
+              >
+                Currency
+              </WithStyles(ForwardRef(InputLabel))>
+              <WithStyles(ForwardRef(Select))
+                className="currency"
+                inputProps={
+                  Object {
+                    "id": "outlined-currency-native-simple",
+                    "name": "currency",
+                  }
+                }
+                labelWidth={0}
+                native={true}
+                onChange={[Function]}
+              >
+                <option
+                  value=""
+                />
+                <option
+                  value="Dollar"
+                >
+                  USD $
+                </option>
+                <option
+                  value="Euro"
+                >
+                  Euro €
+                </option>
+                <option
+                  value="Pound"
+                >
+                  Pound £
+                </option>
+              </WithStyles(ForwardRef(Select))>
+            </WithStyles(ForwardRef(FormControl))>
+          </div>
+        </div>
+        <div
+          style={
+            Object {
+              "display": "flex",
+              "textAlign": "center",
+            }
+          }
+        >
+          <div
+            style={
+              Object {
+                "margin": "auto",
+                "width": "500px",
+              }
+            }
+          >
+            <CountrySelect
+              className="countries"
+              countryChangeFn={[Function]}
+              inputProps={
+                Object {
+                  "id": "outlined-residence-native-simple",
+                  "name": "residence",
+                }
+              }
+            />
+          </div>
+        </div>
+        <div
+          style={
+            Object {
+              "display": "flex",
+              "textAlign": "center",
+            }
+          }
+        >
+          <div
+            className="birthDate"
+            onChange={[Function]}
+            style={
+              Object {
+                "margin": "auto",
+                "width": "500px",
+              }
+            }
+          >
+            <WithStyles(ForwardRef(TextField))
+              InputLabelProps={
+                Object {
+                  "shrink": true,
+                }
+              }
+              defaultValue="1990-01-01"
+              label="Birthday"
+              size="small"
+              type="date"
+            />
+          </div>
+        </div>
+      </div>
+      <div
+        className="makeStyles-submitInfoBtn-4"
+      >
+        <WithStyles(ForwardRef(Button))
+          className="makeStyles-button-5"
+          color="primary"
+          disabled={true}
+          size="large"
+          style={
+            Object {
+              "fontSize": "11px",
+              "height": "40px",
+            }
+          }
+          type="submit"
+          variant="contained"
+        >
+          UPDATE PROFILE
+        </WithStyles(ForwardRef(Button))>
+      </div>
+    </form>
+  </WithStyles(ForwardRef(CardContent))>
+</ForwardRef(Card)>
+`;

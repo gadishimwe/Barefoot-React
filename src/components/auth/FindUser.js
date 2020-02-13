@@ -1,3 +1,5 @@
+/* eslint-disable import/extensions */
+/* eslint-disable no-restricted-globals */
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Formik, Form } from 'formik';
@@ -9,7 +11,7 @@ import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Alert from '@material-ui/lab/Alert';
 import useStyles from '../../styles/FindUser';
-import Loading from '../common/Loading';
+import Loading from '../common/loading';
 import { findUser } from '../../redux/actions/resetPasswordAction';
 
 const emailSchema = yup.object({
