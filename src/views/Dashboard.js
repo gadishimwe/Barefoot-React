@@ -1,15 +1,18 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
-// import Sidebar from '../components/common/sidebar';
 import Drawer from '@material-ui/core/Drawer';
 import Hidden from '@material-ui/core/Hidden';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import Grid from '@material-ui/core/Grid';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import Dialog from '@material-ui/core/Dialog';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
+import { CircularProgress } from '@material-ui/core';
 import Sidebar from '../components/common/sidebar';
 import Footer from '../components/common/Footer';
 import Navbar from '../components/common/mainNavbar';
+import { logoutUser } from '../redux/actions/logoutAction';
 
 const drawerWidth = 240;
 export default function Login() {
@@ -39,6 +42,9 @@ export default function Login() {
 			padding: theme.spacing(1),
 			minHeight: '100%',
 		},
+		loader: {
+			color: 'white',
+		},
 	}));
 	const classes = useStyles();
 	const theme = useTheme();
@@ -47,6 +53,21 @@ export default function Login() {
 		setMobileOpen(!mobileOpen);
 	};
 	const user = useSelector(state => state.auth.user);
+
+	const { isAuthenticated, loading } = useSelector(state => state.logoutReducer);
+	useEffect(() => {
+		if (!isAuthenticated) {
+			localStorage.removeItem('token');
+			localStorage.removeItem('user');
+			window.location.replace('/login');
+		}
+	}, [isAuthenticated]);
+
+	const dispatch = useDispatch();
+	const handleLogout = () => {
+		dispatch(logoutUser());
+	};
+	const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
 
 	return (
 		<>
@@ -69,7 +90,7 @@ export default function Login() {
 							<IconButton onClick={handleDrawerToggle}>
 								<CloseIcon />
 							</IconButton>
-							<Sidebar />
+							<Sidebar handleLogout={handleLogout} />
 						</Drawer>
 					</Hidden>
 					<Hidden xsDown implementation='css'>
@@ -80,31 +101,45 @@ export default function Login() {
 								paper: classes.drawerPaper,
 							}}
 						>
-							<Sidebar />
+							<Sidebar handleLogout={handleLogout} />
 						</Drawer>
 					</Hidden>
 				</nav>
 				<Grid
 					container
 					spacing={0}
-					style={{ maxHeight: '100%' }}
+					style={{ maxHeight: '100%', textAlign: 'left', padding: '2%' }}
 					className={classes.content}
 				>
 					<Grid lg={12} item sm={12} md={12} xs={12}>
 						<div className={classes.toolbar} />
 						{/* ADD YOUR DATA FROM HERE */}
 						<div styles={{ textAlign: 'left' }}>
-							<h2>
+							<div style={{ fontSize: '22px' }}>
 								{'Welcome back '}
+								&nbsp;
 								{user.firstName}
+								&nbsp;
 								{user.lastName}
-							</h2>
+							</div>
 						</div>
 						{/* ADD YOUR DATA FROM HERE */}
 					</Grid>
 				</Grid>
 			</div>
 			<Footer />
+			<Dialog
+				fullScreen={fullScreen}
+				open={loading}
+				PaperProps={{
+					style: {
+						backgroundColor: 'transparent',
+						boxShadow: 'none',
+					},
+				}}
+			>
+				<CircularProgress size={59.5} className={classes.loader} />
+			</Dialog>
 		</>
 	);
 }
