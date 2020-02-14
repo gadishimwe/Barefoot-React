@@ -147,8 +147,8 @@ export default function UserInfoCardEdit(props) {
 						{userProfile.message}
 					</Alert>
 				) : (
-						''
-					)}
+					''
+				)}
 				<form onSubmit={handleSubmit} className={classes.root} noValidate autoComplete='off'>
 					<div className={classes.formDiv}>
 						<div style={{ display: 'flex', textAlign: 'center' }}>
@@ -157,7 +157,6 @@ export default function UserInfoCardEdit(props) {
 									value={currentUser.firstName}
 									className={classes.formInput}
 									id='firstname'
-									label='First name'
 									variant='outlined'
 									size='small'
 									disabled
@@ -170,7 +169,6 @@ export default function UserInfoCardEdit(props) {
 									className={classes.formInput}
 									id='lastname'
 									value={currentUser.lastName}
-									label='Last name'
 									variant='outlined'
 									size='small'
 									disabled
@@ -183,7 +181,6 @@ export default function UserInfoCardEdit(props) {
 									className={classes.formInput}
 									id='email'
 									value={currentUser.email}
-									label='Email'
 									variant='outlined'
 									size='small'
 									disabled

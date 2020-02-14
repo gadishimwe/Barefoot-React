@@ -45,7 +45,7 @@ const useStyles = makeStyles(theme => ({
 	toolbar: theme.mixins.toolbar,
 }));
 
-const Sidebar = () => {
+const Sidebar = ({ handleLogout }) => {
 	const classes = useStyles();
 	return (
 		<div className={classes.sideBar}>
@@ -55,7 +55,10 @@ const Sidebar = () => {
 					<Avatar style={{ margin: 'auto' }} />
 				</div>
 				<Divider />
-				<ListItem button>
+				<ListItem
+					button
+					className={window.location.pathname === '/dashboard' ? classes.isActive : 'null'}
+				>
 					<ListItemIcon>
 						<DashboardIcon />
 					</ListItemIcon>
@@ -78,9 +81,7 @@ const Sidebar = () => {
 						<HomeWorkOutlinedIcon />
 					</ListItemIcon>
 					<ListItemText>
-						<Typography className={classes.menuItems}>
-							Accommodations
-						</Typography>
+						<Typography className={classes.menuItems}>Accommodations</Typography>
 					</ListItemText>
 				</ListItem>
 				<Divider />
@@ -110,27 +111,23 @@ const Sidebar = () => {
 					}}
 				>
 					<ListItemText>
-						<Typography
-							style={{ fontWeight: 'bold', color: 'white', margin: 'auto' }}
-						>
+						<Typography style={{ fontWeight: 'bold', color: 'white', margin: 'auto' }}>
 							Settings
 						</Typography>
 					</ListItemText>
 				</ListItem>
 
-				<ListItem button className={classes.isActive}>
+				<ListItem button>
 					<ListItemIcon>
 						<SettingsIcon />
 					</ListItemIcon>
 					<ListItemText>
-						<Typography className={classes.menuItems}>
-							Account Settings
-						</Typography>
+						<Typography className={classes.menuItems}>Account Settings</Typography>
 					</ListItemText>
 				</ListItem>
 				<Divider />
 				<br />
-				<ListItem button>
+				<ListItem button onClick={handleLogout}>
 					<ListItemIcon>
 						<ExitToAppIcon />
 					</ListItemIcon>

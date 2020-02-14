@@ -46,7 +46,6 @@ exports[`Test On UserInfoCardEdit Component render() Should Render UserInfoCardE
               className="makeStyles-formInput-9"
               disabled={true}
               id="firstname"
-              label="First name"
               size="small"
               variant="outlined"
             />
@@ -72,7 +71,6 @@ exports[`Test On UserInfoCardEdit Component render() Should Render UserInfoCardE
               className="makeStyles-formInput-9"
               disabled={true}
               id="lastname"
-              label="Last name"
               size="small"
               variant="outlined"
             />
@@ -98,7 +96,6 @@ exports[`Test On UserInfoCardEdit Component render() Should Render UserInfoCardE
               className="makeStyles-formInput-9"
               disabled={true}
               id="email"
-              label="Email"
               size="small"
               variant="outlined"
             />

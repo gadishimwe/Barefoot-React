@@ -79,8 +79,8 @@ const LandingPage = () => {
 						<hr className={classes.hrLine} />
 						<div>
 							<p className={classes.paragr}>
-								The world is like a book. If you stay in one place, you won
-								&quot; t read all the pages.
+								The world is like a book. If you stay in one place, you won &quot; t read all the
+								pages.
 							</p>
 							<h1>Work, Travel, Save, Repeat</h1>
 						</div>

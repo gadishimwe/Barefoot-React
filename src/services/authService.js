@@ -7,8 +7,7 @@ export const findUserService = async ({ email }) => {
 };
 
 export const resetPasswordService = async ({ newPassword, confirmPass }) => {
-	// eslint-disable-next-line no-restricted-globals
-	const parsed = queryString.parse(location.search);
+	const parsed = queryString.parse(window.location.search);
 	await localStorage.setItem('token', parsed.token);
 
 	const result = await http.put('/api/auth/reset-password', { newPassword, confirmPass });
@@ -18,5 +17,10 @@ export const resetPasswordService = async ({ newPassword, confirmPass }) => {
 export const loginUserService = data => {
 	const response = http.post('/api/auth/login', data);
 
+	return response;
+};
+
+export const logoutService = () => {
+	const response = http.post('api/auth/logout');
 	return response;
 };

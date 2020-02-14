@@ -1,4 +1,5 @@
 /* eslint-disable no-restricted-globals */
+/* eslint-disable no-return-assign */
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Formik, Form } from 'formik';
@@ -8,7 +9,6 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
-import Alert from '@material-ui/lab/Alert';
 import useStyles from '../../styles/ResetPassword';
 import { resetPassword } from '../../redux/actions/resetPasswordAction';
 import Loading from '../common/loading';
@@ -33,19 +33,14 @@ const ResetPassword = () => {
 	};
 
 	const { resetPasswordReducer } = useSelector(state => state);
-	if (resetPassword.message) {
+	if (resetPasswordReducer.message) {
 		window.location.href = '/login';
+		localStorage.removeItem('token');
 	}
 	return (
 		<Grid component={Paper} elevation={6} className={classes.cards}>
 			<div className={classes.paper}>
-				{resetPasswordReducer.error ? (
-					<Alert className={classes.messages} severity='error'>
-						{resetPasswordReducer.error}
-					</Alert>
-				) : (
-						''
-					)}
+				{resetPasswordReducer.error ? (window.location.href = '/find-user') : ''}
 				<Typography className={classes.cardTitle}>Reset your password</Typography>
 				<Formik
 					validationSchema={passwordSchema}

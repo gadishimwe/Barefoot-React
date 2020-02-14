@@ -5,19 +5,6 @@ import { SET_CURRENT_USER } from '../../redux/actions/actionTypes';
 import loginReducer from '../../redux/reducers/loginReducer';
 
 describe('login reducer test', () => {
-	it('add current user to the state', () => {
-		const action = {
-			type: SET_CURRENT_USER,
-			payload: { id: '1', name: 'user' },
-		};
-		const response = {
-			credentials: {},
-			isAuthenticated: true,
-			user: { id: '1', name: 'user' },
-		};
-		const newState = loginReducer({}, action);
-		expect(newState).toEqual(response);
-	});
 	it('Login a user is pending', () => {
 		const action = {
 			type: 'LOGIN_USER_PENDING',
@@ -63,7 +50,6 @@ describe('login reducer test', () => {
 		const token = jwt.sign(user, `${process.env.SECRET_KEY}`, {
 			expiresIn: 24,
 		});
-		const data = jwtDecode(token);
 		const action = {
 			type: 'LOGIN_USER_FULFILLED',
 			payload: {
@@ -74,8 +60,8 @@ describe('login reducer test', () => {
 		const response = {
 			credentials: {},
 			isAuthenticated: true,
-			user: data,
 			token,
+			user: {},
 			loading: false,
 		};
 		const newState = loginReducer({}, action);

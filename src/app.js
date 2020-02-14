@@ -9,6 +9,7 @@ import jwtDecode from 'jwt-decode';
 import configureStore from './redux/store';
 import { setCurrentUser } from './redux/actions/loginAction';
 import Routes from './routes';
+import http from './services/httpService';
 
 library.add(fab);
 const store = configureStore();
@@ -17,9 +18,9 @@ if (localStorage.token) {
 	const user = jwtDecode(localStorage.token);
 	if (window.location.pathname === '/login') {
 		window.location.href = '/dashboard';
-		store.dispatch(setCurrentUser(user));
+		store.dispatch(setCurrentUser(http.get('/api/users/view-profile')));
 	}
-	store.dispatch(setCurrentUser(user));
+	store.dispatch(setCurrentUser(http.get('/api/users/view-profile')));
 	const currentTime = Date.now() / 1000;
 	if (user.exp < currentTime) {
 		localStorage.removeItem('token');
