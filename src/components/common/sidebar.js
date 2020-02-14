@@ -13,7 +13,8 @@ import CardTravelIcon from '@material-ui/icons/CardTravel';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import Divider from '@material-ui/core/Divider';
-import Avatar from '@material-ui/core/Avatar';
+// import Avatar from '@material-ui/core/Avatar';
+import ProfilePicture from '../profilePicture';
 
 const useStyles = makeStyles(theme => ({
 	isActive: {
@@ -43,19 +44,27 @@ const useStyles = makeStyles(theme => ({
 		minHeight: '40%',
 	},
 	toolbar: theme.mixins.toolbar,
+	large: {
+		width: theme.spacing(12),
+		height: theme.spacing(12),
+	},
 }));
 
-const Sidebar = () => {
+const Sidebar = ({ handleLogout, isLoading, image, handleProfilePictureChange }) => {
 	const classes = useStyles();
 	return (
 		<div className={classes.sideBar}>
 			<div className={classes.toolbar} />
 			<List>
-				<div style={{ textAlign: 'center', marginBottom: '20px' }}>
-					<Avatar style={{ margin: 'auto' }} />
-				</div>
-				<Divider />
-				<ListItem button>
+				<ProfilePicture
+					isLoading={isLoading}
+					image={image}
+					handleProfilePictureChange={handleProfilePictureChange}
+				/>
+				<ListItem
+					button
+					className={window.location.pathname === '/dashboard' ? classes.isActive : 'null'}
+				>
 					<ListItemIcon>
 						<DashboardIcon />
 					</ListItemIcon>
@@ -78,9 +87,7 @@ const Sidebar = () => {
 						<HomeWorkOutlinedIcon />
 					</ListItemIcon>
 					<ListItemText>
-						<Typography className={classes.menuItems}>
-							Accommodations
-						</Typography>
+						<Typography className={classes.menuItems}>Accommodations</Typography>
 					</ListItemText>
 				</ListItem>
 				<Divider />
@@ -110,27 +117,23 @@ const Sidebar = () => {
 					}}
 				>
 					<ListItemText>
-						<Typography
-							style={{ fontWeight: 'bold', color: 'white', margin: 'auto' }}
-						>
+						<Typography style={{ fontWeight: 'bold', color: 'white', margin: 'auto' }}>
 							Settings
 						</Typography>
 					</ListItemText>
 				</ListItem>
 
-				<ListItem button className={classes.isActive}>
+				<ListItem button>
 					<ListItemIcon>
 						<SettingsIcon />
 					</ListItemIcon>
 					<ListItemText>
-						<Typography className={classes.menuItems}>
-							Account Settings
-						</Typography>
+						<Typography className={classes.menuItems}>Account Settings</Typography>
 					</ListItemText>
 				</ListItem>
 				<Divider />
 				<br />
-				<ListItem button>
+				<ListItem button onClick={handleLogout}>
 					<ListItemIcon>
 						<ExitToAppIcon />
 					</ListItemIcon>

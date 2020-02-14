@@ -15,7 +15,6 @@ const initialState = {
 	loading: false,
 };
 
-let User;
 const loginReducer = (state = initialState, action) => {
 	switch (action.type) {
 		case pending(LOGIN_USER):
@@ -28,14 +27,13 @@ const loginReducer = (state = initialState, action) => {
 				loading: true,
 			};
 		case fulfilled(LOGIN_USER):
-			User = jwtDecode(action.payload.data.data);
 			return {
 				...state,
 				credentials: {
 					...state.credentials,
 				},
 				isAuthenticated: true,
-				user: { ...User },
+				user: {},
 				token: action.payload.data.data,
 				loading: false,
 			};
@@ -50,14 +48,23 @@ const loginReducer = (state = initialState, action) => {
 				error: action.payload.response.data,
 				loading: false,
 			};
-		case SET_CURRENT_USER:
+		case 'SET_CURRENT_USER_PENDING':
 			return {
 				...state,
 				credentials: {
 					...state.credentials,
 				},
 				isAuthenticated: true,
-				user: { ...action.payload },
+				loading: true,
+			};
+		case 'SET_CURRENT_USER_FULFILLED':
+			return {
+				...state,
+				credentials: {
+					...state.credentials,
+				},
+				isAuthenticated: true,
+				user: { ...action.payload.data.data },
 			};
 		default:
 			return state;

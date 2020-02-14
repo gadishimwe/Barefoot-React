@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { UPDATE_PROFILE } from '../actions/actionTypes';
 
 import { pending, fulfilled, rejected } from '../../helpers/utils/action.utils';
