@@ -34,7 +34,7 @@ const LoginPage = () => {
 		const { error, user } = newState.auth;
 		if (Object.keys(error).length !== 0) {
 			if (error.message instanceof Array) {
-				return [{ message: newState.auth.error.message, type: 'error' }];
+				return [{ message: ['An error occured, wrong email or password'], type: 'error' }];
 			}
 			return [{ message: [newState.auth.error.message], type: 'error' }];
 		}
@@ -52,10 +52,7 @@ const LoginPage = () => {
 			.string()
 			.email()
 			.required(),
-		password: yup
-			.string('')
-			.min(8, 'Password must contain at least 8 characters')
-			.required('Enter your password'),
+		password: yup.string('').required('Enter your password'),
 	});
 
 	const classes = useStyles();
@@ -98,7 +95,7 @@ const LoginPage = () => {
 									props.values.eamil !== '' &&
 									Object.prototype.hasOwnProperty.call(props.errors, 'email')
 								}
-								helperText={props.values.password !== '' && props.errors.email}
+								helperText={props.values.email !== '' && props.errors.email}
 							/>
 							<TextField
 								variant='outlined'
@@ -145,8 +142,8 @@ const LoginPage = () => {
 								{newState.auth.loading ? (
 									<Loading size={18} color='secondary' thickness={6} id='loading' />
 								) : (
-										'Login'
-									)}
+									'Login'
+								)}
 							</Button>
 							{mes.length !== 0 && mes !== undefined && (
 								<Alert severity={mes[0].type} id='feedback'>
@@ -160,22 +157,26 @@ const LoginPage = () => {
 				</Formik>
 
 				<Typography>Or signin with</Typography>
-				<Grid>
-					<IconButton>
+				<Typography className={classes.social}>
+					<IconButton className={classes.facebookIcon}>
 						<FontAwesomeIcon
-							icon={['fab', 'facebook']}
-							style={{ fontSize: 40, color: '#3b5998' }}
+							icon={['fab', 'facebook-f']}
+							style={{ fontSize: 20, color: '#3b5998' }}
 						/>
 					</IconButton>
-					<IconButton>
-						<FontAwesomeIcon icon={['fab', 'google']} style={{ fontSize: 37, color: '#DB4437' }} />
+					or
+					<IconButton className={classes.googleIcon}>
+						<FontAwesomeIcon
+							icon={['fab', 'google']}
+							style={{ fontSize: 18.02, color: '#DB4437' }}
+						/>
 					</IconButton>
-				</Grid>
+				</Typography>
 				<Grid>
 					<p>
 						{' '}
 						Don&apos;t have an account? &nbsp;
-						<Link href='/Signup' variant='body2'>
+						<Link href='/signup' variant='body2'>
 							Sign Up
 						</Link>
 					</p>

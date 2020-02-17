@@ -307,6 +307,7 @@ export default function ProfilePageEditView() {
                       <Select
                         native
                         label='gender-input'
+                        value={user.gender || ''}
                         className='gender'
                         onChange={handleGenderChange}
                         labelWidth={labelWidth}
@@ -331,6 +332,7 @@ export default function ProfilePageEditView() {
                       <Select
                         native
                         className='currency'
+                        value={user.preferredCurrency || ''}
                         onChange={handleCurrencyChange}
                         labelWidth={labelWidth}
                         inputProps={{
@@ -355,6 +357,7 @@ export default function ProfilePageEditView() {
                       <Select
                         native
                         className='language'
+                        value={user.preferredLanguage || ''}
                         onChange={handleLanguageChange}
                         labelWidth={labelWidth}
                         inputProps={{

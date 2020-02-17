@@ -46,7 +46,7 @@ describe(' Describe <LoginPage />', () => {
 			</Provider>,
 		);
 
-		expect(wrapper.find(Alert).text()).toEqual('enter valid email');
+		expect(wrapper.find(Alert).text()).toEqual('An error occured, wrong email or password');
 	});
 	it('should give message upone error from backend that are objects', () => {
 		const storeAfterLogin = configureStore([thunk])({
