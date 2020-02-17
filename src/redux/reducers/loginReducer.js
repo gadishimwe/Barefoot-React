@@ -15,7 +15,6 @@ const initialState = {
 	loading: false,
 };
 
-let User;
 const loginReducer = (state = initialState, action) => {
 	switch (action.type) {
 		case pending(LOGIN_USER):

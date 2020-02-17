@@ -1,0 +1,118 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Test On ProfilePicture Component render() Should Render ProfilePicture Component 1`] = `
+<ProfilePicture>
+  <div
+    style={
+      Object {
+        "marginBottom": "20px",
+        "textAlign": "center",
+      }
+    }
+  >
+    <WithStyles(ForwardRef(Avatar))
+      className="makeStyles-large-3"
+      style={
+        Object {
+          "margin": "auto",
+        }
+      }
+    >
+      <ForwardRef(Avatar)
+        className="makeStyles-large-3"
+        classes={
+          Object {
+            "circle": "MuiAvatar-circle",
+            "colorDefault": "MuiAvatar-colorDefault",
+            "fallback": "MuiAvatar-fallback",
+            "img": "MuiAvatar-img",
+            "root": "MuiAvatar-root",
+            "rounded": "MuiAvatar-rounded",
+            "square": "MuiAvatar-square",
+          }
+        }
+        style={
+          Object {
+            "margin": "auto",
+          }
+        }
+      >
+        <div
+          className="MuiAvatar-root MuiAvatar-circle makeStyles-large-3 MuiAvatar-colorDefault"
+          style={
+            Object {
+              "margin": "auto",
+            }
+          }
+        >
+          <ForwardRef
+            className="MuiAvatar-fallback"
+          >
+            <WithStyles(ForwardRef(SvgIcon))
+              className="MuiAvatar-fallback"
+            >
+              <ForwardRef(SvgIcon)
+                className="MuiAvatar-fallback"
+                classes={
+                  Object {
+                    "colorAction": "MuiSvgIcon-colorAction",
+                    "colorDisabled": "MuiSvgIcon-colorDisabled",
+                    "colorError": "MuiSvgIcon-colorError",
+                    "colorPrimary": "MuiSvgIcon-colorPrimary",
+                    "colorSecondary": "MuiSvgIcon-colorSecondary",
+                    "fontSizeInherit": "MuiSvgIcon-fontSizeInherit",
+                    "fontSizeLarge": "MuiSvgIcon-fontSizeLarge",
+                    "fontSizeSmall": "MuiSvgIcon-fontSizeSmall",
+                    "root": "MuiSvgIcon-root",
+                  }
+                }
+              >
+                <svg
+                  aria-hidden="true"
+                  className="MuiSvgIcon-root MuiAvatar-fallback"
+                  focusable="false"
+                  role="presentation"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"
+                  />
+                </svg>
+              </ForwardRef(SvgIcon)>
+            </WithStyles(ForwardRef(SvgIcon))>
+          </ForwardRef>
+        </div>
+      </ForwardRef(Avatar)>
+    </WithStyles(ForwardRef(Avatar))>
+    <input
+      accept="image/*"
+      className="makeStyles-input-1"
+      id="contained-button-file"
+      style={
+        Object {
+          "margin": "auto",
+        }
+      }
+      type="file"
+    />
+  </div>
+  <WithStyles(ForwardRef(Divider))>
+    <ForwardRef(Divider)
+      classes={
+        Object {
+          "absolute": "MuiDivider-absolute",
+          "inset": "MuiDivider-inset",
+          "light": "MuiDivider-light",
+          "middle": "MuiDivider-middle",
+          "root": "MuiDivider-root",
+          "vertical": "MuiDivider-vertical",
+        }
+      }
+    >
+      <hr
+        className="MuiDivider-root"
+      />
+    </ForwardRef(Divider)>
+  </WithStyles(ForwardRef(Divider))>
+</ProfilePicture>
+`;
