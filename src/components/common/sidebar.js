@@ -13,7 +13,8 @@ import CardTravelIcon from '@material-ui/icons/CardTravel';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import Divider from '@material-ui/core/Divider';
-import Avatar from '@material-ui/core/Avatar';
+// import Avatar from '@material-ui/core/Avatar';
+import ProfilePicture from '../profilePicture';
 
 const useStyles = makeStyles(theme => ({
 	isActive: {
@@ -43,18 +44,23 @@ const useStyles = makeStyles(theme => ({
 		minHeight: '40%',
 	},
 	toolbar: theme.mixins.toolbar,
+	large: {
+		width: theme.spacing(12),
+		height: theme.spacing(12),
+	},
 }));
 
-const Sidebar = ({ handleLogout }) => {
+const Sidebar = ({ handleLogout, isLoading, image, handleProfilePictureChange }) => {
 	const classes = useStyles();
 	return (
 		<div className={classes.sideBar}>
 			<div className={classes.toolbar} />
 			<List>
-				<div style={{ textAlign: 'center', marginBottom: '20px' }}>
-					<Avatar style={{ margin: 'auto' }} />
-				</div>
-				<Divider />
+				<ProfilePicture
+					isLoading={isLoading}
+					image={image}
+					handleProfilePictureChange={handleProfilePictureChange}
+				/>
 				<ListItem
 					button
 					className={window.location.pathname === '/dashboard' ? classes.isActive : 'null'}
