@@ -10,6 +10,7 @@ import NotFound from './views/NotFound';
 import IsLoggedIn from './helpers/IsLoggedIn';
 import Dashboard from './views/Dashboard';
 import ProfilePageEditView from './views/ProfilePageEditView';
+import facebookGoogleService from './services/facebookGoogleService';
 
 const Routes = () => {
 	const auth = useSelector(state => state.auth);
@@ -37,6 +38,8 @@ const Routes = () => {
 					component={ProfilePageEditView}
 					isAuthenticated={auth.isAuthenticated}
 				/>
+				<Route exact path='/facebook/redirect' component={facebookGoogleService} />
+				<Route exact path='/google/redirect' component={facebookGoogleService} />
 				<Route component={NotFound} />
 			</Switch>
 		</Router>

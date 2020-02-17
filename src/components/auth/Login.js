@@ -57,6 +57,13 @@ const LoginPage = () => {
 
 	const classes = useStyles();
 
+	const facebookHandler = () => {
+		window.location.replace(`${process.env.API_URL}/api/auth/facebook`);
+	};
+	const googleHandler = () => {
+		window.location.replace(`${process.env.API_URL}/api/auth/google`);
+	};
+
 	return (
 		<Grid component={Paper} elevation={6} className={classes.cards} id='component-Login'>
 			<div className={classes.paper}>
@@ -142,8 +149,8 @@ const LoginPage = () => {
 								{newState.auth.loading ? (
 									<Loading size={18} color='secondary' thickness={6} id='loading' />
 								) : (
-									'Login'
-								)}
+										'Login'
+									)}
 							</Button>
 							{mes.length !== 0 && mes !== undefined && (
 								<Alert severity={mes[0].type} id='feedback'>
@@ -158,14 +165,22 @@ const LoginPage = () => {
 
 				<Typography>Or signin with</Typography>
 				<Typography className={classes.social}>
-					<IconButton className={classes.facebookIcon}>
+					<IconButton
+						className={classes.facebookIcon}
+						onClick={facebookHandler}
+						data-test='facebookButton'
+					>
 						<FontAwesomeIcon
 							icon={['fab', 'facebook-f']}
 							style={{ fontSize: 20, color: '#3b5998' }}
 						/>
 					</IconButton>
 					or
-					<IconButton className={classes.googleIcon}>
+					<IconButton
+						className={classes.googleIcon}
+						onClick={googleHandler}
+						data-test='googleButton'
+					>
 						<FontAwesomeIcon
 							icon={['fab', 'google']}
 							style={{ fontSize: 18.02, color: '#DB4437' }}

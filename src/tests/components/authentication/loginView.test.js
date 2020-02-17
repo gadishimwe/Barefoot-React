@@ -182,4 +182,23 @@ describe('redirecting a user', () => {
 
 		done();
 	});
+	describe('Test google and facebook buttons', () => {
+		const component = mount(
+			<Provider store={store}>
+				<LoginView location={{ pathname: '/login' }} />
+			</Provider>,
+		);
+		it('Should call facebookHandler on click', () => {
+			const facebookButton = component.find('[data-test="facebookButton"]').at(1);
+			const onSubmitSpy = jest.spyOn(facebookButton.props(), 'onClick');
+			facebookButton.props().onClick();
+			expect(onSubmitSpy).toBeCalled();
+		});
+		it('Should call googleHandler on click', () => {
+			const googleButton = component.find('[data-test="googleButton"]').at(1);
+			const onSubmitSpy = jest.spyOn(googleButton.props(), 'onClick');
+			googleButton.props().onClick();
+			expect(onSubmitSpy).toBeCalled();
+		});
+	});
 });

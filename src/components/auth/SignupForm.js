@@ -66,6 +66,12 @@ const SignupForm = () => {
 		error = [state.error.message];
 	}
 
+	const facebookHandler = () => {
+		window.location.assign(`${process.env.API_URL}/api/auth/facebook`);
+	};
+	const googleHandler = () => {
+		window.location.assign(`${process.env.API_URL}/api/auth/google`);
+	};
 	return (
 		<Grid component={Paper} elevation={6} className={classes.cards}>
 			<div className={classes.paper}>
@@ -153,8 +159,9 @@ const SignupForm = () => {
 								{error !== undefined ? (
 									<Alert severity='error'>
 										{error.map((err, index) => (
-											<div key={index}>
-												*{err}</div>
+											<div key={index}>*
+{err}
+											</div>
 										))}
 									</Alert>
 								) : null}
@@ -176,14 +183,14 @@ const SignupForm = () => {
 				</Formik>
 				<Typography> Or sign up with </Typography>
 				<Typography className={classes.social}>
-					<IconButton className={classes.facebookIcon}>
+					<IconButton className={classes.facebookIcon} onClick={facebookHandler} data-test='facebookButton'>
 						<FontAwesomeIcon
 							icon={['fab', 'facebook-f']}
 							style={{ fontSize: 20, color: '#3b5998' }}
 						/>
 					</IconButton>
 					or
-					<IconButton className={classes.googleIcon}>
+					<IconButton className={classes.googleIcon} onClick={googleHandler} data-test='googleButton'>
 						<FontAwesomeIcon
 							icon={['fab', 'google']}
 							style={{ fontSize: 18.02, color: '#DB4437' }}
