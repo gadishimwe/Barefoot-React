@@ -1,8 +1,10 @@
+/* eslint-disable no-nested-ternary */
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import SignupForm from './SignupForm';
 import backgroundImage from '../../assets/backgroundPic.jpg';
+import LoginCard from './Login';
 
 const LandingPage = ({ props }) => {
 	const useStyles = makeStyles(theme => ({
@@ -85,7 +87,11 @@ const LandingPage = ({ props }) => {
 					</div>
 				</Grid>
 				<Grid item sm={6} className={classes.rightContainer}>
-					{location.pathname === '/signup' ? <SignupForm props={props} /> : null}
+					{location.pathname === '/signup' ? (
+						<SignupForm props={props} />
+					) : location.pathname === '/login' ? (
+						<LoginCard />
+					) : null}
 				</Grid>
 			</Grid>
 		</div>

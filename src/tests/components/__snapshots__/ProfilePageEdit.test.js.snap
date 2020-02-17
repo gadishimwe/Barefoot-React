@@ -1227,6 +1227,11 @@ exports[`Test On ProfilePageEdit Component render() Should Render ProfilePageEdi
                                             viewBox="0 0 24 24"
                                           >
                                             <path
+                                              d="M0 0h20v20H0V0z"
+                                              fill="none"
+                                              transform="scale(1.2, 1.2)"
+                                            />
+                                            <path
                                               d="M15.95 10.78c.03-.25.05-.51.05-.78s-.02-.53-.06-.78l1.69-1.32c.15-.12.19-.34.1-.51l-1.6-2.77c-.1-.18-.31-.24-.49-.18l-1.99.8c-.42-.32-.86-.58-1.35-.78L12 2.34c-.03-.2-.2-.34-.4-.34H8.4c-.2 0-.36.14-.39.34l-.3 2.12c-.49.2-.94.47-1.35.78l-1.99-.8c-.18-.07-.39 0-.49.18l-1.6 2.77c-.1.18-.06.39.1.51l1.69 1.32c-.04.25-.07.52-.07.78s.02.53.06.78L2.37 12.1c-.15.12-.19.34-.1.51l1.6 2.77c.1.18.31.24.49.18l1.99-.8c.42.32.86.58 1.35.78l.3 2.12c.04.2.2.34.4.34h3.2c.2 0 .37-.14.39-.34l.3-2.12c.49-.2.94-.47 1.35-.78l1.99.8c.18.07.39 0 .49-.18l1.6-2.77c.1-.18.06-.39-.1-.51l-1.67-1.32zM10 13c-1.65 0-3-1.35-3-3s1.35-3 3-3 3 1.35 3 3-1.35 3-3 3z"
                                               transform="scale(1.2, 1.2)"
                                             />
@@ -3269,6 +3274,11 @@ exports[`Test On ProfilePageEdit Component render() Should Render ProfilePageEdi
                                                                         role="presentation"
                                                                         viewBox="0 0 24 24"
                                                                       >
+                                                                        <path
+                                                                          d="M0 0h20v20H0V0z"
+                                                                          fill="none"
+                                                                          transform="scale(1.2, 1.2)"
+                                                                        />
                                                                         <path
                                                                           d="M15.95 10.78c.03-.25.05-.51.05-.78s-.02-.53-.06-.78l1.69-1.32c.15-.12.19-.34.1-.51l-1.6-2.77c-.1-.18-.31-.24-.49-.18l-1.99.8c-.42-.32-.86-.58-1.35-.78L12 2.34c-.03-.2-.2-.34-.4-.34H8.4c-.2 0-.36.14-.39.34l-.3 2.12c-.49.2-.94.47-1.35.78l-1.99-.8c-.18-.07-.39 0-.49.18l-1.6 2.77c-.1.18-.06.39.1.51l1.69 1.32c-.04.25-.07.52-.07.78s.02.53.06.78L2.37 12.1c-.15.12-.19.34-.1.51l1.6 2.77c.1.18.31.24.49.18l1.99-.8c.42.32.86.58 1.35.78l.3 2.12c.04.2.2.34.4.34h3.2c.2 0 .37-.14.39-.34l.3-2.12c.49-.2.94-.47 1.35-.78l1.99.8c.18.07.39 0 .49-.18l1.6-2.77c.1-.18.06-.39-.1-.51l-1.67-1.32zM10 13c-1.65 0-3-1.35-3-3s1.35-3 3-3 3 1.35 3 3-1.35 3-3 3z"
                                                                           transform="scale(1.2, 1.2)"
@@ -5427,6 +5437,11 @@ exports[`Test On ProfilePageEdit Component render() Should Render ProfilePageEdi
                                                             viewBox="0 0 24 24"
                                                           >
                                                             <path
+                                                              d="M0 0h20v20H0V0z"
+                                                              fill="none"
+                                                              transform="scale(1.2, 1.2)"
+                                                            />
+                                                            <path
                                                               d="M15.95 10.78c.03-.25.05-.51.05-.78s-.02-.53-.06-.78l1.69-1.32c.15-.12.19-.34.1-.51l-1.6-2.77c-.1-.18-.31-.24-.49-.18l-1.99.8c-.42-.32-.86-.58-1.35-.78L12 2.34c-.03-.2-.2-.34-.4-.34H8.4c-.2 0-.36.14-.39.34l-.3 2.12c-.49.2-.94.47-1.35.78l-1.99-.8c-.18-.07-.39 0-.49.18l-1.6 2.77c-.1.18-.06.39.1.51l1.69 1.32c-.04.25-.07.52-.07.78s.02.53.06.78L2.37 12.1c-.15.12-.19.34-.1.51l1.6 2.77c.1.18.31.24.49.18l1.99-.8c.42.32.86.58 1.35.78l.3 2.12c.04.2.2.34.4.34h3.2c.2 0 .37-.14.39-.34l.3-2.12c.49-.2.94-.47 1.35-.78l1.99.8c.18.07.39 0 .49-.18l1.6-2.77c.1-.18.06-.39-.1-.51l-1.67-1.32zM10 13c-1.65 0-3-1.35-3-3s1.35-3 3-3 3 1.35 3 3-1.35 3-3 3z"
                                                               transform="scale(1.2, 1.2)"
                                                             />
@@ -6376,10 +6391,10 @@ exports[`Test On ProfilePageEdit Component render() Should Render ProfilePageEdi
                                                                           className="MuiOutlinedInput-notchedOutline"
                                                                           classes={
                                                                             Object {
-                                                                              "legend": "PrivateNotchedOutline-legend-378",
-                                                                              "legendLabelled": "PrivateNotchedOutline-legendLabelled-379",
-                                                                              "legendNotched": "PrivateNotchedOutline-legendNotched-380",
-                                                                              "root": "PrivateNotchedOutline-root-377",
+                                                                              "legend": "PrivateNotchedOutline-legend-380",
+                                                                              "legendLabelled": "PrivateNotchedOutline-legendLabelled-381",
+                                                                              "legendNotched": "PrivateNotchedOutline-legendNotched-382",
+                                                                              "root": "PrivateNotchedOutline-root-379",
                                                                             }
                                                                           }
                                                                           labelWidth={0}
@@ -6387,7 +6402,7 @@ exports[`Test On ProfilePageEdit Component render() Should Render ProfilePageEdi
                                                                         >
                                                                           <fieldset
                                                                             aria-hidden={true}
-                                                                            className="PrivateNotchedOutline-root-377 MuiOutlinedInput-notchedOutline"
+                                                                            className="PrivateNotchedOutline-root-379 MuiOutlinedInput-notchedOutline"
                                                                             style={
                                                                               Object {
                                                                                 "paddingLeft": 8,
@@ -6395,7 +6410,7 @@ exports[`Test On ProfilePageEdit Component render() Should Render ProfilePageEdi
                                                                             }
                                                                           >
                                                                             <legend
-                                                                              className="PrivateNotchedOutline-legend-378"
+                                                                              className="PrivateNotchedOutline-legend-380"
                                                                               style={
                                                                                 Object {
                                                                                   "width": 0.01,
@@ -6607,10 +6622,10 @@ exports[`Test On ProfilePageEdit Component render() Should Render ProfilePageEdi
                                                                           className="MuiOutlinedInput-notchedOutline"
                                                                           classes={
                                                                             Object {
-                                                                              "legend": "PrivateNotchedOutline-legend-378",
-                                                                              "legendLabelled": "PrivateNotchedOutline-legendLabelled-379",
-                                                                              "legendNotched": "PrivateNotchedOutline-legendNotched-380",
-                                                                              "root": "PrivateNotchedOutline-root-377",
+                                                                              "legend": "PrivateNotchedOutline-legend-380",
+                                                                              "legendLabelled": "PrivateNotchedOutline-legendLabelled-381",
+                                                                              "legendNotched": "PrivateNotchedOutline-legendNotched-382",
+                                                                              "root": "PrivateNotchedOutline-root-379",
                                                                             }
                                                                           }
                                                                           labelWidth={0}
@@ -6618,7 +6633,7 @@ exports[`Test On ProfilePageEdit Component render() Should Render ProfilePageEdi
                                                                         >
                                                                           <fieldset
                                                                             aria-hidden={true}
-                                                                            className="PrivateNotchedOutline-root-377 MuiOutlinedInput-notchedOutline"
+                                                                            className="PrivateNotchedOutline-root-379 MuiOutlinedInput-notchedOutline"
                                                                             style={
                                                                               Object {
                                                                                 "paddingLeft": 8,
@@ -6626,7 +6641,7 @@ exports[`Test On ProfilePageEdit Component render() Should Render ProfilePageEdi
                                                                             }
                                                                           >
                                                                             <legend
-                                                                              className="PrivateNotchedOutline-legend-378"
+                                                                              className="PrivateNotchedOutline-legend-380"
                                                                               style={
                                                                                 Object {
                                                                                   "width": 0.01,
@@ -6838,10 +6853,10 @@ exports[`Test On ProfilePageEdit Component render() Should Render ProfilePageEdi
                                                                           className="MuiOutlinedInput-notchedOutline"
                                                                           classes={
                                                                             Object {
-                                                                              "legend": "PrivateNotchedOutline-legend-378",
-                                                                              "legendLabelled": "PrivateNotchedOutline-legendLabelled-379",
-                                                                              "legendNotched": "PrivateNotchedOutline-legendNotched-380",
-                                                                              "root": "PrivateNotchedOutline-root-377",
+                                                                              "legend": "PrivateNotchedOutline-legend-380",
+                                                                              "legendLabelled": "PrivateNotchedOutline-legendLabelled-381",
+                                                                              "legendNotched": "PrivateNotchedOutline-legendNotched-382",
+                                                                              "root": "PrivateNotchedOutline-root-379",
                                                                             }
                                                                           }
                                                                           labelWidth={0}
@@ -6849,7 +6864,7 @@ exports[`Test On ProfilePageEdit Component render() Should Render ProfilePageEdi
                                                                         >
                                                                           <fieldset
                                                                             aria-hidden={true}
-                                                                            className="PrivateNotchedOutline-root-377 MuiOutlinedInput-notchedOutline"
+                                                                            className="PrivateNotchedOutline-root-379 MuiOutlinedInput-notchedOutline"
                                                                             style={
                                                                               Object {
                                                                                 "paddingLeft": 8,
@@ -6857,7 +6872,7 @@ exports[`Test On ProfilePageEdit Component render() Should Render ProfilePageEdi
                                                                             }
                                                                           >
                                                                             <legend
-                                                                              className="PrivateNotchedOutline-legend-378"
+                                                                              className="PrivateNotchedOutline-legend-380"
                                                                               style={
                                                                                 Object {
                                                                                   "width": 0.01,
@@ -7495,10 +7510,10 @@ exports[`Test On ProfilePageEdit Component render() Should Render ProfilePageEdi
                                                                           className="MuiOutlinedInput-notchedOutline"
                                                                           classes={
                                                                             Object {
-                                                                              "legend": "PrivateNotchedOutline-legend-378",
-                                                                              "legendLabelled": "PrivateNotchedOutline-legendLabelled-379",
-                                                                              "legendNotched": "PrivateNotchedOutline-legendNotched-380",
-                                                                              "root": "PrivateNotchedOutline-root-377",
+                                                                              "legend": "PrivateNotchedOutline-legend-380",
+                                                                              "legendLabelled": "PrivateNotchedOutline-legendLabelled-381",
+                                                                              "legendNotched": "PrivateNotchedOutline-legendNotched-382",
+                                                                              "root": "PrivateNotchedOutline-root-379",
                                                                             }
                                                                           }
                                                                           label="gender-input"
@@ -7507,10 +7522,10 @@ exports[`Test On ProfilePageEdit Component render() Should Render ProfilePageEdi
                                                                         >
                                                                           <fieldset
                                                                             aria-hidden={true}
-                                                                            className="PrivateNotchedOutline-root-377 MuiOutlinedInput-notchedOutline"
+                                                                            className="PrivateNotchedOutline-root-379 MuiOutlinedInput-notchedOutline"
                                                                           >
                                                                             <legend
-                                                                              className="PrivateNotchedOutline-legendLabelled-379"
+                                                                              className="PrivateNotchedOutline-legendLabelled-381"
                                                                             >
                                                                               <span>
                                                                                 gender-input
@@ -8134,10 +8149,10 @@ exports[`Test On ProfilePageEdit Component render() Should Render ProfilePageEdi
                                                                           className="MuiOutlinedInput-notchedOutline"
                                                                           classes={
                                                                             Object {
-                                                                              "legend": "PrivateNotchedOutline-legend-378",
-                                                                              "legendLabelled": "PrivateNotchedOutline-legendLabelled-379",
-                                                                              "legendNotched": "PrivateNotchedOutline-legendNotched-380",
-                                                                              "root": "PrivateNotchedOutline-root-377",
+                                                                              "legend": "PrivateNotchedOutline-legend-380",
+                                                                              "legendLabelled": "PrivateNotchedOutline-legendLabelled-381",
+                                                                              "legendNotched": "PrivateNotchedOutline-legendNotched-382",
+                                                                              "root": "PrivateNotchedOutline-root-379",
                                                                             }
                                                                           }
                                                                           labelWidth={0}
@@ -8145,7 +8160,7 @@ exports[`Test On ProfilePageEdit Component render() Should Render ProfilePageEdi
                                                                         >
                                                                           <fieldset
                                                                             aria-hidden={true}
-                                                                            className="PrivateNotchedOutline-root-377 MuiOutlinedInput-notchedOutline"
+                                                                            className="PrivateNotchedOutline-root-379 MuiOutlinedInput-notchedOutline"
                                                                             style={
                                                                               Object {
                                                                                 "paddingLeft": 8,
@@ -8153,7 +8168,7 @@ exports[`Test On ProfilePageEdit Component render() Should Render ProfilePageEdi
                                                                             }
                                                                           >
                                                                             <legend
-                                                                              className="PrivateNotchedOutline-legend-378"
+                                                                              className="PrivateNotchedOutline-legend-380"
                                                                               style={
                                                                                 Object {
                                                                                   "width": 0.01,
@@ -8811,10 +8826,10 @@ exports[`Test On ProfilePageEdit Component render() Should Render ProfilePageEdi
                                                                           className="MuiOutlinedInput-notchedOutline"
                                                                           classes={
                                                                             Object {
-                                                                              "legend": "PrivateNotchedOutline-legend-378",
-                                                                              "legendLabelled": "PrivateNotchedOutline-legendLabelled-379",
-                                                                              "legendNotched": "PrivateNotchedOutline-legendNotched-380",
-                                                                              "root": "PrivateNotchedOutline-root-377",
+                                                                              "legend": "PrivateNotchedOutline-legend-380",
+                                                                              "legendLabelled": "PrivateNotchedOutline-legendLabelled-381",
+                                                                              "legendNotched": "PrivateNotchedOutline-legendNotched-382",
+                                                                              "root": "PrivateNotchedOutline-root-379",
                                                                             }
                                                                           }
                                                                           labelWidth={0}
@@ -8822,7 +8837,7 @@ exports[`Test On ProfilePageEdit Component render() Should Render ProfilePageEdi
                                                                         >
                                                                           <fieldset
                                                                             aria-hidden={true}
-                                                                            className="PrivateNotchedOutline-root-377 MuiOutlinedInput-notchedOutline"
+                                                                            className="PrivateNotchedOutline-root-379 MuiOutlinedInput-notchedOutline"
                                                                             style={
                                                                               Object {
                                                                                 "paddingLeft": 8,
@@ -8830,7 +8845,7 @@ exports[`Test On ProfilePageEdit Component render() Should Render ProfilePageEdi
                                                                             }
                                                                           >
                                                                             <legend
-                                                                              className="PrivateNotchedOutline-legend-378"
+                                                                              className="PrivateNotchedOutline-legend-380"
                                                                               style={
                                                                                 Object {
                                                                                   "width": 0.01,
@@ -8891,7 +8906,7 @@ exports[`Test On ProfilePageEdit Component render() Should Render ProfilePageEdi
                                                       className="countries"
                                                       classes={
                                                         Object {
-                                                          "option": "makeStyles-option-411",
+                                                          "option": "makeStyles-option-413",
                                                         }
                                                       }
                                                       getOptionLabel={[Function]}
@@ -10174,7 +10189,7 @@ exports[`Test On ProfilePageEdit Component render() Should Render ProfilePageEdi
                                                             "listbox": "MuiAutocomplete-listbox",
                                                             "loading": "MuiAutocomplete-loading",
                                                             "noOptions": "MuiAutocomplete-noOptions",
-                                                            "option": "MuiAutocomplete-option makeStyles-option-411",
+                                                            "option": "MuiAutocomplete-option makeStyles-option-413",
                                                             "paper": "MuiAutocomplete-paper",
                                                             "popper": "MuiAutocomplete-popper",
                                                             "popperDisablePortal": "MuiAutocomplete-popperDisablePortal",
@@ -12418,10 +12433,10 @@ exports[`Test On ProfilePageEdit Component render() Should Render ProfilePageEdi
                                                                                   className="MuiOutlinedInput-notchedOutline"
                                                                                   classes={
                                                                                     Object {
-                                                                                      "legend": "PrivateNotchedOutline-legend-378",
-                                                                                      "legendLabelled": "PrivateNotchedOutline-legendLabelled-379",
-                                                                                      "legendNotched": "PrivateNotchedOutline-legendNotched-380",
-                                                                                      "root": "PrivateNotchedOutline-root-377",
+                                                                                      "legend": "PrivateNotchedOutline-legend-380",
+                                                                                      "legendLabelled": "PrivateNotchedOutline-legendLabelled-381",
+                                                                                      "legendNotched": "PrivateNotchedOutline-legendNotched-382",
+                                                                                      "root": "PrivateNotchedOutline-root-379",
                                                                                     }
                                                                                   }
                                                                                   label={
@@ -12434,10 +12449,10 @@ exports[`Test On ProfilePageEdit Component render() Should Render ProfilePageEdi
                                                                                 >
                                                                                   <fieldset
                                                                                     aria-hidden={true}
-                                                                                    className="PrivateNotchedOutline-root-377 MuiOutlinedInput-notchedOutline"
+                                                                                    className="PrivateNotchedOutline-root-379 MuiOutlinedInput-notchedOutline"
                                                                                   >
                                                                                     <legend
-                                                                                      className="PrivateNotchedOutline-legendLabelled-379"
+                                                                                      className="PrivateNotchedOutline-legendLabelled-381"
                                                                                     >
                                                                                       <span>
                                                                                         Residence
@@ -12881,15 +12896,15 @@ exports[`Test On ProfilePageEdit Component render() Should Render ProfilePageEdi
     >
       <Footer>
         <div
-          className="makeStyles-root-449"
+          className="makeStyles-root-451"
         >
           <WithStyles(ForwardRef(AppBar))
-            className="makeStyles-appBar-450"
+            className="makeStyles-appBar-452"
             color="primary"
             position="static"
           >
             <ForwardRef(AppBar)
-              className="makeStyles-appBar-450"
+              className="makeStyles-appBar-452"
               classes={
                 Object {
                   "colorDefault": "MuiAppBar-colorDefault",
@@ -12907,13 +12922,13 @@ exports[`Test On ProfilePageEdit Component render() Should Render ProfilePageEdi
               position="static"
             >
               <WithStyles(ForwardRef(Paper))
-                className="MuiAppBar-root MuiAppBar-positionStatic makeStyles-appBar-450 MuiAppBar-colorPrimary"
+                className="MuiAppBar-root MuiAppBar-positionStatic makeStyles-appBar-452 MuiAppBar-colorPrimary"
                 component="header"
                 elevation={4}
                 square={true}
               >
                 <ForwardRef(Paper)
-                  className="MuiAppBar-root MuiAppBar-positionStatic makeStyles-appBar-450 MuiAppBar-colorPrimary"
+                  className="MuiAppBar-root MuiAppBar-positionStatic makeStyles-appBar-452 MuiAppBar-colorPrimary"
                   classes={
                     Object {
                       "elevation0": "MuiPaper-elevation0",
@@ -12951,14 +12966,14 @@ exports[`Test On ProfilePageEdit Component render() Should Render ProfilePageEdi
                   square={true}
                 >
                   <header
-                    className="MuiPaper-root MuiAppBar-root MuiAppBar-positionStatic makeStyles-appBar-450 MuiAppBar-colorPrimary MuiPaper-elevation4"
+                    className="MuiPaper-root MuiAppBar-root MuiAppBar-positionStatic makeStyles-appBar-452 MuiAppBar-colorPrimary MuiPaper-elevation4"
                   >
                     <Copyright>
                       <WithStyles(ForwardRef(Typography))
-                        className="makeStyles-typographyBody1-451"
+                        className="makeStyles-typographyBody1-453"
                       >
                         <ForwardRef(Typography)
-                          className="makeStyles-typographyBody1-451"
+                          className="makeStyles-typographyBody1-453"
                           classes={
                             Object {
                               "alignCenter": "MuiTypography-alignCenter",
@@ -12995,7 +13010,7 @@ exports[`Test On ProfilePageEdit Component render() Should Render ProfilePageEdi
                           }
                         >
                           <p
-                            className="MuiTypography-root makeStyles-typographyBody1-451 MuiTypography-body1"
+                            className="MuiTypography-root makeStyles-typographyBody1-453 MuiTypography-body1"
                           >
                             Copyright © 
                             <WithStyles(ForwardRef(Link))
