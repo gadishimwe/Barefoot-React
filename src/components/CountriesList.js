@@ -1,3 +1,4 @@
+/* eslint-disable react/destructuring-assignment */
 /* eslint-disable no-use-before-define */
 /* eslint-disable prettier/prettier */
 /* eslint-disable react/jsx-props-no-spreading */

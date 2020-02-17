@@ -27,6 +27,18 @@ const useStyles = makeStyles(theme => ({
 		padding: '8px',
 		margin: 0,
 	},
+	googleIcon: {
+		border: '1px solid red',
+		margin: '5px',
+		padding: '10px',
+	},
+	facebookIcon: {
+		border: '1px solid #3b5998',
+		margin: '5px',
+		padding: '10px',
+		height: '40px',
+		width: '40px',
+	},
 }));
 
 export default useStyles;

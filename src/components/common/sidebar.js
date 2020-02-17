@@ -2,7 +2,6 @@ import React from 'react';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
-import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import SettingsIcon from '@material-ui/icons/Settings';
@@ -13,7 +12,11 @@ import CardTravelIcon from '@material-ui/icons/CardTravel';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import Divider from '@material-ui/core/Divider';
-// import Avatar from '@material-ui/core/Avatar';
+import Link from '@material-ui/core/Link';
+import Collapse from '@material-ui/core/Collapse';
+import ExpandLess from '@material-ui/icons/ExpandLess';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ProfilePicture from '../profilePicture';
 
 const useStyles = makeStyles(theme => ({
@@ -24,9 +27,6 @@ const useStyles = makeStyles(theme => ({
 
 	menuItems: {
 		fontSize: 14,
-		'&:hover': {
-			fontSize: '16px',
-		},
 	},
 	button: {
 		backgroundColor: '#0074D9',
@@ -48,10 +48,18 @@ const useStyles = makeStyles(theme => ({
 		width: theme.spacing(12),
 		height: theme.spacing(12),
 	},
+	nested: {
+		paddingLeft: theme.spacing(4),
+	},
 }));
 
 const Sidebar = ({ handleLogout, isLoading, image, handleProfilePictureChange }) => {
 	const classes = useStyles();
+	const [openCollapse, setOpenCollapse] = React.useState(false);
+
+	function handleOpenSettings() {
+		setOpenCollapse(!openCollapse);
+	}
 	return (
 		<div className={classes.sideBar}>
 			<div className={classes.toolbar} />
@@ -61,87 +69,86 @@ const Sidebar = ({ handleLogout, isLoading, image, handleProfilePictureChange })
 					image={image}
 					handleProfilePictureChange={handleProfilePictureChange}
 				/>
-				<ListItem
-					button
-					className={window.location.pathname === '/dashboard' ? classes.isActive : 'null'}
-				>
-					<ListItemIcon>
-						<DashboardIcon />
-					</ListItemIcon>
-					<ListItemText>
-						<Typography className={classes.menuItems}>Dashboard</Typography>
-					</ListItemText>
-				</ListItem>
 				<Divider />
-				<ListItem button>
-					<ListItemIcon>
-						<MailOutlineIcon />
-					</ListItemIcon>
-					<ListItemText>
-						<Typography className={classes.menuItems}>Messages</Typography>
-					</ListItemText>
-				</ListItem>
-				<Divider />
-				<ListItem button>
-					<ListItemIcon>
-						<HomeWorkOutlinedIcon />
-					</ListItemIcon>
-					<ListItemText>
-						<Typography className={classes.menuItems}>Accommodations</Typography>
-					</ListItemText>
-				</ListItem>
-				<Divider />
-				<ListItem button>
-					<ListItemIcon>
-						<CardTravelIcon />
-					</ListItemIcon>
-					<ListItemText>
-						<Typography className={classes.menuItems}>Trip Requests</Typography>
-					</ListItemText>
-				</ListItem>
-				<Divider />
-				<ListItem button>
-					<ListItemIcon>
-						<BallotOutlinedIcon />
-					</ListItemIcon>
-					<ListItemText>
-						<Typography className={classes.menuItems}>My Bookings</Typography>
-					</ListItemText>
-				</ListItem>
-				<Divider />
-				<ListItem
-					style={{
-						backgroundColor: '#A5A7AB',
-						fontWeight: 'bold',
-						textAlign: 'center',
-					}}
-				>
-					<ListItemText>
-						<Typography style={{ fontWeight: 'bold', color: 'white', margin: 'auto' }}>
-							Settings
-						</Typography>
-					</ListItemText>
-				</ListItem>
+				{[
+					{
+						path: '/dashboard',
+						icon: <DashboardIcon />,
+						text: 'Dashboard',
+						id: 1,
+					},
+					{
+						path: '/chat',
+						icon: <MailOutlineIcon />,
+						text: 'Messages',
+						id: 2,
+					},
+					{
+						path: '/accommodations',
+						icon: <HomeWorkOutlinedIcon />,
+						text: 'Accommodations',
+						id: 3,
+					},
+					{
+						path: '/trips',
+						icon: <CardTravelIcon />,
+						text: 'Trip Requests',
+						id: 4,
+					},
+					{
+						path: '/bookings',
+						icon: <BallotOutlinedIcon />,
+						text: 'My Bookings',
+						id: 5,
+					},
+				].map(item => (
+					<Link href={item.path} key={item.id} style={{ textDecoration: 'none', color: 'black' }}>
+						<ListItem
+							button
+							className={window.location.pathname === item.path ? classes.isActive : 'null'}
+						>
+							<ListItemIcon>{item.icon}</ListItemIcon>
+							<ListItemText primary={item.text} />
+						</ListItem>
+					</Link>
+				))}
 
-				<ListItem button>
+				<Divider />
+
+				<ListItem button onClick={handleOpenSettings}>
 					<ListItemIcon>
 						<SettingsIcon />
 					</ListItemIcon>
-					<ListItemText>
-						<Typography className={classes.menuItems}>Account Settings</Typography>
-					</ListItemText>
+					<ListItemText primary='Settings' />
+					{openCollapse ? <ExpandLess /> : <ChevronRightIcon />}
 				</ListItem>
+				<Collapse in={openCollapse} timeout='auto' unmountOnExit>
+					{[
+						{
+							path: '/settings/edit-profile',
+							icon: <AccountCircleIcon />,
+							text: 'Account Settings',
+							id: 1,
+						},
+					].map(menu => (
+						<Link href={menu.path} key={menu.id} style={{ textDecoration: 'none', color: 'black' }}>
+							<List component='div' disablePadding>
+								<ListItem button className={classes.nested}>
+									<ListItemIcon>{menu.icon}</ListItemIcon>
+									<ListItemText primary={menu.text} />
+								</ListItem>
+							</List>
+						</Link>
+					))}
+				</Collapse>
 				<Divider />
-				<br />
+
 				<ListItem button onClick={handleLogout}>
 					<ListItemIcon>
 						<ExitToAppIcon />
 					</ListItemIcon>
-					<ListItemText>
-						<Typography className={classes.menuItems}>Sign Out</Typography>
-					</ListItemText>
+					<ListItemText primary='Sign Out' />
 				</ListItem>
-				<Divider />
 			</List>
 		</div>
 	);
