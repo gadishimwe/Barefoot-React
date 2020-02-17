@@ -102,8 +102,8 @@ const SignupForm = () => {
 									autoComplete='first-name'
 									onChange={props.handleChange('firstName')}
 									value={props.values.firstName}
-									error={Object.prototype.hasOwnProperty.call(props.errors, 'firstName')}
-									helperText={props.errors.firstName}
+									error={props.values.firstName !== '' && Object.prototype.hasOwnProperty.call(props.errors, 'firstName')}
+									helperText={props.values.firstName !== '' && props.errors.firstName}
 								/>
 								<TextField
 									size='small'
@@ -117,8 +117,8 @@ const SignupForm = () => {
 									autoComplete='last-name'
 									onChange={props.handleChange('lastName')}
 									value={props.values.lastName}
-									error={Object.prototype.hasOwnProperty.call(props.errors, 'lastName')}
-									helperText={props.errors.lastName}
+									error={props.values.lastName !== '' && Object.prototype.hasOwnProperty.call(props.errors, 'lastName')}
+									helperText={props.values.lastName !== '' && props.errors.lastName}
 								/>
 								<TextField
 									size='small'
@@ -132,8 +132,8 @@ const SignupForm = () => {
 									autoComplete='email'
 									onChange={props.handleChange('email')}
 									value={props.values.email}
-									error={Object.prototype.hasOwnProperty.call(props.errors, 'email')}
-									helperText={props.errors.email}
+									error={props.values.email !== '' && Object.prototype.hasOwnProperty.call(props.errors, 'email')}
+									helperText={props.values.email !== '' && props.errors.email}
 								/>
 								<TextField
 									size='small'
@@ -147,8 +147,8 @@ const SignupForm = () => {
 									id='password'
 									onChange={props.handleChange('password')}
 									value={props.values.password}
-									error={Object.prototype.hasOwnProperty.call(props.errors, 'password')}
-									helperText={props.errors.password}
+									error={props.values.password !== '' && Object.prototype.hasOwnProperty.call(props.errors, 'password')}
+									helperText={props.values.password !== '' && props.errors.password}
 								/>
 								{error !== undefined ? (
 									<Alert severity='error'>
@@ -192,7 +192,7 @@ const SignupForm = () => {
 				</Typography>
 				<Typography className={classes.typo}>
 					Already have an account? &nbsp;
-					<Link href='http://localhost:8080/login' variant='body2'>
+					<Link href='/login' variant='body2'>
 						Sign in here
 					</Link>
 				</Typography>

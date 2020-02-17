@@ -16,7 +16,7 @@ library.add(fab);
 describe(' Describe <LoginPage />', () => {
 	const login = mount(
 		<Provider store={store}>
-			<LoginView />
+			<LoginView location={{ pathname: '/login' }} />
 		</Provider>,
 	);
 	it('should render without error', done => {
@@ -42,7 +42,7 @@ describe(' Describe <LoginPage />', () => {
 		});
 		const wrapper = mount(
 			<Provider store={storeAfterLogin}>
-				<LoginView />
+				<LoginView location={{ pathname: '/login' }} />
 			</Provider>,
 		);
 
@@ -64,7 +64,7 @@ describe(' Describe <LoginPage />', () => {
 		});
 		const wrapper = mount(
 			<Provider store={storeAfterLogin}>
-				<LoginView />
+				<LoginView location={{ pathname: '/login' }} />
 			</Provider>,
 		);
 
@@ -76,7 +76,7 @@ describe(' Describe <LoginPage />', () => {
 		act(() => {
 			tree = mount(
 				<Provider store={store}>
-					<LoginPage />
+					<LoginPage location={{ pathname: '/login' }} />
 				</Provider>,
 			);
 		});
@@ -113,7 +113,7 @@ describe('redirecting a user', () => {
 		});
 		const wrapper = mount(
 			<Provider store={storeAfterLogin}>
-				<LoginView />
+				<LoginView location={{ pathname: '/login' }} />
 			</Provider>,
 		);
 		expect(window.location.replace).toHaveBeenCalled();
@@ -135,7 +135,7 @@ describe('redirecting a user', () => {
 		});
 		const component = mount(
 			<Provider store={storeMock}>
-				<LoginPage />
+				<LoginPage location={{ pathname: '/login' }} />
 			</Provider>,
 		);
 
@@ -167,7 +167,7 @@ describe('redirecting a user', () => {
 		});
 		const component = mount(
 			<Provider store={storeMock}>
-				<LoginPage />
+				<LoginPage location={{ pathname: '/login' }} />
 			</Provider>,
 		);
 

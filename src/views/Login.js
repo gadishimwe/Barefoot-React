@@ -1,13 +1,13 @@
 import React from 'react';
 import Navbar from '../components/common/NavBar';
 import Footer from '../components/common/Footer';
-import LoginForm from '../components/LandingPage';
+import LoginForm from '../components/auth/LandingPage';
 
-export default function Login() {
+export default function Login(props) {
 	return (
 		<>
 			<Navbar />
-			<LoginForm />
+			<LoginForm props={props} />
 			<Footer />
 		</>
 	);
