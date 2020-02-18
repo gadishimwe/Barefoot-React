@@ -142,4 +142,24 @@ describe('Test signing up functionality', () => {
 			expect(isDisabled).toEqual(false);
 		});
 	});
+	describe('Test google and facebook buttons', () => {
+		const store = configureStore();
+		const component = mount(
+			<Provider store={store}>
+				<SignupView location={{ pathname: '/signup' }} />
+			</Provider>,
+		);
+		it('Should call facebookHandler on click', () => {
+			const facebookButton = component.find('[data-test="facebookButton"]').at(1);
+			const onSubmitSpy = jest.spyOn(facebookButton.props(), 'onClick');
+			facebookButton.props().onClick();
+			expect(onSubmitSpy).toBeCalled();
+		});
+		it('Should call googleHandler on click', () => {
+			const googleButton = component.find('[data-test="googleButton"]').at(1);
+			const onSubmitSpy = jest.spyOn(googleButton.props(), 'onClick');
+			googleButton.props().onClick();
+			expect(onSubmitSpy).toBeCalled();
+		});
+	});
 });
