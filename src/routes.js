@@ -11,6 +11,7 @@ import IsLoggedIn from './helpers/IsLoggedIn';
 import Dashboard from './views/Dashboard';
 import ProfilePageEditView from './views/ProfilePageEditView';
 import facebookGoogleService from './services/facebookGoogleService';
+import UserRoleView from './views/UserRoleView';
 
 const Routes = () => {
 	const auth = useSelector(state => state.auth);
@@ -40,6 +41,12 @@ const Routes = () => {
 				/>
 				<Route exact path='/facebook/redirect' component={facebookGoogleService} />
 				<Route exact path='/google/redirect' component={facebookGoogleService} />
+				<IsLoggedIn
+					exact
+					path='/settings/user-role'
+					component={UserRoleView}
+					isAuthenticated={auth.isAuthenticated}
+				/>
 				<Route component={NotFound} />
 			</Switch>
 		</Router>

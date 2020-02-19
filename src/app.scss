@@ -66,3 +66,34 @@ body {
     transform: translate(24px, 0);
   }
 }
+
+.form-select {
+  outline: none;
+  width: 100%;
+  height: 40px;
+  margin-top: 5px;
+  font-size: 1.2em;
+  cursor: pointer;
+}
+
+.form-select:hover {
+  background-color: lightgray;
+}
+
+.pagination li {
+  display: inline-block;
+  margin: 2px;
+  width: 3%;
+}
+
+.pagination p {
+
+  border: 1px solid lightgray;
+  font-size: 1.5em;
+  text-align: center;
+  cursor: pointer;
+}
+
+.pagination p:hover {
+  background-color: lightgray;
+}
