@@ -5,6 +5,7 @@ import resetPasswordReducer from './resetPasswordReducer';
 import profileReducer from './updateProfile';
 import logoutReducer from './logoutReducer';
 import userReducer from './userReducer';
+import notificationPrefsReducer from './notificationPrefsReducer';
 
 export default combineReducers({
 	auth: loginReducer,
@@ -13,4 +14,5 @@ export default combineReducers({
 	profileData: profileReducer,
 	logoutReducer,
 	userReducer,
+	setNotification: notificationPrefsReducer
 });

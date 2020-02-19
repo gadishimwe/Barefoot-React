@@ -124,8 +124,6 @@ const UserRole = () => {
 	};
 	return (
 		<>
-			<span>Assign Role to users</span>
-			<hr />
 			{
 				userRoleState.error && (
 					<Alert severity='error'>

@@ -5,33 +5,22 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable jsx-a11y/control-has-associated-label */
 import React, { useEffect } from 'react';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
-import Drawer from '@material-ui/core/Drawer';
-import Hidden from '@material-ui/core/Hidden';
-import IconButton from '@material-ui/core/IconButton';
-import CloseIcon from '@material-ui/icons/Close';
-import Grid from '@material-ui/core/Grid';
+import { makeStyles } from '@material-ui/core/styles';
 import { useSelector, useDispatch } from 'react-redux';
-import Dialog from '@material-ui/core/Dialog';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
-import { CircularProgress } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import Alert from '@material-ui/lab/Alert';
+import { Grid } from '@material-ui/core'
 import CountrySelect from '../components/CountriesList';
-import { logoutUser } from '../redux/actions/logoutAction';
-import Navbar from '../components/common/mainNavbar';
-import Footer from '../components/common/Footer';
-import Sidebar from '../components/common/sidebar';
 import { updateProfile } from '../redux/actions/updateProfileActions';
 import Loading from '../components/common/loading';
 import { setCurrentUser } from '../redux/actions/loginAction'
 
 const drawerWidth = 240;
-export default function ProfilePageEditView() {
+export default function ProfilePageEditView(props) {
   const useStyles = makeStyles(theme => ({
     root: {
       display: 'flex',
@@ -86,20 +75,13 @@ export default function ProfilePageEditView() {
   }));
 
   const classes = useStyles();
-  const theme = useTheme();
-
-  const [mobileOpen, setMobileOpen] = React.useState(false);
-  const handleDrawerToggle = () => {
-    setMobileOpen(!mobileOpen);
-  };
+  const {image}= props
 
   const [gender, setGender] = React.useState('');
   const [preferredCurrency, setCurrency] = React.useState('');
   const [preferredLanguage, setLanguage] = React.useState('');
   const [residence, setResidence] = React.useState('');
   const [birthDate, setBirthDate] = React.useState('');
-  const [image, setImage] = React.useState('');
-  const [isLoading, setLoading] = React.useState(false);
 
   const handleGenderChange = event => {
     setGender(event.target.value);
@@ -121,49 +103,28 @@ export default function ProfilePageEditView() {
     setBirthDate(event.target.value);
   };
 
-  const handleProfilePictureChange = async e => {
-    const { files } = e.target;
-    const data = new FormData();
-    data.append('file', files[0]);
-    data.append('upload_preset', 'gustavo_upload_preset');
-    setLoading(true);
-    const res = await fetch('	https://api.cloudinary.com/v1_1/higustave/image/upload', {
-      method: 'POST',
-      body: data,
-    });
-    const file = await res.json();
-    setImage(file.secure_url);
-    setLoading(false);
-  };
-
   const user = useSelector(state => state.auth.user);
-  const { isAuthenticated, loading } = useSelector(state => state.logoutReducer);
-  useEffect(() => {
-    if (!isAuthenticated) {
-      localStorage.removeItem('token');
-      localStorage.removeItem('user');
-      window.location.replace('/login');
-    }
-  }, [isAuthenticated]);
-
+  const [currentUser, setUser] = React.useState('');
   const dispatch = useDispatch();
-  const handleLogout = () => {
-    dispatch(logoutUser());
-  };
-  const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
+
+
   const inputLabel = React.useRef(null);
   const [labelWidth, setLabelWidth] = React.useState(0);
   React.useEffect(() => {
     setLabelWidth(inputLabel.current.offsetWidth);
   }, []);
 
+  React.useEffect(() => {
+    setUser(user)
+  }, [user]);
+  
   const userProfile = useSelector(state => {
     return state.profileData;
   });
 
   useEffect(() => {
     dispatch(setCurrentUser(new Promise((resolve) => {
-      resolve({ data: { data: { ...userProfile.userData } } })
+      resolve({ data: { data: { ...user, ...userProfile.userData } } })
     })))
   }, [userProfile.userData])
 
@@ -191,70 +152,8 @@ export default function ProfilePageEditView() {
   };
 
   return (
-    <>
-      <Navbar handleDrawerToggle={handleDrawerToggle} />
-      <div className={classes.root}>
-        <nav className={classes.drawer}>
-          <Hidden smUp implementation='css'>
-            <Drawer
-              variant='temporary'
-              anchor={theme.direction === 'rtl' ? 'right' : 'left'}
-              open={mobileOpen}
-              onClose={handleDrawerToggle}
-              classes={{
-                paper: classes.drawerPaper,
-              }}
-              ModalProps={{
-                keepMounted: true, // Better open performance on mobile.
-              }}
-            >
-              <IconButton onClick={handleDrawerToggle}>
-                <CloseIcon />
-              </IconButton>
-              <Sidebar
-                handleLogout={handleLogout}
-                isLoading={isLoading}
-                image={image}
-                handleProfilePictureChange={handleProfilePictureChange}
-              />
-            </Drawer>
-          </Hidden>
-          <Hidden xsDown implementation='css'>
-            <Drawer
-              className={classes.drawerPaper}
-              variant='permanent'
-              classes={{
-                paper: classes.drawerPaper,
-              }}
-            >
-              <Sidebar
-                handleLogout={handleLogout}
-                isLoading={isLoading}
-                image={image}
-                handleProfilePictureChange={handleProfilePictureChange}
-              />
-            </Drawer>
-          </Hidden>
-        </nav>
-        <Grid
-          container
-          spacing={0}
-          style={{ maxHeight: '100%', padding: '2%' }}
-          className={classes.content}
-        >
-          <Grid lg={12} item sm={12} md={12} xs={12} style={{ textAlign: 'centea' }}>
-            <div className={classes.toolbar} />
-            <h2
-              style={{
-                backgroundColor: '#E3E6EB',
-                paddingBottom: '10px',
-                paddingTop: '10px',
-                marginBottom: '20px',
-              }}
-            >
-              User Profile
-            </h2>
-            <div style={{ margin: 'auto', minHeight: '95%' }}>
+    <Grid item lg={8} md={6} xl={9} xs={12}>
+            <div style={{  }}>
               {userProfile.message ? (
                 <Alert severity='success' style={{ width: '250px', margin: 'auto' }}>
                   {userProfile.message}
@@ -265,9 +164,9 @@ export default function ProfilePageEditView() {
               <br />
               <form onSubmit={handleSubmit}>
                 <div style={{ display: 'flex', textAlign: 'center', marginBottom: '10px' }}>
-                  <div style={{ width: '500px', margin: 'auto' }}>
+                  <div style={{ width: '100%', margin: 'auto' }}>
                     <TextField
-                      value={user.firstName || ''}
+                      value={currentUser.firstName || ''}
                       className={classes.formInput}
                       id='firstname'
                       variant='outlined'
@@ -277,11 +176,11 @@ export default function ProfilePageEditView() {
                   </div>
                 </div>
                 <div style={{ display: 'flex', textAlign: 'center', marginBottom: '10px' }}>
-                  <div style={{ width: '500px', margin: 'auto' }}>
+                  <div style={{ width: '100%', margin: 'auto' }}>
                     <TextField
                       className={classes.formInput}
                       id='lastname'
-                      value={user.lastName || ''}
+                      value={currentUser.lastName || ''}
                       variant='outlined'
                       size='small'
                       disabled
@@ -289,11 +188,11 @@ export default function ProfilePageEditView() {
                   </div>
                 </div>
                 <div style={{ display: 'flex', textAlign: 'center', marginBottom: '10px' }}>
-                  <div style={{ width: '500px', margin: 'auto' }}>
+                  <div style={{ width: '100%', margin: 'auto' }}>
                     <TextField
                       className={classes.formInput}
                       id='email'
-                      value={user.email || ''}
+                      value={currentUser.email || ''}
                       variant='outlined'
                       size='small'
                       disabled
@@ -301,7 +200,7 @@ export default function ProfilePageEditView() {
                   </div>
                 </div>
                 <div style={{ display: 'flex', textAlign: 'center' }}>
-                  <div style={{ width: '500px', margin: 'auto' }}>
+                  <div style={{ width: '100%', margin: 'auto' }}>
                     <FormControl variant='outlined' className={classes.formControl} size='small'>
                       <InputLabel ref={inputLabel} htmlFor='outlined-gender-native-simple'>
                         Gender
@@ -336,7 +235,7 @@ export default function ProfilePageEditView() {
                   </div>
                 </div>
                 <div style={{ display: 'flex', textAlign: 'center' }}>
-                  <div style={{ width: '500px', margin: 'auto' }}>
+                  <div style={{ width: '100%', margin: 'auto' }}>
                     <FormControl variant='outlined' className={classes.formControl} size='small'>
                       <InputLabel ref={inputLabel} htmlFor='outlined-currency-native-simple'>
                         Currency
@@ -370,7 +269,7 @@ export default function ProfilePageEditView() {
                   </div>
                 </div>
                 <div style={{ display: 'flex', textAlign: 'center' }}>
-                  <div style={{ width: '500px', margin: 'auto' }}>
+                  <div style={{ width: '100%', margin: 'auto' }}>
                     <FormControl variant='outlined' className={classes.formControl} size='small'>
                       <InputLabel ref={inputLabel} htmlFor='outlined-language-native-simple'>
                         Language
@@ -404,7 +303,7 @@ export default function ProfilePageEditView() {
                   </div>
                 </div>
                 <div style={{ display: 'flex', textAlign: 'center' }}>
-                  <div style={{ width: '500px', margin: 'auto' }}>
+                  <div style={{ width: '100%', margin: 'auto' }}>
                     <CountrySelect
                       size='small'
                       className='countries'
@@ -418,7 +317,7 @@ export default function ProfilePageEditView() {
                 </div>
                 <div style={{ display: 'flex', textAlign: 'center' }}>
                   <div
-                    style={{ width: '500px', margin: 'auto' }}
+                    style={{ width: '100%', margin: 'auto' }}
                     className='birthDate'
                     onChange={handleBirthDateChange}
                   >
@@ -457,22 +356,6 @@ export default function ProfilePageEditView() {
                 </div>
               </form>
             </div>
-          </Grid>
-        </Grid>
-      </div>
-      <Footer />
-      <Dialog
-        fullScreen={fullScreen}
-        open={loading}
-        PaperProps={{
-          style: {
-            backgroundColor: 'transparent',
-            boxShadow: 'none',
-          },
-        }}
-      >
-        <CircularProgress size={59.5} className={classes.loader} />
-      </Dialog>
-    </>
+    </Grid>
   );
 }

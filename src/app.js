@@ -6,10 +6,12 @@ import { fab } from '@fortawesome/free-brands-svg-icons';
 import { Provider } from 'react-redux';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import jwtDecode from 'jwt-decode';
+import { BrowserRouter as Router } from 'react-router-dom';
+import { renderRoutes } from 'react-router-config';
 import configureStore from './redux/store';
 import { setCurrentUser } from './redux/actions/loginAction';
-import Routes from './routes';
 import http from './services/httpService';
+import routes from './routes';
 
 library.add(fab);
 const store = configureStore();
@@ -32,26 +34,26 @@ if (localStorage.token) {
 const theme = createMuiTheme({
 	palette: {
 		primary: {
-			main: '#0074D9',
-		},
+			main: '#0074D9'
+		}
 	},
 	overrides: {
 		MuiOutlinedInput: {
 			input: {
 				'&:-webkit-autofill': {
 					WebkitBoxShadow: '0 0 0 100px #fff inset',
-					WebkitTextFillColor: '#000000',
-				},
-			},
-		},
-	},
+					WebkitTextFillColor: '#000000'
+				}
+			}
+		}
+	}
 });
 
 const App = () => {
 	return (
 		<Provider store={store} id='component-App'>
 			<ThemeProvider theme={theme}>
-				<Routes />
+				<Router>{renderRoutes(routes)}</Router>
 			</ThemeProvider>
 		</Provider>
 	);

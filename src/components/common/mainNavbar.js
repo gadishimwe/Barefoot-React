@@ -1,70 +1,187 @@
-import React from 'react';
-import AppBar from '@material-ui/core/AppBar';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Badge from '@material-ui/core/Badge';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
+import React, { useState, useRef, useEffect } from 'react';
+import { Link as RouterLink } from 'react-router-dom';
+import { makeStyles } from '@material-ui/styles';
+import { AppBar, Badge, Button, IconButton, Toolbar, Hidden, colors } from '@material-ui/core';
 import NotificationsIcon from '@material-ui/icons/Notifications';
+import InputIcon from '@material-ui/icons/Input';
+import MenuIcon from '@material-ui/icons/Menu';
+import socketIOClient from 'socket.io-client';
+import MuiAlert from '@material-ui/lab/Alert';
+import Snackbar from '@material-ui/core/Snackbar';
+
+import http from '../../services/httpService';
+import NotificationsPopover from '../Notification/NotificationsPopover';
 
 const useStyles = makeStyles(theme => ({
 	root: {
 		display: 'flex',
 		flexGrow: 1,
-		textAlign: 'center',
+		textAlign: 'center'
 	},
 	appBar: {
 		zIndex: theme.zIndex.drawer + 1,
-		backgroundColor: '#0074D9',
+		backgroundColor: '#0074D9'
 	},
-	menuButton: {
-		marginRight: theme.spacing(2),
-		[theme.breakpoints.up('sm')]: {
-			display: 'none',
-		},
+	flexGrow: {
+		flexGrow: 1
 	},
-
-	sectionDesktop: {
-		display: 'none',
-		[theme.breakpoints.up('md')]: {
-			display: 'flex',
-		},
+	notificationsButton: {
+		marginLeft: theme.spacing(1)
 	},
+	notificationsBadge: {
+		backgroundColor: colors.orange[600]
+	},
+	logoutButton: {
+		marginLeft: theme.spacing(1)
+	},
+	logoutIcon: {
+		marginRight: theme.spacing(1)
+	}
 }));
-export default function Navbar(props) {
+function Alert(props) {
+	return <MuiAlert elevation={6} variant='filled' {...props} />;
+}
+const TopBar = props => {
 	const classes = useStyles();
+	const notificationsRef = useRef(null);
+	const [notifications, setNotifications] = useState([]);
+	const [unreadNotifications, setUnreadNotifications] = useState(0);
+	const [openNotifications, setOpenNotifications] = useState(false);
+	const [open, setOpen] = React.useState(false);
+	const [snackBarMessage, setSnackBarMessage] = useState('');
+
+	const endPoint = `${process.env.API_URL}`;
+
+	const connect = () => {
+		const token = localStorage.getItem('token');
+		const socket = socketIOClient(endPoint);
+
+		socket.on('connect', () => {
+			socket
+				.emit('authenticate', { token }) // send the jwt
+				.on('authenticated', () => {
+					socket.on('success', userData => {
+						socket.emit('new-user', userData);
+					});
+					socket.on('new-notification', data => {
+						setNotifications(prev => [...prev, data]);
+						setUnreadNotifications(prevUnread => prevUnread + 1);
+						setSnackBarMessage(data.message);
+						setOpen(true);
+					});
+				});
+		});
+	};
+	useEffect(() => {
+		let mounted = true;
+
+		const fetchNotifications = () => {
+			http.get('/api/notifications').then(response => {
+				if (mounted) {
+					response.data.data.notifications.map(notification => {
+						if (notification.isRead === false) {
+							setNotifications(prev => [...prev, notification]);
+						}
+					});
+					setUnreadNotifications(response.data.data.unread);
+				}
+			});
+		};
+
+		fetchNotifications();
+		setInterval(connect(), 1000);
+
+		return () => {
+			mounted = false;
+		};
+	}, []);
+	let sortedNotifications = notifications;
+	if (notifications.length > 0) {
+		// sort notification by created date
+		sortedNotifications = notifications
+			.sort((a, b) => a.createdAt.localeCompare(b.createdAt))
+			.reverse();
+	}
+	const handleNotificationsOpen = () => {
+		setOpenNotifications(true);
+	};
+
+	const handleNotificationsClose = () => {
+		setOpenNotifications(false);
+	};
+	const markAllAsRead = () => {
+		http.patch('/api/notifications/mark-all-as-read').then(() => {
+			setUnreadNotifications(prevUnread => prevUnread * 0);
+		});
+	};
+	const handleClose = (event, reason) => {
+		if (reason === 'clickaway') {
+			return;
+		}
+
+		setOpen(false);
+	};
 
 	return (
 		<div className={classes.root}>
-			<CssBaseline />
-			<AppBar position='fixed' className={classes.appBar}>
+			<Snackbar
+				open={open}
+				autoHideDuration={10000}
+				onClose={handleClose}
+				anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+			>
+				<Alert severity='info' id='feedback' onClose={handleClose}>
+					{snackBarMessage}
+				</Alert>
+			</Snackbar>
+			<AppBar className={classes.appBar} color='primary'>
 				<Toolbar>
-					<IconButton
-						color='inherit'
-						aria-label='Open drawer'
-						edge='start'
-						onClick={() => props.handleDrawerToggle()}
-						className={classes.menuButton}
-					>
-						<MenuIcon />
-					</IconButton>
-					<Typography variant='h6' style={{ fontWeight: 'bold' }} noWrap>
-						Barefoot Nomad
-					</Typography>
-					<div className={classes.root} />
-					<div className={classes.sectionDesktop}>
-						<IconButton aria-label='show 5 new notifications' color='inherit'>
-							<Badge badgeContent={0} color='secondary'>
+					<RouterLink to='/'>
+						<img alt='Logo' src='/public/images/logos/barefoot-logo.svg' />
+					</RouterLink>
+					<div className={classes.flexGrow} />
+					<Hidden smDown>
+						<IconButton
+							className={classes.notificationsButton}
+							color='inherit'
+							onClick={handleNotificationsOpen}
+							ref={notificationsRef}
+						>
+							<Badge
+								badgeContent={unreadNotifications}
+								classes={{ badge: classes.notificationsBadge }}
+								max={50}
+							>
 								<NotificationsIcon />
 							</Badge>
 						</IconButton>
-					</div>
+						<Button
+							className={classes.logoutButton}
+							color='inherit'
+							onClick={() => props.handleLogout()}
+						>
+							<InputIcon className={classes.logoutIcon} />
+							Sign out
+						</Button>
+					</Hidden>
+					<Hidden smUp>
+						<IconButton color='inherit' onClick={() => props.handleDrawerToggle()}>
+							<MenuIcon />
+						</IconButton>
+					</Hidden>
 				</Toolbar>
-			</AppBar>
 
-			<div className={classes.toolbar} />
+				<NotificationsPopover
+					anchorEl={notificationsRef.current}
+					notifications={sortedNotifications}
+					unreadNotifications={unreadNotifications}
+					markAllAsRead={markAllAsRead}
+					onClose={handleNotificationsClose}
+					open={openNotifications}
+				/>
+			</AppBar>
 		</div>
 	);
-}
+};
+
+export default TopBar;

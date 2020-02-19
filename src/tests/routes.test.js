@@ -3,7 +3,8 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import { MemoryRouter } from 'react-router-dom';
-import Routes from '../routes';
+import App from '../app';
+import '../app.scss';
 import configureStore from '../redux/store';
 
 describe('app component', () => {
@@ -11,10 +12,10 @@ describe('app component', () => {
 		const component = mount(
 			<Provider store={configureStore()}>
 				<MemoryRouter initialEntries={['/']}>
-					<Routes />
+					<App />
 				</MemoryRouter>
-			</Provider>,
+			</Provider>
 		);
-		expect(component.find(Routes)).toHaveLength(1);
+		expect(component).toHaveLength(1);
 	});
 });

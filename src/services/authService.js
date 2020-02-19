@@ -21,6 +21,6 @@ export const loginUserService = data => {
 };
 
 export const logoutService = () => {
-	const response = http.post('api/auth/logout');
+	const response = http.post('/api/auth/logout');
 	return response;
 };

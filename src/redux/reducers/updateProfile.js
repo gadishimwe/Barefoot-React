@@ -14,7 +14,7 @@ const initialState = {
     },
     error: {},
     loading: false,
-    message: ''
+    message: '',
 }
 
 const profileReducer = (state = initialState, action) => {
@@ -45,7 +45,7 @@ const profileReducer = (state = initialState, action) => {
                     ...state.userData
                 },
                 error: {},
-                loading: true
+                loading: true,
             };
         default:
             return state;
