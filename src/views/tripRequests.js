@@ -142,7 +142,14 @@ export default function tripRequests() {
               My Trip Requests
             </h2>
           </Grid>
-          {currentTrips.map(trip => {
+        {(currentTrips.length === 0 ? 
+          <div style={{ paddingTop: '20%', textAlign: 'center', color: '#979696 ', width:'100%'}}>
+            <h2 style={{ margin: 'auto'}}>
+              No Trips Requests Found
+            </h2>
+          </div>
+          :
+          (currentTrips.map(trip => {
             let {
               tripType,
               originId,
@@ -203,7 +210,8 @@ export default function tripRequests() {
                 />
               </Grid>
             )
-          })
+          }))
+          )
           }
           <Grid
             item
