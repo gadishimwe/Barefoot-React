@@ -1,3 +1,4 @@
+/* eslint-disable no-fallthrough */
 /* eslint-disable prettier/prettier */
 import { UPDATE_PROFILE } from '../actions/actionTypes';
 

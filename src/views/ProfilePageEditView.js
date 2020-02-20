@@ -150,7 +150,6 @@ export default function ProfilePageEditView(props) {
       updateProfile(filtered),
     );
   };
-
   return (
     <Grid item lg={8} md={6} xl={9} xs={12}>
             <div style={{  }}>

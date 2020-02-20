@@ -1,0 +1,103 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Test On ProfilePicture Component render() Should Render ProfilePicture Component 1`] = `
+<ForwardRef(Card)
+  className="makeStyles-root-1"
+  classes={
+    Object {
+      "root": "MuiCard-root",
+    }
+  }
+>
+  <WithStyles(ForwardRef(Typography))
+    style={
+      Object {
+        "backgroundColor": "#0074D9",
+        "color": "#ffff",
+        "fontWeight": "bold",
+        "paddingBottom": "10px",
+        "paddingTop": "10px",
+        "textAlign": "center",
+      }
+    }
+  />
+  <div
+    style={
+      Object {
+        "marginLeft": "20px",
+        "marginRight": "20px",
+      }
+    }
+  >
+    <p>
+      <span
+        style={
+          Object {
+            "fontWeight": "bold",
+            "paddingRight": "5px",
+          }
+        }
+      >
+        Origin:
+      </span>
+      <span />
+    </p>
+    <p>
+      <span
+        style={
+          Object {
+            "fontWeight": "bold",
+            "paddingRight": "5px",
+          }
+        }
+      >
+        Destination:
+      </span>
+      <span />
+    </p>
+    <p>
+      <span
+        style={
+          Object {
+            "fontWeight": "bold",
+            "paddingRight": "5px",
+          }
+        }
+      >
+        Departure Date:
+      </span>
+      <span />
+    </p>
+    <p>
+      <span
+        style={
+          Object {
+            "fontWeight": "bold",
+            "paddingRight": "5px",
+          }
+        }
+      >
+        Return Date:
+      </span>
+      <span />
+    </p>
+  </div>
+  <WithStyles(ForwardRef(Divider)) />
+  <p
+    style={
+      Object {
+        "textAlign": "center",
+      }
+    }
+  >
+    <span
+      style={
+        Object {
+          "color": "#C62828",
+          "fontWeight": "bold",
+        }
+      }
+    />
+  </p>
+</ForwardRef(Card)>
+`;

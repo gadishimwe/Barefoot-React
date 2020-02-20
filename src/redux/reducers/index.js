@@ -6,6 +6,8 @@ import profileReducer from './updateProfile';
 import logoutReducer from './logoutReducer';
 import userReducer from './userReducer';
 import notificationPrefsReducer from './notificationPrefsReducer';
+import tripRequestsReducer from './tripRequestsReducer';
+import tripLocationsReducer from './tripLocationsReducer';
 
 export default combineReducers({
 	auth: loginReducer,
@@ -14,5 +16,7 @@ export default combineReducers({
 	profileData: profileReducer,
 	logoutReducer,
 	userReducer,
-	setNotification: notificationPrefsReducer
+	setNotification: notificationPrefsReducer,
+	tripRequestsReducer,
+	tripLocationsReducer
 });
