@@ -25,7 +25,7 @@ const useStyles = makeStyles(theme => ({
     height: theme.spacing(12),
   },
 }));
-export const ProfilePicture = ({ isLoading, handleProfilePictureChange }) => {
+export const ProfilePicture = ({ isLoading, handleProfilePictureChange}) => {
 
   const user = useSelector(state => state.auth.user);
   const classes = useStyles();
@@ -73,7 +73,7 @@ export const ProfilePicture = ({ isLoading, handleProfilePictureChange }) => {
         ) : (
             <>
               <Avatar
-                src={user.profilePicture}
+                src={user.ProfilePicture}
                 style={{ margin: 'auto' }}
                 className={classes.large}
               />

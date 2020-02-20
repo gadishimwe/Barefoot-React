@@ -1,3 +1,5 @@
+/* eslint-disable no-return-assign */
+/* eslint-disable no-constant-condition */
 /* eslint-disable no-sequences */
 /* eslint-disable prefer-const */
 /* eslint-disable prettier/prettier */
@@ -250,7 +252,7 @@ export default function ProfilePageEditView() {
                 marginBottom: '20px',
               }}
             >
-              User Profile Edit
+              User Profile
             </h2>
             <div style={{ margin: 'auto', minHeight: '95%' }}>
               {userProfile.message ? (
@@ -307,7 +309,6 @@ export default function ProfilePageEditView() {
                       <Select
                         native
                         label='gender-input'
-                        value={user.gender || ''}
                         className='gender'
                         onChange={handleGenderChange}
                         labelWidth={labelWidth}
@@ -316,9 +317,20 @@ export default function ProfilePageEditView() {
                           id: 'outlined-gender-native-simple',
                         }}
                       >
-                        <option value='' />
-                        <option value='M'>Male</option>
-                        <option value='F'>Female</option>
+                        {
+                          user.gender === 'M' ? (
+                            <>
+                              <option value='M' selected>Male</option>
+                              <option value='F'>Female</option>
+                            </>
+                          ) :
+                            (
+                              <>
+                                <option value='M'>Male</option>
+                                <option value='F' selected>Female</option>
+                              </>
+                            )
+                        }
                       </Select>
                     </FormControl>
                   </div>
@@ -332,7 +344,6 @@ export default function ProfilePageEditView() {
                       <Select
                         native
                         className='currency'
-                        value={user.preferredCurrency || ''}
                         onChange={handleCurrencyChange}
                         labelWidth={labelWidth}
                         inputProps={{
@@ -340,10 +351,20 @@ export default function ProfilePageEditView() {
                           id: 'outlined-currency-native-simple',
                         }}
                       >
-                        <option value='' />
-                        <option value='Dollar'>USD $</option>
-                        <option value='Euro'>Euro €</option>
-                        <option value='Pound'>Pound £</option>
+                        {
+                          user.preferredCurrency === 'Dollar' ? (
+                            <>
+                              <option value='Dollar' selected>USD $</option>
+                              <option value='Euro'>Euro €</option>
+                            </>
+                          ) :
+                            (
+                              <>
+                                <option value='Dollar'>USD $</option>
+                                <option value='Euro' selected>Euro €</option>
+                              </>
+                            )
+                        }
                       </Select>
                     </FormControl>
                   </div>
@@ -357,7 +378,6 @@ export default function ProfilePageEditView() {
                       <Select
                         native
                         className='language'
-                        value={user.preferredLanguage || ''}
                         onChange={handleLanguageChange}
                         labelWidth={labelWidth}
                         inputProps={{
@@ -365,9 +385,20 @@ export default function ProfilePageEditView() {
                           id: 'outlined-language-native-simple',
                         }}
                       >
-                        <option value='' />
-                        <option value='english'>English</option>
-                        <option value='french'>French</option>
+                        {
+                          user.preferredLanguage === 'english' ? (
+                            <>
+                              <option value='english' selected>English</option>
+                              <option value='french'>French</option>
+                            </>
+                          ) :
+                            (
+                              <>
+                                <option value='english'>English</option>
+                                <option value='french' selected>French</option>
+                              </>
+                            )
+                        }
                       </Select>
                     </FormControl>
                   </div>
