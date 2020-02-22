@@ -130,6 +130,12 @@ const Sidebar = ({ handleLogout, isLoading, image, handleProfilePictureChange })
 							text: 'Account Settings',
 							id: 1,
 						},
+						{
+							path: '/settings/user-role',
+							icon: <AccountCircleIcon />,
+							text: 'Update User Role',
+							id: 2,
+						},
 					].map(menu => (
 						<Link href={menu.path} key={menu.id} style={{ textDecoration: 'none', color: 'black' }}>
 							<List component='div' disablePadding>

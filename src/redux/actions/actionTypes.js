@@ -5,3 +5,5 @@ export const LOGIN_USER = 'LOGIN_USER';
 export const SET_CURRENT_USER = 'SET_CURRENT_USER';
 export const UPDATE_PROFILE = 'UPDATE_PROFILE';
 export const LOGOUT_USER = 'LOGOUT_USER';
+export const USER_ROLE = 'USER_ROLE';
+export const UPDATE_USER_ROLE = 'UPDATE_USER_ROLE';
