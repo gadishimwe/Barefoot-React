@@ -3,7 +3,6 @@ import { makeStyles } from '@material-ui/styles';
 import { Typography } from '@material-ui/core';
 
 const useStyles = makeStyles(() => ({
-	root: {},
 	overline: {
 		fontSize: '11px',
 		fontWeight: 500,
@@ -19,18 +18,16 @@ const useStyles = makeStyles(() => ({
 	}
 }));
 
-const Header = props => {
-	const { className, ...rest } = props;
-
+const Header = ({ title, subtitle }) => {
 	const classes = useStyles();
 
 	return (
-		<div {...rest} className={classes.root}>
+		<div style={{ margin: '17px 0' }}>
 			<Typography className={classes.overline} component='h2' gutterBottom>
-				Settings
+				{title}
 			</Typography>
 			<Typography component='h1' className={classes.h3}>
-				Change account information
+				{subtitle}
 			</Typography>
 		</div>
 	);

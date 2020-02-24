@@ -96,23 +96,5 @@ exports[`Test On ProfilePicture Component render() Should Render ProfilePicture 
       type="file"
     />
   </div>
-  <WithStyles(ForwardRef(Divider))>
-    <ForwardRef(Divider)
-      classes={
-        Object {
-          "absolute": "MuiDivider-absolute",
-          "inset": "MuiDivider-inset",
-          "light": "MuiDivider-light",
-          "middle": "MuiDivider-middle",
-          "root": "MuiDivider-root",
-          "vertical": "MuiDivider-vertical",
-        }
-      }
-    >
-      <hr
-        className="MuiDivider-root"
-      />
-    </ForwardRef(Divider)>
-  </WithStyles(ForwardRef(Divider))>
 </ProfilePicture>
 `;

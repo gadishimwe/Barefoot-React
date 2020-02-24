@@ -5,7 +5,6 @@
 /* eslint-disable react/no-unused-prop-types */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React from 'react';
-import Divider from '@material-ui/core/Divider';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core';
@@ -109,7 +108,6 @@ export const ProfilePicture = ({ isLoading, image, handleProfilePictureChange })
             </>
           )}
       </div>
-      <Divider />
     </>
   );
 };

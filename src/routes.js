@@ -13,6 +13,7 @@ import UserRoleView from './views/UserRoleView';
 import AppLayout from './views/appLayout';
 import Settings from './views/SettingsView';
 import tripRequests from './views/tripRequests';
+import Trips from './components/trips/trips';
 
 const routes = [
 	{
@@ -70,11 +71,6 @@ const routes = [
 				component: NotFound
 			},
 			{
-				path: '/settings/user-role',
-				exact: true,
-				component: UserRoleView
-			},
-			{
 				path: '/settings',
 				exact: true,
 				component: Settings
@@ -88,6 +84,11 @@ const routes = [
 				path: '/trips',
 				exact: true,
 				component: tripRequests
+			},
+			{
+				path: '/trips/:type',
+				exact: true,
+				component: Trips
 			},
 			{
 				component: () => <Redirect to='/errors/error-404' />

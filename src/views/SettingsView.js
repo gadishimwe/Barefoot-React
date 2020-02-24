@@ -2,19 +2,13 @@ import React from 'react';
 import { Redirect } from 'react-router-dom';
 import { makeStyles } from '@material-ui/styles';
 import { Tabs, Tab, Divider, colors } from '@material-ui/core';
-
-import Page from '../components/common/Page';
 import Notifications from '../components/Notification/notificationSettings';
 import Header from '../components/common/SettingsHeader';
 import ProfilePageEditView from './ProfilePageEditView';
 import AssignManager from '../components/AssignManager';
+import UserRole from '../components/UserRole';
 
 const useStyles = makeStyles(theme => ({
-	root: {
-		maxWidth: '100%',
-		margin: '0 auto',
-		padding: theme.spacing(3)
-	},
 	tabs: {
 		marginTop: theme.spacing(3)
 	},
@@ -38,7 +32,8 @@ const Settings = props => {
 	const tabs = [
 		{ value: 'edit-profile', label: 'General' },
 		{ value: 'notifications', label: 'Notifications' },
-		{ value: 'assign-manager', label: 'Assign Manager' }
+		{ value: 'assign-manager', label: 'Assign Manager' },
+		{ value: 'user-role', label: 'User roles' }
 	];
 
 	if (!tab) {
@@ -50,14 +45,16 @@ const Settings = props => {
 	}
 
 	return (
-		<Page className={classes.root} title='Settings'>
-			<Header />
+		<>
+			<Header title='Settings' subtitle='Change account information' />
 			<Tabs
 				className={classes.tabs}
 				onChange={handleTabsChange}
 				scrollButtons='auto'
 				value={tab}
 				variant='scrollable'
+				indicatorColor='primary'
+				textColor='primary'
 			>
 				{tabs.map(tabContent => (
 					<Tab key={tabContent.value} label={tabContent.label} value={tabContent.value} />
@@ -68,8 +65,9 @@ const Settings = props => {
 				{tab === 'edit-profile' && <ProfilePageEditView image={image} />}
 				{tab === 'notifications' && <Notifications />}
 				{tab === 'assign-manager' && <AssignManager />}
+				{tab === 'user-role' && <UserRole />}
 			</div>
-		</Page>
+		</>
 	);
 };
 

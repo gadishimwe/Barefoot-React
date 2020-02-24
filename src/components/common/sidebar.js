@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-globals */
 import React from 'react';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -18,6 +19,7 @@ import ExpandLess from '@material-ui/icons/ExpandLess';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import NotificationsActiveIcon from '@material-ui/icons/NotificationsActive';
+import FlightTakeoffIcon from '@material-ui/icons/FlightTakeoff';
 import ProfilePicture from '../profilePicture';
 
 const useStyles = makeStyles(theme => ({
@@ -61,16 +63,25 @@ const Sidebar = ({ handleLogout, isLoading, image, handleProfilePictureChange })
 	function handleOpenSettings() {
 		setOpenCollapse(!openCollapse);
 	}
-
+	let type = 'oneway-trip';
+	if (
+		location.pathname === '/trips/oneway-trip' ||
+		location.pathname === '/trips/return-trip' ||
+		location.pathname === '/trips/multi-city-trip'
+	) {
+		type = location.pathname.slice(7);
+	}
 	return (
 		<div className={classes.sideBar}>
 			<div className={classes.toolbar} />
 			<List>
-				<ProfilePicture
-					isLoading={isLoading}
-					image={image}
-					handleProfilePictureChange={handleProfilePictureChange}
-				/>
+				<div style={{ height: '150px' }}>
+					<ProfilePicture
+						isLoading={isLoading}
+						image={image}
+						handleProfilePictureChange={handleProfilePictureChange}
+					/>
+				</div>
 				<Divider />
 				{[
 					{
@@ -86,22 +97,28 @@ const Sidebar = ({ handleLogout, isLoading, image, handleProfilePictureChange })
 						id: 2
 					},
 					{
+						path: `/trips/${type}`,
+						icon: <FlightTakeoffIcon />,
+						text: 'Book a trip',
+						id: 3
+					},
+					{
 						path: '/accommodations',
 						icon: <HomeWorkOutlinedIcon />,
 						text: 'Accommodations',
-						id: 3
+						id: 4
 					},
 					{
 						path: '/trips',
 						icon: <CardTravelIcon />,
 						text: 'Trip Requests',
-						id: 4
+						id: 5
 					},
 					{
 						path: '/bookings',
 						icon: <BallotOutlinedIcon />,
 						text: 'My Bookings',
-						id: 5
+						id: 6
 					}
 				].map(item => (
 					<Link href={item.path} key={item.id} style={{ textDecoration: 'none', color: 'black' }}>
@@ -116,7 +133,6 @@ const Sidebar = ({ handleLogout, isLoading, image, handleProfilePictureChange })
 				))}
 
 				<Divider />
-
 				<ListItem button onClick={handleOpenSettings}>
 					<ListItemIcon>
 						<SettingsIcon />
@@ -124,6 +140,7 @@ const Sidebar = ({ handleLogout, isLoading, image, handleProfilePictureChange })
 					<ListItemText primary='Settings' />
 					{openCollapse ||
 					window.location.pathname === '/settings/edit-profile' ||
+					window.location.pathname === '/settings/user-role' ||
 					window.location.pathname === '/settings/notifications' ? (
 						<ExpandLess />
 					) : (
@@ -134,6 +151,7 @@ const Sidebar = ({ handleLogout, isLoading, image, handleProfilePictureChange })
 					in={
 						openCollapse ||
 						window.location.pathname === '/settings/edit-profile' ||
+						window.location.pathname === '/settings/user-role' ||
 						window.location.pathname === '/settings/notifications'
 					}
 				>
@@ -178,7 +196,6 @@ const Sidebar = ({ handleLogout, isLoading, image, handleProfilePictureChange })
 					))}
 				</Collapse>
 				<Divider />
-
 				<ListItem button onClick={handleLogout}>
 					<ListItemIcon>
 						<ExitToAppIcon />
