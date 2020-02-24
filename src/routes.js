@@ -12,6 +12,7 @@ import facebookGoogleService from './services/facebookGoogleService';
 import UserRoleView from './views/UserRoleView';
 import AppLayout from './views/appLayout';
 import Settings from './views/SettingsView';
+import tripRequests from './views/tripRequests';
 
 const routes = [
 	{
@@ -82,6 +83,11 @@ const routes = [
 				path: '/settings/:tab',
 				exact: true,
 				component: Settings
+			},
+			{
+				path: '/trips',
+				exact: true,
+				component: tripRequests
 			},
 			{
 				component: () => <Redirect to='/errors/error-404' />
