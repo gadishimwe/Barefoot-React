@@ -107,7 +107,6 @@ export default function tripRequests() {
   const paginate = PageNumber => {
     setCurrentPage(PageNumber);
   };
-
   const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
   const handleClick = () => {
 
@@ -145,7 +144,7 @@ export default function tripRequests() {
         {(currentTrips.length === 0 ? 
           <div style={{ paddingTop: '20%', textAlign: 'center', color: '#979696 ', width:'100%'}}>
             <h2 style={{ margin: 'auto'}}>
-              No Trips Requests Found
+              No Trip Requests Found
             </h2>
           </div>
           :
