@@ -8,7 +8,6 @@ import React from 'react';
 import Divider from '@material-ui/core/Divider';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
-import { useSelector } from 'react-redux';
 import { makeStyles } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
@@ -25,9 +24,8 @@ const useStyles = makeStyles(theme => ({
     height: theme.spacing(12),
   },
 }));
-export const ProfilePicture = ({ isLoading, handleProfilePictureChange}) => {
+export const ProfilePicture = ({ isLoading, image, handleProfilePictureChange }) => {
 
-  const user = useSelector(state => state.auth.user);
   const classes = useStyles();
 
   return (
@@ -36,7 +34,7 @@ export const ProfilePicture = ({ isLoading, handleProfilePictureChange}) => {
         {isLoading ? (
           <>
             <Avatar
-              src={user.ProfilePicture}
+              src={image}
               style={{ margin: 'auto' }}
               className={classes.large}
             />
@@ -73,7 +71,7 @@ export const ProfilePicture = ({ isLoading, handleProfilePictureChange}) => {
         ) : (
             <>
               <Avatar
-                src={user.ProfilePicture}
+                src={image}
                 style={{ margin: 'auto' }}
                 className={classes.large}
               />

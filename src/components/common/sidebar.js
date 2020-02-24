@@ -17,40 +17,41 @@ import Collapse from '@material-ui/core/Collapse';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import NotificationsActiveIcon from '@material-ui/icons/NotificationsActive';
 import ProfilePicture from '../profilePicture';
 
 const useStyles = makeStyles(theme => ({
 	isActive: {
 		backgroundColor: '#E3F2FD',
-		color: '#2196F3',
+		color: '#2196F3'
 	},
 
 	menuItems: {
-		fontSize: 14,
+		fontSize: 14
 	},
 	button: {
 		backgroundColor: '#0074D9',
 		'&:hover': {
 			boxShadow: '0 0 0 0.2rem rgba(0,123,255,.5)',
-			backgroundColor: '#0074D9',
+			backgroundColor: '#0074D9'
 		},
 		fontSize: '10px',
 		fontWeight: 'bold',
 		borderRadius: 4,
 		marginTop: 30,
-		padding: 'auto',
+		padding: 'auto'
 	},
 	sideBar: {
-		minHeight: '40%',
+		minHeight: '40%'
 	},
 	toolbar: theme.mixins.toolbar,
 	large: {
 		width: theme.spacing(12),
-		height: theme.spacing(12),
+		height: theme.spacing(12)
 	},
 	nested: {
-		paddingLeft: theme.spacing(4),
-	},
+		paddingLeft: theme.spacing(4)
+	}
 }));
 
 const Sidebar = ({ handleLogout, isLoading, image, handleProfilePictureChange }) => {
@@ -60,6 +61,7 @@ const Sidebar = ({ handleLogout, isLoading, image, handleProfilePictureChange })
 	function handleOpenSettings() {
 		setOpenCollapse(!openCollapse);
 	}
+
 	return (
 		<div className={classes.sideBar}>
 			<div className={classes.toolbar} />
@@ -75,32 +77,32 @@ const Sidebar = ({ handleLogout, isLoading, image, handleProfilePictureChange })
 						path: '/dashboard',
 						icon: <DashboardIcon />,
 						text: 'Dashboard',
-						id: 1,
+						id: 1
 					},
 					{
 						path: '/chat',
 						icon: <MailOutlineIcon />,
 						text: 'Messages',
-						id: 2,
+						id: 2
 					},
 					{
 						path: '/accommodations',
 						icon: <HomeWorkOutlinedIcon />,
 						text: 'Accommodations',
-						id: 3,
+						id: 3
 					},
 					{
 						path: '/trips',
 						icon: <CardTravelIcon />,
 						text: 'Trip Requests',
-						id: 4,
+						id: 4
 					},
 					{
 						path: '/bookings',
 						icon: <BallotOutlinedIcon />,
 						text: 'My Bookings',
-						id: 5,
-					},
+						id: 5
+					}
 				].map(item => (
 					<Link href={item.path} key={item.id} style={{ textDecoration: 'none', color: 'black' }}>
 						<ListItem
@@ -120,25 +122,47 @@ const Sidebar = ({ handleLogout, isLoading, image, handleProfilePictureChange })
 						<SettingsIcon />
 					</ListItemIcon>
 					<ListItemText primary='Settings' />
-					{openCollapse ? <ExpandLess /> : <ChevronRightIcon />}
+					{openCollapse ||
+					window.location.pathname === '/settings/edit-profile' ||
+					window.location.pathname === '/settings/notifications' ? (
+						<ExpandLess />
+					) : (
+						<ChevronRightIcon />
+					)}
 				</ListItem>
-				<Collapse in={openCollapse} timeout='auto' unmountOnExit>
+				<Collapse
+					in={
+						openCollapse ||
+						window.location.pathname === '/settings/edit-profile' ||
+						window.location.pathname === '/settings/notifications'
+					}
+				>
 					{[
 						{
 							path: '/settings/edit-profile',
 							icon: <AccountCircleIcon />,
 							text: 'Account Settings',
-							id: 1,
+							id: 1
 						},
 						{
 							path: '/settings/user-role',
 							icon: <AccountCircleIcon />,
 							text: 'Update User Role',
-							id: 2,
+							id: 2
 						},
+						{
+							path: '/settings/notifications',
+							icon: <NotificationsActiveIcon />,
+							text: 'Notifications',
+							id: 3
+						}
 					].map(menu => (
 						<Link href={menu.path} key={menu.id} style={{ textDecoration: 'none', color: 'black' }}>
-							<List component='div' disablePadding>
+							<List
+								component='div'
+								disablePadding
+								className={window.location.pathname === menu.path ? classes.isActive : 'null'}
+							>
 								<ListItem button className={classes.nested}>
 									<ListItemIcon>{menu.icon}</ListItemIcon>
 									<ListItemText primary={menu.text} />
