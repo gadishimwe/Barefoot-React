@@ -2,6 +2,7 @@ import React from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import { makeStyles } from '@material-ui/styles';
 import { Typography, Button, useTheme, useMediaQuery } from '@material-ui/core';
+import NotFoundImage from '../../public/images/undraw_page_not_found_su7k.svg';
 
 import Page from '../components/common/Page';
 
@@ -46,11 +47,7 @@ const NotFound = () => {
 				the navigation
 			</Typography>
 			<div className={classes.imageContainer}>
-				<img
-					alt='Under development'
-					className={classes.image}
-					src='/public/images/undraw_page_not_found_su7k.svg'
-				/>
+				<img alt='Under development' className={classes.image} src={NotFoundImage} />
 			</div>
 			<div className={classes.buttonContainer}>
 				<Button color='primary' component={RouterLink} to='/dashboard' variant='outlined'>
