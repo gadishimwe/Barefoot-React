@@ -50,6 +50,11 @@ const routes = [
 		component: resetpassword
 	},
 	{
+		path: '/success',
+		exact: true,
+		component: success
+	},
+	{
 		route: '*',
 		component: AppLayout,
 		routes: [
@@ -62,11 +67,6 @@ const routes = [
 				path: '/errors/error-404',
 				exact: true,
 				component: NotFound
-			},
-			{
-				path: '/success',
-				exact: true,
-				component: success
 			},
 			{
 				path: '/settings/user-role',
