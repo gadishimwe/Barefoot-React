@@ -8,6 +8,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import socketIOClient from 'socket.io-client';
 import MuiAlert from '@material-ui/lab/Alert';
 import Snackbar from '@material-ui/core/Snackbar';
+import BarefootLogo from '../../../public/images/logos/barefoot-logo.svg';
 
 import http from '../../services/httpService';
 import NotificationsPopover from '../Notification/NotificationsPopover';
@@ -137,7 +138,7 @@ const TopBar = props => {
 			<AppBar className={classes.appBar} color='primary'>
 				<Toolbar>
 					<RouterLink to='/'>
-						<img alt='Logo' src='/public/images/logos/barefoot-logo.svg' />
+						<img alt='Logo' src={BarefootLogo} />
 					</RouterLink>
 					<div className={classes.flexGrow} />
 					<Hidden smDown>

@@ -25,16 +25,27 @@ module.exports = {
 				use: [{ loader: 'style-loader' }, { loader: 'css-loader' }, { loader: 'sass-loader' }]
 			},
 			{
-				test: /\.(png|woff|woff2|svg|ttf|eot)($|\?)/i,
+				test: /\.(png|woff|woff2|ttf|eot)($|\?)/i,
 				use: {
 					loader: 'url-loader?limit=5000'
 				}
 			},
 			{
-				test: /\.(png|svg|jpg|gif)$/,
+				test: /\.(png|jpg|gif)$/,
 				use: ['file-loader']
 			},
-			{ test: /\.jsx?$/, loader: 'babel-loader' }
+			{ test: /\.jsx?$/, loader: 'babel-loader' },
+			{
+				test: /\.svg$/,
+				use: [
+					{
+						loader: 'svg-url-loader',
+						options: {
+							limit: 10000
+						}
+					}
+				]
+			}
 		]
 	},
 	devServer: {

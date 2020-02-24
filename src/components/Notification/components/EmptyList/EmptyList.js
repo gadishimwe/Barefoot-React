@@ -1,6 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/styles';
 import { Typography } from '@material-ui/core';
+import empty from '../../../../../public/images/undraw_empty_xct9.svg';
 
 const useStyles = makeStyles(theme => ({
 	root: {
@@ -9,7 +10,7 @@ const useStyles = makeStyles(theme => ({
 	},
 	image: {
 		height: 240,
-		backgroundImage: 'url("/public/images/undraw_empty_xct9.svg")',
+		backgroundImage: `url(${empty})`,
 		backgroundPositionX: 'right',
 		backgroundPositionY: 'center',
 		backgroundRepeat: 'no-repeat',
