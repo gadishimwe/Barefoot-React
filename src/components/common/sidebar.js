@@ -155,6 +155,12 @@ const Sidebar = ({ handleLogout, isLoading, image, handleProfilePictureChange })
 							icon: <NotificationsActiveIcon />,
 							text: 'Notifications',
 							id: 3
+						},
+						{
+							path: '/settings/assign-manager',
+							icon: <AccountCircleIcon />,
+							text: 'Assign Manager',
+							id: 4
 						}
 					].map(menu => (
 						<Link href={menu.path} key={menu.id} style={{ textDecoration: 'none', color: 'black' }}>

@@ -10,7 +10,7 @@ const setUp = () => {
 	const wrapper = mount(
 		<Provider store={store}>
 			<FindUser />
-		</Provider>,
+		</Provider>
 	);
 	return wrapper;
 };
