@@ -1,5 +1,5 @@
-import queryString from 'query-string';
 import http from './httpService';
+import fetchData from '../helpers/fetchData';
 
 export const findUserService = async ({ email }) => {
 	const result = await http.post('/api/auth/find-user', { email });
@@ -7,10 +7,7 @@ export const findUserService = async ({ email }) => {
 };
 
 export const resetPasswordService = async ({ newPassword, confirmPass }) => {
-	const parsed = queryString.parse(window.location.search);
-	await localStorage.setItem('token', parsed.token);
-
-	const result = await http.put('/api/auth/reset-password', { newPassword, confirmPass });
+	const result = await fetchData.put('/api/auth/reset-password', { newPassword, confirmPass });
 	return result;
 };
 
