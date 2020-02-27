@@ -11,4 +11,14 @@ export const updateUserRoleService = (userEmail, userRole) => {
 	return result;
 };
 
+export const getManagersService = () => {
+	const result = http.get('/api/users/settings/view-managers?page=1&limit=10');
+	return result;
+};
+
+export const assignManagerToUser = (requesterId, lineManagerId) => {
+	const result = http.patch(`/api/users/${requesterId}`, { lineManagerId });
+	return result;
+};
+
 userRoleService();

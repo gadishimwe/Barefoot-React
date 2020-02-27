@@ -7,6 +7,7 @@ import Page from '../components/common/Page';
 import Notifications from '../components/Notification/notificationSettings';
 import Header from '../components/common/SettingsHeader';
 import ProfilePageEditView from './ProfilePageEditView';
+import AssignManager from '../components/AssignManager';
 
 const useStyles = makeStyles(theme => ({
 	root: {
@@ -36,7 +37,8 @@ const Settings = props => {
 
 	const tabs = [
 		{ value: 'edit-profile', label: 'General' },
-		{ value: 'notifications', label: 'Notifications' }
+		{ value: 'notifications', label: 'Notifications' },
+		{ value: 'assign-manager', label: 'Assign Manager' }
 	];
 
 	if (!tab) {
@@ -65,6 +67,7 @@ const Settings = props => {
 			<div className={classes.content}>
 				{tab === 'edit-profile' && <ProfilePageEditView image={image} />}
 				{tab === 'notifications' && <Notifications />}
+				{tab === 'assign-manager' && <AssignManager />}
 			</div>
 		</Page>
 	);
