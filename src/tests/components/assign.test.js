@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import AssignManager from '../../components/AssignManager';
+import userReducer from '../../redux/reducers/userReducer';
 
 const setUp = () => {
 	const store = configureStore([thunk])({
@@ -35,19 +36,48 @@ describe('AssignManager Component', () => {
 		component = setUp();
 	});
 
-	it('Should dispatch values', () => {
-		const form = component.find('[data-test="assign-manager"]');
-		const onSubmitSpy = jest.spyOn(form.props(), 'onSubmit');
-		const preventDefault = jest.fn();
-		form.props().onSubmit({ requesterId: '120', lineManagerId: '911', preventDefault });
-		expect(onSubmitSpy).toBeCalled();
-	});
-
 	it('Should dispatch multiple values', () => {
 		const button = component.find('[data-test="assign-multiple"]').at(1);
 		const onClickSpy = jest.spyOn(button.props(), 'onClick');
 		const preventDefault = jest.fn();
 		button.props().onClick({ requesterId: '120', lineManagerId: '911', preventDefault });
 		expect(onClickSpy).toBeCalled();
+	});
+
+	it('Should wait for an action', done => {
+		const action = {
+			type: 'ASSIGN_MANAGER_PENDING',
+			payload: {
+				data: {
+					data: 200,
+					message: ''
+				}
+			}
+		};
+		const response = { loading: true };
+		const newState = userReducer({}, action);
+
+		expect(newState).toEqual(response);
+		done();
+	});
+
+	it('Should return data on fulfilled action', done => {
+		const action = {
+			type: 'ASSIGN_MANAGER_FULFILLED',
+			payload: {
+				data: {
+					data: 200,
+					message: 'Requester is successfully assigned to a manager'
+				}
+			}
+		};
+		const response = {
+			error: '',
+			message: 'Requester is successfully assigned to a manager',
+			loading: false
+		};
+		const newState = userReducer({}, action);
+		expect(newState).toEqual(response);
+		done();
 	});
 });
