@@ -29,7 +29,7 @@ export const ProfilePicture = ({ isLoading, image, handleProfilePictureChange })
 
   return (
     <>
-      <div style={{ textAlign: 'center', marginBottom: '20px' }}>
+      <div style={{ textAlign: 'center', marginBottom: '0px' }}>
         {isLoading ? (
           <>
             <Avatar
@@ -37,7 +37,6 @@ export const ProfilePicture = ({ isLoading, image, handleProfilePictureChange })
               style={{ margin: 'auto' }}
               className={classes.large}
             />
-            <h4>Loading...</h4>
             <input
               accept='image/*'
               className={classes.input}
@@ -63,7 +62,7 @@ export const ProfilePicture = ({ isLoading, image, handleProfilePictureChange })
                   fontWeight: 'bold',
                 }}
               >
-                UPLOAD
+                Uploading...
               </Button>
             </label>
           </>

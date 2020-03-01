@@ -65,7 +65,7 @@ const OneWay = () => {
       width: '100%'
     },
     buttons: {
-      width: '50%',
+      width: '200px',
       margin: '10px 0'
     }
   });

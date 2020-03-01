@@ -160,8 +160,8 @@ export default function tripRequests({ history} ) {
             const originLocationName = allLocations.filter(loc => loc.id === originId);
             const destinationLocationName = allLocations.filter(loc => loc.id === destinationId);
 
-            const originFullName = (`${originLocationName[0].country}`);
-            const destinationFullName = (`${destinationLocationName[0].country}`);
+            const originFullName = (`${originLocationName.country}`);
+            const destinationFullName = (`${destinationLocationName.country}`);
 
             const stringDepartureDate = new Date(Date.parse(departureDate));
             const departureYear = stringDepartureDate.getFullYear();
