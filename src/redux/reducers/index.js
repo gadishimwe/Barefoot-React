@@ -9,6 +9,7 @@ import notificationPrefsReducer from './notificationPrefsReducer';
 import tripRequestsReducer from './tripRequestsReducer';
 import tripLocationsReducer from './tripLocationsReducer';
 import multiCityReducer from './multiCityReducer';
+import oneWayTripReducer from './oneWayTripReducer';
 
 export default combineReducers({
 	auth: loginReducer,
@@ -20,5 +21,6 @@ export default combineReducers({
 	setNotification: notificationPrefsReducer,
 	tripRequestsReducer,
 	tripLocationsReducer,
-	multiCityReducer
+	multiCityReducer,
+	oneWayTripReducer
 });

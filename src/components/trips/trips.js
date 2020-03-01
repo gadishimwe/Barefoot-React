@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import React from 'react';
 import { Tabs, Tab, colors, Divider } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';

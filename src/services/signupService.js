@@ -5,7 +5,7 @@ export default ({ firstName, lastName, email, password }) => {
 		firstName,
 		lastName,
 		email,
-		password,
+		password
 	});
 	return response;
 };
