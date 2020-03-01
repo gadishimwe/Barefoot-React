@@ -1,3 +1,5 @@
+/* eslint-disable max-len */
+/* eslint-disable react/destructuring-assignment */
 /* eslint-disable prettier/prettier */
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable no-nested-ternary */
@@ -28,6 +30,7 @@ export const disabledHandler = (props, state) => {
     !props.values.travelReasons ||
     state.loading ||
     Object.keys(props.errors).length !== 0
+    // (props.values.origin === props.values.destination)
   ) {
     return true;
   }
@@ -65,7 +68,7 @@ const OneWay = () => {
       width: '100%'
     },
     buttons: {
-      width: '50%',
+      width: '200px',
       margin: '10px 0'
     }
   });
@@ -80,7 +83,7 @@ const OneWay = () => {
   const countries = state.locations;
 
   const { messages } = state;
-  
+
   return (
     <div>
       <Formik
