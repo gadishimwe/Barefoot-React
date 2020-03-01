@@ -23,7 +23,7 @@ const useStyles = makeStyles(theme => ({
 		alignItems: 'center',
 	},
 	cards: {
-		minWidth: 300,
+		minWidth: 275,
 		paddingBottom: '10px',
 		display: 'inline-grid',
 		margin: 5,
@@ -33,11 +33,6 @@ const useStyles = makeStyles(theme => ({
 		height: 50,
 		marginTop: 10,
 	},
-
-	root: {
-		display: 'inline-block',
-		margin: 5,
-	},
 	content: {
 		padding: 0,
 		'&:last-child': {
@@ -45,7 +40,7 @@ const useStyles = makeStyles(theme => ({
 		},
 	},
 	description: {
-		padding: theme.spacing(2, 3, 1, 3),
+		padding: theme.spacing(2, 3, 1, 3)
 	},
 	tags: {
 		padding: theme.spacing(0, 3, 1, 3),
@@ -65,6 +60,11 @@ const useStyles = makeStyles(theme => ({
 	details: {
 		padding: theme.spacing(1, 3),
 	},
+	grids: {
+		display: 'grid',
+    gridTemplateColumns: 'repeat(auto-fit,minmax(300px,1fr))',
+    gridGap: '20px',
+	}
 }));
 
 const values = {
@@ -87,7 +87,7 @@ const UserRole = () => {
 	const users = [...userRoleState.data];
 
 	const [currentPage, setCurrentPage] = useState(1);
-	const [usersPerPage] = useState(6);
+	const [usersPerPage] = useState(7);
 	const [newUserRole, setUserRole] = useState({});
 	const [open, setOpen]= useState(false)
 	useEffect(() => {
@@ -123,7 +123,7 @@ const UserRole = () => {
 		setOpen(true)
 	};
 	return (
-		<>
+		<div>
 			{
 				userRoleState.error && (
 					<Alert severity='error'>
@@ -144,9 +144,11 @@ const UserRole = () => {
 					</Snackbar>
 				)
 			}
+			<div className={classes.grids}>
 			{currentUsers.map(user => {
 				return (
-					<Card className={classes.root} key={Math.random()}>
+					<>
+					<Card key={Math.random()}>
 						<CardHeader
 							avatar={<Avatar alt='Author' src={user.profilePicture} />}
 							className={classes.header}
@@ -202,8 +204,10 @@ const UserRole = () => {
 							</div>
 						</CardContent>
 					</Card>
+					</>
 				);
 			})}
+			</div>
 			<div style={{textAlign: 'center'}}>
 				<Pagination
 					style={{margin: 'auto'}}
@@ -213,7 +217,7 @@ const UserRole = () => {
 					currentPage={currentPage}
 				/>
 			</div>
-		</>
+		</div>
 	);
 };
 

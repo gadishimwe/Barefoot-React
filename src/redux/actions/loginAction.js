@@ -4,13 +4,13 @@ import { loginUserService } from '../../services/authService';
 export const setCurrentUser = user => {
 	return {
 		type: SET_CURRENT_USER,
-		payload: user,
+		payload: user
 	};
 };
 
 export const loginUser = ({ email, password }) => {
 	return {
 		type: LOGIN_USER,
-		payload: loginUserService({ email, password }),
+		payload: loginUserService({ email, password })
 	};
 };

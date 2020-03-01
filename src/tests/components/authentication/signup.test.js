@@ -7,11 +7,11 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { fab } from '@fortawesome/free-brands-svg-icons';
 import thunk from 'redux-thunk';
 import Alert from '@material-ui/lab/Alert';
-import SignupView from '../../views/Signup';
-import SignupForm, { disabledHandler } from '../../components/auth/SignupForm';
-import configureStore from '../../redux/store';
-import NavBar from '../../components/common/NavBar';
-import Footer from '../../components/common/Footer';
+import SignupView from '../../../views/Signup';
+import SignupForm, { disabledHandler } from '../../../components/auth/SignupForm';
+import configureStore from '../../../redux/store';
+import NavBar from '../../../components/common/NavBar';
+import Footer from '../../../components/common/Footer';
 
 library.add(fab);
 
@@ -21,7 +21,7 @@ describe('Test sign up views', () => {
 		const component = mount(
 			<Provider store={store}>
 				<SignupView location={{ pathname: '/signup' }} />
-			</Provider>,
+			</Provider>
 		);
 		expect(component.exists(NavBar));
 		expect(component.exists(Footer));
@@ -47,13 +47,13 @@ describe('Test signing up functionality', () => {
 			signupReducer: {
 				authorized: true,
 				error: { message: ['errors'] },
-				loading: false,
-			},
+				loading: false
+			}
 		});
 		const component = mount(
 			<Provider store={store}>
 				<SignupForm />
-			</Provider>,
+			</Provider>
 		);
 		expect(component.find(Alert).text()).toEqual('*errors');
 		expect(window.location.assign).toHaveBeenCalled();
@@ -62,13 +62,13 @@ describe('Test signing up functionality', () => {
 		const store = mockConfigureStore([thunk])({
 			signupReducer: {
 				error: { message: 'errors' },
-				loading: false,
-			},
+				loading: false
+			}
 		});
 		const component = mount(
 			<Provider store={store}>
 				<SignupForm />
-			</Provider>,
+			</Provider>
 		);
 		expect(component.find(Alert).text()).toEqual('*errors');
 	});
@@ -77,7 +77,7 @@ describe('Test signing up functionality', () => {
 		const component = mount(
 			<Provider store={store}>
 				<SignupForm />
-			</Provider>,
+			</Provider>
 		);
 		const form = component.find(Formik);
 		const onSubmitSpy = jest.spyOn(form.props(), 'onSubmit');
@@ -85,7 +85,7 @@ describe('Test signing up functionality', () => {
 			.props()
 			.onSubmit(
 				{ firstName: 'Stev', lastName: 'james', email: 'james@email.com', password: 'password' },
-				{ resetForm: jest.fn() },
+				{ resetForm: jest.fn() }
 			);
 		expect(onSubmitSpy).toBeCalled();
 		done();
@@ -95,9 +95,9 @@ describe('Test signing up functionality', () => {
 			const isDisabled = disabledHandler(
 				{
 					values: { firstName: 'joe', lastName: '', email: '', password: '' },
-					errors: { jj: 'frfrfrf' },
+					errors: { jj: 'frfrfrf' }
 				},
-				{ state: { loading: true } },
+				{ state: { loading: true } }
 			);
 			expect(isDisabled).toEqual(true);
 		});
@@ -105,9 +105,9 @@ describe('Test signing up functionality', () => {
 			const isDisabled = disabledHandler(
 				{
 					values: { firstName: 'joe', lastName: 'will', email: '', password: '' },
-					errors: { jj: 'frfrfrf' },
+					errors: { jj: 'frfrfrf' }
 				},
-				{ state: { loading: true } },
+				{ state: { loading: true } }
 			);
 			expect(isDisabled).toEqual(true);
 		});
@@ -115,9 +115,9 @@ describe('Test signing up functionality', () => {
 			const isDisabled = disabledHandler(
 				{
 					values: { firstName: 'joe', lastName: 'will', email: 'will@ew.co', password: '' },
-					errors: { jj: 'frfrfrf' },
+					errors: { jj: 'frfrfrf' }
 				},
-				{ state: { loading: true } },
+				{ state: { loading: true } }
 			);
 			expect(isDisabled).toEqual(true);
 		});
@@ -125,9 +125,9 @@ describe('Test signing up functionality', () => {
 			const isDisabled = disabledHandler(
 				{
 					values: { firstName: 'joe', lastName: 'will', email: 'will@ew.co', password: 'pass' },
-					errors: { jj: 'frfrfrf' },
+					errors: { jj: 'frfrfrf' }
 				},
-				{ state: { loading: true } },
+				{ state: { loading: true } }
 			);
 			expect(isDisabled).toEqual(true);
 		});
@@ -135,9 +135,9 @@ describe('Test signing up functionality', () => {
 			const isDisabled = disabledHandler(
 				{
 					values: { firstName: 'joe', lastName: 'will', email: 'will@ew.co', password: 'pass' },
-					errors: {},
+					errors: {}
 				},
-				{ state: { loading: false } },
+				{ state: { loading: false } }
 			);
 			expect(isDisabled).toEqual(false);
 		});
@@ -147,7 +147,7 @@ describe('Test signing up functionality', () => {
 		const component = mount(
 			<Provider store={store}>
 				<SignupView location={{ pathname: '/signup' }} />
-			</Provider>,
+			</Provider>
 		);
 		it('Should call facebookHandler on click', () => {
 			const facebookButton = component.find('[data-test="facebookButton"]').at(1);

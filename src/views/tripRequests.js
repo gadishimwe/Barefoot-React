@@ -5,25 +5,18 @@
 /* eslint-disable prettier/prettier */
 import React, { useEffect, useState } from 'react';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
-import Drawer from '@material-ui/core/Drawer';
-import Hidden from '@material-ui/core/Hidden';
-import IconButton from '@material-ui/core/IconButton';
-import CloseIcon from '@material-ui/icons/Close';
 import Grid from '@material-ui/core/Grid';
 import { useSelector, useDispatch } from 'react-redux';
-import Dialog from '@material-ui/core/Dialog';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
-import { CircularProgress, Typography, Paper } from '@material-ui/core';
-import Sidebar from '../components/common/sidebar';
-import Footer from '../components/common/Footer';
-import Navbar from '../components/common/mainNavbar';
+import { Tabs ,Tab, Divider,colors} from '@material-ui/core';
 import { logoutUser } from '../redux/actions/logoutAction';
 import TripInfoCard from '../components/requests/tripRequestsCard';
 import { getAllTripRequests, getAllTripLocations } from '../redux/actions/requestsAction';
 import Pagination from '../components/common/Pagination';
+import Header from '../components/common/SettingsHeader';
 
 const drawerWidth = 240;
-export default function tripRequests() {
+export default function tripRequests({ history} ) {
   const useStyles = makeStyles(theme => ({
     root: {
       display: 'flex'
@@ -59,6 +52,13 @@ export default function tripRequests() {
       textAlign: 'center',
       color: theme.palette.text.secondary,
     },
+    tabs: {
+			marginTop: theme.spacing(3)
+    },
+    divider: {
+			backgroundColor: colors.grey[300],
+			marginBottom: '24px'
+		},
   }));
 
   const classes = useStyles();
@@ -111,9 +111,25 @@ export default function tripRequests() {
   const handleClick = () => {
 
   }
+  const handleTabsChange = (event, value) => {
+		history.push(value);
+  };
+  
   return (
     <>
-
+        <Header title='Requests' subtitle='My Trip Requests' />
+        <Tabs
+                onChange={handleTabsChange}
+                value='trips'
+                variant='scrollable'
+                indicatorColor='primary'
+                textColor='primary'
+                scrollButtons='auto'
+                className={classes.tabs}
+        >
+                  <Tab label='All' value='trips' />
+        </Tabs>
+        <Divider className={classes.divider} />
         <Grid
           container
           direction="row"
@@ -124,23 +140,6 @@ export default function tripRequests() {
             paddingBottom: '8px'
           }}
         >
-          <Grid
-            item
-            lg={12}
-            md={12}
-            sm={12}
-            xs={12}
-            style={{
-              textAlign: 'center',
-              marginTop: '-5px',
-              marginBottom: '10px',
-              backgroundColor: '#E3E6EB',
-            }}
-          >
-            <h2>
-              My Trip Requests
-            </h2>
-          </Grid>
         {(currentTrips.length === 0 ? 
           <div style={{ paddingTop: '20%', textAlign: 'center', color: '#979696 ', width:'100%'}}>
             <h2 style={{ margin: 'auto'}}>

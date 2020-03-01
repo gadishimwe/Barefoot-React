@@ -1,7 +1,6 @@
 /* eslint-disable react/jsx-one-expression-per-line */
 /* eslint-disable react/jsx-closing-tag-location */
 /* eslint-disable react/no-array-index-key */
-/* eslint-disable prettier/prettier */
 import React from 'react';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
@@ -52,7 +51,7 @@ const SignupForm = () => {
 			.required(),
 		password: Yup.string()
 			.min(8)
-			.required(),
+			.required()
 	});
 
 	const state = useSelector(statee => statee.signupReducer);
@@ -87,7 +86,7 @@ const SignupForm = () => {
 						firstName: '',
 						lastName: '',
 						email: '',
-						password: '',
+						password: ''
 					}}
 					validationSchema={signupSchema}
 					onSubmit={values => dispatch(validateSignup(values))}
@@ -108,7 +107,10 @@ const SignupForm = () => {
 									autoComplete='first-name'
 									onChange={props.handleChange('firstName')}
 									value={props.values.firstName}
-									error={props.values.firstName !== '' && Object.prototype.hasOwnProperty.call(props.errors, 'firstName')}
+									error={
+										props.values.firstName !== '' &&
+										Object.prototype.hasOwnProperty.call(props.errors, 'firstName')
+									}
 									helperText={props.values.firstName !== '' && props.errors.firstName}
 								/>
 								<TextField
@@ -123,7 +125,10 @@ const SignupForm = () => {
 									autoComplete='last-name'
 									onChange={props.handleChange('lastName')}
 									value={props.values.lastName}
-									error={props.values.lastName !== '' && Object.prototype.hasOwnProperty.call(props.errors, 'lastName')}
+									error={
+										props.values.lastName !== '' &&
+										Object.prototype.hasOwnProperty.call(props.errors, 'lastName')
+									}
 									helperText={props.values.lastName !== '' && props.errors.lastName}
 								/>
 								<TextField
@@ -138,7 +143,10 @@ const SignupForm = () => {
 									autoComplete='email'
 									onChange={props.handleChange('email')}
 									value={props.values.email}
-									error={props.values.email !== '' && Object.prototype.hasOwnProperty.call(props.errors, 'email')}
+									error={
+										props.values.email !== '' &&
+										Object.prototype.hasOwnProperty.call(props.errors, 'email')
+									}
 									helperText={props.values.email !== '' && props.errors.email}
 								/>
 								<TextField
@@ -153,15 +161,16 @@ const SignupForm = () => {
 									id='password'
 									onChange={props.handleChange('password')}
 									value={props.values.password}
-									error={props.values.password !== '' && Object.prototype.hasOwnProperty.call(props.errors, 'password')}
+									error={
+										props.values.password !== '' &&
+										Object.prototype.hasOwnProperty.call(props.errors, 'password')
+									}
 									helperText={props.values.password !== '' && props.errors.password}
 								/>
 								{error !== undefined ? (
 									<Alert severity='error'>
 										{error.map((err, index) => (
-											<div key={index}>*
-{err}
-											</div>
+											<div key={index}>*{err}</div>
 										))}
 									</Alert>
 								) : null}
@@ -183,14 +192,22 @@ const SignupForm = () => {
 				</Formik>
 				<Typography> Or sign up with </Typography>
 				<Typography className={classes.social}>
-					<IconButton className={classes.facebookIcon} onClick={facebookHandler} data-test='facebookButton'>
+					<IconButton
+						className={classes.facebookIcon}
+						onClick={facebookHandler}
+						data-test='facebookButton'
+					>
 						<FontAwesomeIcon
 							icon={['fab', 'facebook-f']}
 							style={{ fontSize: 20, color: '#3b5998' }}
 						/>
 					</IconButton>
 					or
-					<IconButton className={classes.googleIcon} onClick={googleHandler} data-test='googleButton'>
+					<IconButton
+						className={classes.googleIcon}
+						onClick={googleHandler}
+						data-test='googleButton'
+					>
 						<FontAwesomeIcon
 							icon={['fab', 'google']}
 							style={{ fontSize: 18.02, color: '#DB4437' }}
@@ -200,7 +217,7 @@ const SignupForm = () => {
 				<Typography className={classes.typo}>
 					Already have an account? &nbsp;
 					<Link href='/login' variant='body2'>
-						Sign in here
+						Sign in
 					</Link>
 				</Typography>
 			</div>
