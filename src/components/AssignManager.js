@@ -64,6 +64,9 @@ const useStyles = makeStyles(theme => ({
 	},
 	details: {
 		padding: theme.spacing(1, 3)
+	},
+	button: {
+		visibility: 'hidden'
 	}
 }));
 
@@ -95,15 +98,7 @@ const AssignRole = () => {
 		const {
 			target: { name, value }
 		} = e;
-
 		setUserId([...users, { requesterId: name, lineManagerId: value }]);
-	};
-
-	const handleSubmit = e => {
-		e.preventDefault();
-		users.map(user => {
-			dispatch(assignManagerAction(user.requesterId, user.lineManagerId));
-		});
 	};
 
 	const handleClick = () => {
@@ -119,13 +114,10 @@ const AssignRole = () => {
 				</Alert>
 			)}
 			{userReducer.message && <Alert severity='success'>{userReducer.message}</Alert>}
-			<Button onClick={handleClick} color='primary' data-test='assign-multiple'>
-				{userReducer.loading ? <Loading /> : 'Assign Multiple'}
-			</Button>
-			<Divider />
 			{currentUsers.length === 0
 				? 'No users to display'
 				: currentUsers.map(requester => {
+						const ownManager = managers.filter(manager => manager.id === requester.lineManagerId);
 						return (
 							<Card key={requester.id} className={classes.root}>
 								<CardHeader
@@ -155,14 +147,18 @@ const AssignRole = () => {
 									<div className={classes.details}>
 										<Grid alignItems='center' container justify='space-between' spacing={3}>
 											<Grid item>
-												<form onSubmit={handleSubmit} data-test='assign-manager'>
+												<form data-test='assign-manager'>
 													<select
 														className='form-select'
 														id='assign-role'
 														name={requester.id}
 														onChange={handleChange}
 													>
-														<option value='0'>Assign Manager to user</option>
+														<option value='0'>
+															{requester.lineManagerId !== ''
+																? `${ownManager[0].firstName} ${ownManager[0].lastName}`
+																: 'Assign Manager to user'}
+														</option>
 														{managers.map(user => {
 															return (
 																<option key={user.id} value={user.id}>
@@ -173,7 +169,7 @@ const AssignRole = () => {
 															);
 														})}
 													</select>
-													<Button type='submit' color='primary'>
+													<Button type='submit' color='primary' className={classes.button}>
 														Assign
 													</Button>
 												</form>
@@ -184,6 +180,16 @@ const AssignRole = () => {
 							</Card>
 						);
 				  })}
+			<Divider />
+			<Button
+				disabled={users.length === 0}
+				onClick={handleClick}
+				variant='contained'
+				color='primary'
+				data-test='assign-multiple'
+			>
+				{userReducer.loading ? <Loading /> : 'Update'}
+			</Button>
 			<div style={{ textAlign: 'center' }}>
 				<Pagination
 					style={{ margin: 'auto' }}
