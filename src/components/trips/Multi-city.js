@@ -25,7 +25,7 @@ export const disabledHandler = (props, state) => {
       err = true;
     }
   });
-  if (err || state.loading) {
+  if (Object.prototype.hasOwnProperty.call(props.errors, 'trips') || err || state.loading) {
     return true;
   }
   return false;
@@ -135,20 +135,18 @@ const Multicity = () => {
                                     autoComplete: 'new-password' // disable autocomplete and autofill
                                   }}
                                   error={
+                                    props.values.trips[index].origin !== '' &&
                                     Object.prototype.hasOwnProperty.call(props.errors, 'trips') &&
                                     checkError(props.errors.trips, 'origin')[index] !== undefined
                                   }
                                   helperText={
+                                    props.values.trips[index].origin !== '' &&
                                     Object.prototype.hasOwnProperty.call(props.errors, 'trips') &&
                                       checkError(props.errors.trips, 'origin')[index] !== undefined
                                       ? checkError(props.errors.trips, 'origin')[index]
                                       : null
                                   }
-                                  value={
-                                    index !== 0
-                                      ? props.values.trips[index - 1].destination
-                                      : props.values.trips[index].origin
-                                  }
+                                  value={props.values.trips[index].origin}
                                 />
                               )}
                             />
@@ -186,11 +184,13 @@ const Multicity = () => {
                                   }}
                                   value={props.values.trips[index].destination}
                                   error={
+                                    props.values.trips[index].destination !== '' &&
                                     Object.prototype.hasOwnProperty.call(props.errors, 'trips') &&
                                     checkError(props.errors.trips, 'destination')[index] !==
                                     undefined
                                   }
                                   helperText={
+                                    props.values.trips[index].destination !== '' &&
                                     Object.prototype.hasOwnProperty.call(props.errors, 'trips') &&
                                       checkError(props.errors.trips, 'destination')[index] !==
                                       undefined
@@ -257,10 +257,12 @@ const Multicity = () => {
                               onChange={props.handleChange(`trips[${index}].travelReasons`)}
                               value={props.values.trips[index].travelReasons}
                               error={
+                                props.values.trips[index].travelReasons !== '' &&
                                 Object.prototype.hasOwnProperty.call(props.errors, 'trips') &&
                                 checkError(props.errors.trips, 'travelReasons')[index] !== undefined
                               }
                               helperText={
+                                props.values.trips[index].travelReasons !== '' &&
                                 Object.prototype.hasOwnProperty.call(props.errors, 'trips') &&
                                   checkError(props.errors.trips, 'travelReasons')[index] !== undefined
                                   ? checkError(props.errors.trips, 'travelReasons')[index]
@@ -303,7 +305,7 @@ const Multicity = () => {
                       <Button
                         className={classes.buttons}
                         variant='contained'
-                        color='primary'
+                        color='secondary'
                         onClick={() =>
                           arrayHelpers.push({
                             origin: '',
@@ -320,12 +322,11 @@ const Multicity = () => {
                     </div>
                   )}
                 />
-                {/* ))} */}
               </div>
               <Button
                 className={classes.buttons}
                 type='submit'
-                fullWidth
+                style={{width:'176.07px'}}
                 variant='contained'
                 color='primary'
                 onClick={props.handleSubmit}

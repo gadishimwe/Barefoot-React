@@ -130,7 +130,8 @@ describe('Test multi city trip', () => {
 	it('Should disable button or enable it', () => {
 		const isDiasabled = disabledHandler(
 			{
-				values: { trips: [{ origin: 'nn', destination: 'bb', travelReasons: 'gg' }] }
+				values: { trips: [{ origin: 'nn', destination: 'bb', travelReasons: 'gg' }] },
+				errors: {}
 			},
 			{ loading: false }
 		);
