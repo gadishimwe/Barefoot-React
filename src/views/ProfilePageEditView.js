@@ -70,12 +70,12 @@ export default function ProfilePageEditView(props) {
     },
     formControl: {
       margin: theme.spacing(1),
-      width: '96%',
+      width: '95%',
     },
   }));
 
   const classes = useStyles();
-  const {image}= props
+  const { image } = props
 
   const [gender, setGender] = React.useState('');
   const [preferredCurrency, setCurrency] = React.useState('');
@@ -117,7 +117,7 @@ export default function ProfilePageEditView(props) {
   React.useEffect(() => {
     setUser(user)
   }, [user]);
-  
+
   const userProfile = useSelector(state => {
     return state.profileData;
   });
@@ -152,209 +152,212 @@ export default function ProfilePageEditView(props) {
   };
   return (
     <Grid item lg={8} md={6} xl={9} xs={12}>
-            <div style={{  }}>
-              {userProfile.message ? (
-                <Alert severity='success' style={{ width: '250px', margin: 'auto' }}>
-                  {userProfile.message}
-                </Alert>
-              ) : (
-                  ''
-                )}
-              <br />
-              <form onSubmit={handleSubmit}>
-                <div style={{ display: 'flex', textAlign: 'center', marginBottom: '10px' }}>
-                  <div style={{ width: '100%', margin: 'auto' }}>
-                    <TextField
-                      value={currentUser.firstName || ''}
-                      className={classes.formInput}
-                      id='firstname'
-                      variant='outlined'
-                      size='small'
-                      disabled
-                    />
-                  </div>
-                </div>
-                <div style={{ display: 'flex', textAlign: 'center', marginBottom: '10px' }}>
-                  <div style={{ width: '100%', margin: 'auto' }}>
-                    <TextField
-                      className={classes.formInput}
-                      id='lastname'
-                      value={currentUser.lastName || ''}
-                      variant='outlined'
-                      size='small'
-                      disabled
-                    />
-                  </div>
-                </div>
-                <div style={{ display: 'flex', textAlign: 'center', marginBottom: '10px' }}>
-                  <div style={{ width: '100%', margin: 'auto' }}>
-                    <TextField
-                      className={classes.formInput}
-                      id='email'
-                      value={currentUser.email || ''}
-                      variant='outlined'
-                      size='small'
-                      disabled
-                    />
-                  </div>
-                </div>
-                <div style={{ display: 'flex', textAlign: 'center' }}>
-                  <div style={{ width: '100%', margin: 'auto' }}>
-                    <FormControl variant='outlined' className={classes.formControl} size='small'>
-                      <InputLabel ref={inputLabel} htmlFor='outlined-gender-native-simple'>
-                        Gender
-                      </InputLabel>
-                      <Select
-                        native
-                        label='gender-input'
-                        className='gender'
-                        onChange={handleGenderChange}
-                        labelWidth={labelWidth}
-                        inputProps={{
-                          name: 'gender',
-                          id: 'outlined-gender-native-simple',
-                        }}
-                      >
-                        {
-                          user.gender === 'M' ? (
-                            <>
-                              <option value='M' selected>Male</option>
-                              <option value='F'>Female</option>
-                            </>
-                          ) :
-                            (
-                              <>
-                                <option value='M'>Male</option>
-                                <option value='F' selected>Female</option>
-                              </>
-                            )
-                        }
-                      </Select>
-                    </FormControl>
-                  </div>
-                </div>
-                <div style={{ display: 'flex', textAlign: 'center' }}>
-                  <div style={{ width: '100%', margin: 'auto' }}>
-                    <FormControl variant='outlined' className={classes.formControl} size='small'>
-                      <InputLabel ref={inputLabel} htmlFor='outlined-currency-native-simple'>
-                        Currency
-                      </InputLabel>
-                      <Select
-                        native
-                        className='currency'
-                        onChange={handleCurrencyChange}
-                        labelWidth={labelWidth}
-                        inputProps={{
-                          name: 'currency',
-                          id: 'outlined-currency-native-simple',
-                        }}
-                      >
-                        {
-                          user.preferredCurrency === 'Dollar' ? (
-                            <>
-                              <option value='Dollar' selected>USD $</option>
-                              <option value='Euro'>Euro €</option>
-                            </>
-                          ) :
-                            (
-                              <>
-                                <option value='Dollar'>USD $</option>
-                                <option value='Euro' selected>Euro €</option>
-                              </>
-                            )
-                        }
-                      </Select>
-                    </FormControl>
-                  </div>
-                </div>
-                <div style={{ display: 'flex', textAlign: 'center' }}>
-                  <div style={{ width: '100%', margin: 'auto' }}>
-                    <FormControl variant='outlined' className={classes.formControl} size='small'>
-                      <InputLabel ref={inputLabel} htmlFor='outlined-language-native-simple'>
-                        Language
-                      </InputLabel>
-                      <Select
-                        native
-                        className='language'
-                        onChange={handleLanguageChange}
-                        labelWidth={labelWidth}
-                        inputProps={{
-                          name: 'language',
-                          id: 'outlined-language-native-simple',
-                        }}
-                      >
-                        {
-                          user.preferredLanguage === 'english' ? (
-                            <>
-                              <option value='english' selected>English</option>
-                              <option value='french'>French</option>
-                            </>
-                          ) :
-                            (
-                              <>
-                                <option value='english'>English</option>
-                                <option value='french' selected>French</option>
-                              </>
-                            )
-                        }
-                      </Select>
-                    </FormControl>
-                  </div>
-                </div>
-                <div style={{ display: 'flex', textAlign: 'center' }}>
-                  <div style={{ width: '100%', margin: 'auto' }}>
-                    <CountrySelect
-                      size='small'
-                      className='countries'
-                      countryChangeFn={handleResidenceChange}
-                      inputProps={{
-                        name: 'residence',
-                        id: 'outlined-residence-native-simple',
-                      }}
-                    />
-                  </div>
-                </div>
-                <div style={{ display: 'flex', textAlign: 'center' }}>
-                  <div
-                    style={{ width: '100%', margin: 'auto' }}
-                    className='birthDate'
-                    onChange={handleBirthDateChange}
-                  >
-                    <TextField
-                      label='Birthday'
-                      type='date'
-                      size='small'
-                      defaultValue='1990-01-01'
-                      className={classes.textField}
-                      InputLabelProps={{
-                        shrink: true,
-                      }}
-                    />
-                  </div>
-                </div>
-                <div className={classes.submitInfoBtn}>
-                  <Button
-                    disabled={
-                      !gender &&
-                      !preferredCurrency &&
-                      !preferredLanguage &&
-                      !residence &&
-                      !birthDate &&
-                      !image ||
-                      userProfile.loading === true
-                    }
-                    size='large'
-                    style={{ height: '40px', fontSize: '11px' }}
-                    type='submit'
-                    variant='contained'
-                    color='primary'
-                    className={classes.button}
-                  >
-                    {!userProfile.loading ? 'UPDATE PROFILE' : <Loading />}
-                  </Button>
-                </div>
-              </form>
+      <div style={{}}>
+        {userProfile.message ? (
+          <Alert severity='success' style={{ width: '250px', margin: 'auto' }}>
+            {userProfile.message}
+          </Alert>
+        ) : (
+            ''
+          )}
+        <br />
+        <form onSubmit={handleSubmit}>
+          <div style={{ display: 'flex', textAlign: 'center', marginBottom: '10px' }}>
+            <div style={{ width: '100%', margin: 'auto' }}>
+              <TextField
+                value={currentUser.firstName || ''}
+                className={classes.formInput}
+                id='firstname'
+                variant='outlined'
+                label='First Name'
+                size='small'
+                disabled
+              />
             </div>
+          </div>
+          <div style={{ display: 'flex', textAlign: 'center', marginBottom: '10px' }}>
+            <div style={{ width: '100%', margin: 'auto' }}>
+              <TextField
+                className={classes.formInput}
+                id='lastname'
+                value={currentUser.lastName || ''}
+                variant='outlined'
+                label='Last Name'
+                size='small'
+                disabled
+              />
+            </div>
+          </div>
+          <div style={{ display: 'flex', textAlign: 'center', marginBottom: '10px' }}>
+            <div style={{ width: '100%', margin: 'auto' }}>
+              <TextField
+                className={classes.formInput}
+                id='email'
+                value={currentUser.email || ''}
+                variant='outlined'
+                label='Email'
+                size='small'
+                disabled
+              />
+            </div>
+          </div>
+          <div style={{ display: 'flex', textAlign: 'center' }}>
+            <div style={{ width: '100%', margin: 'auto' }}>
+              <FormControl variant='outlined' className={classes.formControl} size='small'>
+                <InputLabel ref={inputLabel} htmlFor='outlined-gender-native-simple'>
+                  Gender
+                </InputLabel>
+                <Select
+                  native
+                  label='gender-input'
+                  className='gender'
+                  onChange={handleGenderChange}
+                  labelWidth={labelWidth}
+                  inputProps={{
+                    name: 'gender',
+                    id: 'outlined-gender-native-simple',
+                  }}
+                >
+                  {
+                    user.gender === 'M' ? (
+                      <>
+                        <option value='M' selected>Male</option>
+                        <option value='F'>Female</option>
+                      </>
+                    ) :
+                      (
+                        <>
+                          <option value='M'>Male</option>
+                          <option value='F' selected>Female</option>
+                        </>
+                      )
+                  }
+                </Select>
+              </FormControl>
+            </div>
+          </div>
+          <div style={{ display: 'flex', textAlign: 'center' }}>
+            <div style={{ width: '100%', margin: 'auto' }}>
+              <FormControl variant='outlined' className={classes.formControl} size='small'>
+                <InputLabel ref={inputLabel} htmlFor='outlined-currency-native-simple'>
+                  Currency
+                </InputLabel>
+                <Select
+                  native
+                  className='currency'
+                  onChange={handleCurrencyChange}
+                  labelWidth={labelWidth}
+                  inputProps={{
+                    name: 'currency',
+                    id: 'outlined-currency-native-simple',
+                  }}
+                >
+                  {
+                    user.preferredCurrency === 'Dollar' ? (
+                      <>
+                        <option value='Dollar' selected>USD $</option>
+                        <option value='Euro'>Euro €</option>
+                      </>
+                    ) :
+                      (
+                        <>
+                          <option value='Dollar'>USD $</option>
+                          <option value='Euro' selected>Euro €</option>
+                        </>
+                      )
+                  }
+                </Select>
+              </FormControl>
+            </div>
+          </div>
+          <div style={{ display: 'flex', textAlign: 'center' }}>
+            <div style={{ width: '100%', margin: 'auto' }}>
+              <FormControl variant='outlined' className={classes.formControl} size='small'>
+                <InputLabel ref={inputLabel} htmlFor='outlined-language-native-simple'>
+                  Language
+                </InputLabel>
+                <Select
+                  native
+                  className='language'
+                  onChange={handleLanguageChange}
+                  labelWidth={labelWidth}
+                  inputProps={{
+                    name: 'language',
+                    id: 'outlined-language-native-simple',
+                  }}
+                >
+                  {
+                    user.preferredLanguage === 'english' ? (
+                      <>
+                        <option value='english' selected>English</option>
+                        <option value='french'>French</option>
+                      </>
+                    ) :
+                      (
+                        <>
+                          <option value='english'>English</option>
+                          <option value='french' selected>French</option>
+                        </>
+                      )
+                  }
+                </Select>
+              </FormControl>
+            </div>
+          </div>
+          <div style={{ display: 'flex', textAlign: 'center', paddingLeft: '17px' }}>
+            <div style={{ width: '100%',margin: 'auto' }}>
+              <CountrySelect
+                size='small'
+                className='countries'
+                countryChangeFn={handleResidenceChange}
+                inputProps={{
+                  name: 'residence',
+                  id: 'outlined-residence-native-simple',
+                }}
+              />
+            </div>
+          </div>
+          <div style={{ display: 'flex', textAlign: 'center' }}>
+            <div
+              style={{ width: '100%', margin: 'auto' }}
+              className='birthDate'
+              onChange={handleBirthDateChange}
+            >
+              <TextField
+                label='Birthday'
+                type='date'
+                size='small'
+                defaultValue='1990-01-01'
+                className={classes.textField}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+              />
+            </div>
+          </div>
+          <div className={classes.submitInfoBtn}>
+            <Button
+              disabled={
+                !gender &&
+                !preferredCurrency &&
+                !preferredLanguage &&
+                !residence &&
+                !birthDate &&
+                !image ||
+                userProfile.loading === true
+              }
+              size='large'
+              style={{ height: '40px', fontSize: '11px' }}
+              type='submit'
+              variant='contained'
+              color='primary'
+              className={classes.button}
+            >
+              {!userProfile.loading ? 'UPDATE PROFILE' : <Loading />}
+            </Button>
+          </div>
+        </form>
+      </div>
     </Grid>
   );
 }

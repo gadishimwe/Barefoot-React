@@ -4,6 +4,6 @@ import signupService from '../../services/signupService';
 export default values => {
 	return {
 		type: VALIDATE_SIGNUP,
-		payload: signupService(values),
+		payload: signupService(values)
 	};
 };

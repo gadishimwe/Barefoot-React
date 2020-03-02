@@ -11,7 +11,6 @@ import { BrowserRouter } from 'react-router-dom';
 import configureStore from '../../../redux/store';
 import Multicity, { countryToFlag, disabledHandler } from '../../../components/trips/Multi-city';
 import Trips, { handleTabsChange } from '../../../components/trips/trips';
-import Oneway from '../../../components/trips/Oneway';
 import Return from '../../../components/trips/Return';
 
 describe('Test multi city trip', () => {
@@ -243,15 +242,6 @@ describe('Test trip tabs', () => {
 		);
 		handleTabsChange([1, 2], 3);
 		expect(component.exists('multiCityForm'));
-	});
-	it('Should render the one way trip tab', () => {
-		const store = configureStore();
-		const component = mount(
-			<Provider store={store}>
-				<Trips match={{ params: { type: 'oneway-trip' } }} />
-			</Provider>
-		);
-		expect(component.find(Oneway).text()).toEqual('One way trip');
 	});
 	it('Should render the return trip tab', () => {
 		const store = configureStore();

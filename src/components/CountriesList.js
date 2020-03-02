@@ -29,7 +29,7 @@ export default function CountrySelect(props) {
 
 	return (
 		<Autocomplete
-			style={{ width: '95%' }}
+			style={{ width: '97%' }}
 			id='country_select'
 			options={countries}
 			classes={{
@@ -57,7 +57,7 @@ export default function CountrySelect(props) {
 						...params.inputProps,
 						autoComplete: 'new-password', // disable autocomplete and autofill
 					}}
-					style={{ width: '100%', marginLeft: '12px' }}
+					style={{ width: '100%' }}
 					value={props.value}
 				/>
 			)}

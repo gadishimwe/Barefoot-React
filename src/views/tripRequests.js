@@ -160,8 +160,8 @@ export default function tripRequests({ history} ) {
             const originLocationName = allLocations.filter(loc => loc.id === originId);
             const destinationLocationName = allLocations.filter(loc => loc.id === destinationId);
 
-            const originFullName = (`${originLocationName[0].city}(${originLocationName[0].country})`);
-            const destinationFullName = (`${destinationLocationName[0].city}(${destinationLocationName[0].country})`);
+            const originFullName = (`${originLocationName[0].country}`);
+            const destinationFullName = (`${destinationLocationName[0].country}`);
 
             const stringDepartureDate = new Date(Date.parse(departureDate));
             const departureYear = stringDepartureDate.getFullYear();
@@ -228,7 +228,6 @@ export default function tripRequests({ history} ) {
             />
           </Grid>
         </Grid>
-      
     </>
   );
 }
