@@ -5,7 +5,7 @@ exports[`Test On ProfilePicture Component render() Should Render ProfilePicture 
   <div
     style={
       Object {
-        "marginBottom": "20px",
+        "marginBottom": "0px",
         "textAlign": "center",
       }
     }
