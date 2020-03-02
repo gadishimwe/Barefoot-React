@@ -121,7 +121,7 @@ const AssignRole = () => {
 						return (
 							<Card key={requester.id} className={classes.root}>
 								<CardHeader
-									avatar={<Avatar alt='Author' />}
+									avatar={<Avatar alt='Author' src={requester.profilePicture} />}
 									className={classes.header}
 									disableTypography
 									subheader={
@@ -155,19 +155,21 @@ const AssignRole = () => {
 														onChange={handleChange}
 													>
 														<option value='0'>
-															{requester.lineManagerId !== ''
-																? `${ownManager[0].firstName} ${ownManager[0].lastName}`
-																: 'Assign Manager to user'}
+															{ownManager.length === 0
+																? 'Assign Manager to user'
+																: `${ownManager[0].firstName} ${ownManager[0].lastName}`}
 														</option>
-														{managers.map(user => {
-															return (
-																<option key={user.id} value={user.id}>
-																	{user.firstName}
-																	&nbsp;
-																	{user.lastName}
-																</option>
-															);
-														})}
+														{managers.length === 0
+															? 'No manager found'
+															: managers.map(user => {
+																	return (
+																		<option key={user.id} value={user.id}>
+																			{user.firstName}
+																			&nbsp;
+																			{user.lastName}
+																		</option>
+																	);
+															  })}
 													</select>
 													<Button type='submit' color='primary' className={classes.button}>
 														Assign
