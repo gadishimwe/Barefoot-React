@@ -18,7 +18,7 @@ const tripRequestsReducer = (state = initialState, action) => {
                     data: action.payload.data.data.rows,
                 }
         case pending(FIND_TRIP_REQUESTS):
-            return state;
+            return state;     
         default:
             return state;
     }

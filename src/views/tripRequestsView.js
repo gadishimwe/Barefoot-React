@@ -149,6 +149,7 @@ export default function TripRequests({ history} ) {
           :
           (currentTrips.map(trip => {
             let {
+              id,
               tripType,
               originId,
               destinationId,
@@ -157,12 +158,16 @@ export default function TripRequests({ history} ) {
               request
             } = trip;
             const tripStatus = request.status;
-            const originLocationName = allLocations.filter(loc => loc.id === originId);
-            const destinationLocationName = allLocations.filter(loc => loc.id === destinationId);
-
-            const originFullName = (`${originLocationName.country}`);
-            const destinationFullName = (`${destinationLocationName.country}`);
-
+          
+            let originLocationName;
+            let destinationLocationName
+            if(allLocations.length > 0) {
+              const originLocation = allLocations.filter(loc => loc.id === originId);
+              const destinationLocation = allLocations.filter(loc => loc.id === destinationId);
+              originLocationName = originLocation[0].country;
+              destinationLocationName = destinationLocation[0].country;  
+            }
+            
             const stringDepartureDate = new Date(Date.parse(departureDate));
             const departureYear = stringDepartureDate.getFullYear();
             const departureMonth = ("0" + (stringDepartureDate.getMonth() + 1)).slice(-2);
@@ -199,9 +204,10 @@ export default function TripRequests({ history} ) {
               >
                 <TripInfoCard
                   key={Math.random()}
+                  id={id}
                   tripType={tripType}
-                  originId={originFullName}
-                  destinationId={destinationFullName}
+                  originId={originLocationName}
+                  destinationId={destinationLocationName}
                   departureDate={formattedDepartureDate}
                   returnDate={formattedReturnDate}
                   status={tripStatus}

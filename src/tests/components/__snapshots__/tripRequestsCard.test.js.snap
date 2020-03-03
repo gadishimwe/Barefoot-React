@@ -20,7 +20,12 @@ exports[`Test On ProfilePicture Component render() Should Render ProfilePicture 
         "textAlign": "center",
       }
     }
-  />
+  >
+    <a
+      className="makeStyles-link-2"
+      href="/comments/?trip_id=undefined"
+    />
+  </WithStyles(ForwardRef(Typography))>
   <div
     style={
       Object {

@@ -12,6 +12,7 @@ import multiCityReducer from './multiCityReducer';
 import oneWayTripReducer from './oneWayTripReducer';
 import returnTripReducer from './returnTripReducer';
 import managerRequestsReducer from './requestsApprovalReducer';
+import commentsReducer from './commentReducer';
 
 export default combineReducers({
 	auth: loginReducer,
@@ -26,5 +27,6 @@ export default combineReducers({
 	multiCityReducer,
 	oneWayTripReducer,
 	returnTripReducer,
-	managerRequestsReducer
+	managerRequestsReducer,
+	commentsReducer
 });

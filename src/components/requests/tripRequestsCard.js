@@ -11,6 +11,10 @@ const useStyles = makeStyles(() => ({
     width: '97%',
     textAlign: 'left',
     height: '100%'
+  },
+  link: {
+    color: 'white',
+    textDecoration: 'none'
   }
 }));
 
@@ -36,7 +40,7 @@ export default function TripInfoCard(props) {
           paddingBottom: '10px',
         }}
       >
-        {props.tripType}
+        <a href={`/comments/?trip_id=${props.id}`} className={classes.link}>{props.tripType}</a>
       </Typography>
       
       <div
