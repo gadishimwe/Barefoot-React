@@ -10,12 +10,12 @@ import Login from './views/Login';
 import NotFound from './views/NotFound';
 import Dashboard from './views/Dashboard';
 import facebookGoogleService from './services/facebookGoogleService';
-import UserRoleView from './views/UserRoleView';
 import AppLayout from './views/appLayout';
 import Settings from './views/SettingsView';
 import TripRequests from './views/tripRequestsView';
 import Trips from './components/trips/trips';
 import ApprovalsTable from './views/approvalsView';
+import commentsView from './views/CommentsView';
 
 const routes = [
 	{
@@ -96,6 +96,11 @@ const routes = [
 				path: '/manager/requests',
 				exact: true,
 				component: ApprovalsTable
+			},
+			{
+				path: '/comments',
+				exact: true,
+				component: commentsView
 			},
 			{
 				component: () => <Redirect to='/errors/error-404' />
