@@ -19,7 +19,7 @@ const inputData = {
 	department: null,
 	lineManagerId: null,
 	role: 'requester',
-	profilePicture: 'none',
+	profilePicture: 'none'
 };
 
 describe('Test updateProfile Actions', () => {
@@ -38,18 +38,18 @@ describe('Test updateProfile Actions', () => {
 					status: 200,
 					message: 'Profile Updated successfully',
 					data: {
-						...inputData,
-					},
-				},
+						...inputData
+					}
+				}
 			});
 		});
 		const expectedActions = [
 			{
 				type: UPDATE_PROFILE,
 				payload: {
-					...inputData,
-				},
-			},
+					...inputData
+				}
+			}
 		];
 		const mockStore = configureStore([thunk]);
 		const store = mockStore({});
@@ -57,7 +57,7 @@ describe('Test updateProfile Actions', () => {
 			updateProfile('M', '1997-01-01', 'french', 'Euro', 'Burundi', 'profilepictureurl'),
 			() => {
 				expect(store.getActions()).toEqual(expectedActions);
-			},
+			}
 		);
 	});
 });

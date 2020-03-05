@@ -7,8 +7,8 @@ const useStyles = makeStyles(() => ({
 	typographyBody1: {
 		fontSize: '14px',
 		margin: 'auto',
-		display: 'inline',
-	},
+		display: 'inline'
+	}
 }));
 const Copyright = () => {
 	const classes = useStyles();

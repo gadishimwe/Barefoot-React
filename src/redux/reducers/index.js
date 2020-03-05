@@ -11,6 +11,7 @@ import tripLocationsReducer from './tripLocationsReducer';
 import multiCityReducer from './multiCityReducer';
 import oneWayTripReducer from './oneWayTripReducer';
 import returnTripReducer from './returnTripReducer';
+import managerRequestsReducer from './requestsApprovalReducer';
 
 export default combineReducers({
 	auth: loginReducer,
@@ -24,5 +25,6 @@ export default combineReducers({
 	tripLocationsReducer,
 	multiCityReducer,
 	oneWayTripReducer,
-	returnTripReducer
+	returnTripReducer,
+	managerRequestsReducer
 });

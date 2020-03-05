@@ -6,6 +6,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import { makeStyles } from '@material-ui/core/styles';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import SettingsIcon from '@material-ui/icons/Settings';
+import LoyaltyOutlinedIcon from '@material-ui/icons/LoyaltyOutlined';
 import MailOutlineIcon from '@material-ui/icons/MailOutline';
 import BallotOutlinedIcon from '@material-ui/icons/BallotOutlined';
 import HomeWorkOutlinedIcon from '@material-ui/icons/HomeWorkOutlined';
@@ -119,6 +120,12 @@ const Sidebar = ({ handleLogout, isLoading, image, handleProfilePictureChange })
 						icon: <BallotOutlinedIcon />,
 						text: 'My Bookings',
 						id: 6
+					},
+					{
+						path: '/manager/requests',
+						icon: <LoyaltyOutlinedIcon />,
+						text: 'My Approvals',
+						id: 7
 					}
 				].map(item => (
 					<Link href={item.path} key={item.id} style={{ textDecoration: 'none', color: 'black' }}>

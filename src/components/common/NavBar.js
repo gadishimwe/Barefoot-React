@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -20,7 +21,7 @@ export default function NavBar() {
     const classes = useStyles();
     return (
         <div className={classes.root}>
-            <AppBar position="static" >
+            <AppBar position="static">
                 <Toolbar>
                     <Typography variant="h6" className={classes.title}>Barefoot Nomad</Typography>
                 </Toolbar>
