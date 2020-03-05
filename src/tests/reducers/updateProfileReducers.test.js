@@ -13,11 +13,11 @@ describe('Update Profile Reducer Test ', () => {
 				preferredLanguage: 'english',
 				preferredCurrency: 'Dollar',
 				birthDate: '1990-01-01',
-				profilePicture: 'dnjsfhbnjdsfhbfdjnskdjshj',
+				profilePicture: 'dnjsfhbnjdsfhbfdjnskdjshj'
 			},
 			error: {},
 			loading: false,
-			message: '',
+			message: ''
 		};
 
 		expect(profileReducer(undefined, action)).toEqual(initialState);
@@ -29,23 +29,23 @@ describe('Update Profile Reducer Test ', () => {
 			preferredLanguage: 'french',
 			preferredCurrency: 'Pound',
 			birthDate: '1992-10-30',
-			profilePicture: 'profilepictureurl',
+			profilePicture: 'profilepictureurl'
 		},
 		error: {},
 		loading: true,
-		message: 'Profile Updated successfully',
+		message: 'Profile Updated successfully'
 	};
 	test('Should Test a pending request', () => {
 		const action = { type: pending(UPDATE_PROFILE) };
 		expect(
 			profileReducer(
 				{
-					...inputData,
+					...inputData
 				},
-				action,
-			),
+				action
+			)
 		).toEqual({
-			...inputData,
+			...inputData
 		});
 	});
 
@@ -55,13 +55,13 @@ describe('Update Profile Reducer Test ', () => {
 			profileReducer(
 				{
 					...inputData,
-					loading: false,
+					loading: false
 				},
-				action,
-			),
+				action
+			)
 		).toEqual({
 			...inputData,
-			loading: true,
+			loading: true
 		});
 	});
 });

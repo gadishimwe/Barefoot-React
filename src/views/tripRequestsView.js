@@ -16,7 +16,7 @@ import Pagination from '../components/common/Pagination';
 import Header from '../components/common/SettingsHeader';
 
 const drawerWidth = 240;
-export default function tripRequests({ history} ) {
+export default function TripRequests({ history} ) {
   const useStyles = makeStyles(theme => ({
     root: {
       display: 'flex'
@@ -117,7 +117,7 @@ export default function tripRequests({ history} ) {
   
   return (
     <>
-        <Header title='Requests' subtitle='My Trip Requests' />
+        <Header title='' subtitle='My Trip Requests' />
         <Tabs
                 onChange={handleTabsChange}
                 value='trips'
@@ -127,7 +127,7 @@ export default function tripRequests({ history} ) {
                 scrollButtons='auto'
                 className={classes.tabs}
         >
-                  <Tab label='All' value='trips' />
+        <Tab label='All' value='trips' />
         </Tabs>
         <Divider className={classes.divider} />
         <Grid

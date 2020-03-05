@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React from 'react';
 import { Redirect } from 'react-router-dom';
 
@@ -12,8 +13,9 @@ import facebookGoogleService from './services/facebookGoogleService';
 import UserRoleView from './views/UserRoleView';
 import AppLayout from './views/appLayout';
 import Settings from './views/SettingsView';
-import tripRequests from './views/tripRequests';
+import TripRequests from './views/tripRequestsView';
 import Trips from './components/trips/trips';
+import ApprovalsTable from './views/approvalsView';
 
 const routes = [
 	{
@@ -83,12 +85,17 @@ const routes = [
 			{
 				path: '/trips',
 				exact: true,
-				component: tripRequests
+				component: TripRequests
 			},
 			{
 				path: '/trips/:type',
 				exact: true,
 				component: Trips
+			},
+			{
+				path: '/manager/requests',
+				exact: true,
+				component: ApprovalsTable
 			},
 			{
 				component: () => <Redirect to='/errors/error-404' />
