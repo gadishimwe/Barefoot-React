@@ -17,7 +17,14 @@ import OneWay, { countryToFlag, disabledHandler } from '../../../components/trip
 describe('Test one way trip', () => {
     let component;
     beforeEach(() => {
-        const store = configureStore();
+        const store = mockConfigureStore([thunk])({
+            getAccommodationsReducer:{
+                accommodations: []
+            },
+            oneWayTripReducer:{
+                locations:[]
+            }
+        });
         component = mount(
             <Provider store={store}>
                 <OneWay />
@@ -56,10 +63,12 @@ describe('Test one way trip', () => {
 describe('Test on inputs validations', () => {
     it('should validate trip inputs', () => {
         const store = mockConfigureStore([thunk])({
-            oneWayTripReducer: {
-                loading: false,
-                messages: 'Trip request is successfully created',
-                locations: []
+            getAccommodationsReducer:{
+                accommodations: []
+            },
+            oneWayTripReducer:{
+                locations:[],
+                messages:'Trip request is successfully created'
             }
         });
         const component = mount(

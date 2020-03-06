@@ -13,6 +13,7 @@ import oneWayTripReducer from './oneWayTripReducer';
 import returnTripReducer from './returnTripReducer';
 import managerRequestsReducer from './requestsApprovalReducer';
 import commentsReducer from './commentReducer';
+import getAccommodationsReducer from './getAccommodationsReducer';
 
 export default combineReducers({
 	auth: loginReducer,
@@ -28,5 +29,6 @@ export default combineReducers({
 	oneWayTripReducer,
 	returnTripReducer,
 	managerRequestsReducer,
-	commentsReducer
+	commentsReducer,
+	getAccommodationsReducer
 });

@@ -17,7 +17,17 @@ import Return, { countryToFlag, disabledHandler } from '../../../components/trip
 describe('Test return trip', () => {
     let component;
     beforeEach(() => {
-        const store = configureStore();
+        // const store = configureStore();
+        const store = mockConfigureStore([thunk])({
+            returnTripReducer: {
+                loading: false,
+                messages: 'Trip created successfully',
+                locations: []
+            },
+            getAccommodationsReducer:{
+                accommodations: []
+            }
+        });
         component = mount(
             <Provider store={store}>
                 <Return />
@@ -74,6 +84,9 @@ describe('Test message returned on success', () => {
                 loading: false,
                 messages: 'Trip created successfully',
                 locations: []
+            },
+            getAccommodationsReducer:{
+                accommodations: []
             }
         });
         const component = mount(
