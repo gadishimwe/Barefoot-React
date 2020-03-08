@@ -123,7 +123,8 @@ export default function ApprovalsTable({ history }) {
               requesterPicture,
               status,
               tripType,
-              lineManagerId
+              lineManagerId,
+              trip
             } = request;
             return (
               <Grid
@@ -136,6 +137,7 @@ export default function ApprovalsTable({ history }) {
               >
                 <ApprovalCard
                   key={id}
+                  id={id}
                   requesterId={requesterId}
                   requesterFname={requesterFname}
                   requesterLname={requesterLname}
@@ -143,6 +145,7 @@ export default function ApprovalsTable({ history }) {
                   status={status}
                   tripType={tripType}
                   lineManagerId={lineManagerId}
+                  trip={trip}
                 />
               </Grid>
             )
