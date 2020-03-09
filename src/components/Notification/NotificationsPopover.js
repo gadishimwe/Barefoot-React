@@ -7,7 +7,6 @@ import DoneAllIcon from '@material-ui/icons/DoneAll';
 import SettingsIcon from '@material-ui/icons/Settings';
 
 import NotificationList from './components/NotificationList/NotificationList';
-import EmptyList from './components/EmptyList/EmptyList';
 
 const useStyles = makeStyles(() => ({
 	root: {
@@ -70,11 +69,7 @@ const NotificationsPopover = props => {
 					}
 				/>
 				<Divider />
-				{unreadNotifications > 0 ? (
-					<NotificationList notifications={notifications} />
-				) : (
-					<EmptyList />
-				)}
+				<NotificationList notifications={notifications} />
 				<Divider />
 			</div>
 		</Popover>

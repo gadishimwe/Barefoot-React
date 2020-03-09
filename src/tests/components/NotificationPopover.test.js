@@ -43,34 +43,4 @@ describe('Test Not found view', () => {
 		);
 		expect(component.length).toEqual(1);
 	});
-	it('Should render the empty view if no notifications', () => {
-		const theme = createMuiTheme({
-			palette: {
-				primary: {
-					main: '#0074D9'
-				}
-			},
-			overrides: {
-				MuiOutlinedInput: {
-					input: {
-						'&:-webkit-autofill': {
-							WebkitBoxShadow: '0 0 0 100px #fff inset',
-							WebkitTextFillColor: '#000000'
-						}
-					}
-				}
-			}
-		});
-		const store = configureStore();
-		const component = mount(
-			<Provider store={store}>
-				<ThemeProvider theme={theme}>
-					<Router>
-						<NotificationsPopover open anchorEl={<IconButton />} />
-					</Router>
-				</ThemeProvider>
-			</Provider>
-		);
-		expect(component.length).toEqual(1);
-	});
 });

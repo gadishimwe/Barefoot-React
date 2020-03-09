@@ -80,9 +80,7 @@ const TopBar = props => {
 			http.get('/api/notifications').then(response => {
 				if (mounted) {
 					response.data.data.notifications.map(notification => {
-						if (notification.isRead === false) {
-							setNotifications(prev => [...prev, notification]);
-						}
+						setNotifications(prev => [...prev, notification]);
 					});
 					setUnreadNotifications(response.data.data.unread);
 				}
