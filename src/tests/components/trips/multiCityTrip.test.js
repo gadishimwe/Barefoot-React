@@ -110,6 +110,9 @@ describe('Test multi city trip', () => {
 					}
 				],
 				locations: []
+			},
+			getAccommodationsReducer: {
+				accommodations: []
 			}
 		});
 		const component2 = mount(
@@ -160,6 +163,9 @@ describe('Test validations', () => {
 					}
 				],
 				locations: []
+			},
+			getAccommodationsReducer: {
+				accommodations: []
 			}
 		});
 		const component = mount(
@@ -191,6 +197,9 @@ describe('Test validations', () => {
 					}
 				],
 				locations: []
+			},
+			getAccommodationsReducer: {
+				accommodations: []
 			}
 		});
 		const component = mount(
@@ -222,6 +231,9 @@ describe('Test validations', () => {
 					}
 				],
 				locations: []
+			},
+			getAccommodationsReducer: {
+				accommodations: []
 			}
 		});
 		const component = mount(
