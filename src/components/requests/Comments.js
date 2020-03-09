@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import queryString from 'query-string';
+import moment from 'moment';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
@@ -11,10 +12,12 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
+import { Grid, Divider } from '@material-ui/core';
 import {
 	commentOnTrip,
 	getAllTripRequests,
-	getAllTripLocations
+	getAllTripLocations,
+	viewCommentsAction
 } from '../../redux/actions/requestsAction';
 import Loading from '../common/loading';
 
@@ -41,7 +44,7 @@ const useStyles = makeStyles(theme => ({
 	},
 	textField: {
 		float: 'right',
-		width: '95%',
+		width: '100%',
 		marginBottom: 5
 	},
 	button: {
@@ -57,6 +60,11 @@ const Comments = () => {
 
 	const commentsReducer = useSelector(state => state.commentsReducer);
 	const [comment, setComment] = useState('');
+	const [page] = useState(1);
+	const [limit, setLimit] = useState(5);
+
+	const allCommentsReducer = useSelector(state => state.commentsReducer);
+	const allComments = [...allCommentsReducer.data];
 
 	const tripsList = useSelector(state => state.tripRequestsReducer);
 	const trips = [...tripsList.data];
@@ -94,6 +102,7 @@ const Comments = () => {
 	useEffect(() => {
 		dispatch(getAllTripRequests());
 		dispatch(getAllTripLocations());
+		dispatch(viewCommentsAction(tripId.trip_id, page, limit));
 	}, []);
 
 	const handleChange = e => {
@@ -102,9 +111,19 @@ const Comments = () => {
 
 	const handleClick = e => {
 		e.preventDefault();
+		dispatch(viewCommentsAction(tripId.trip_id, page, limit));
 		dispatch(commentOnTrip(tripId.trip_id, comment));
+		dispatch(viewCommentsAction(tripId.trip_id, page, limit));
 		setComment('');
 	};
+
+	const viewMore = e => {
+		e.preventDefault();
+		setLimit(prev => prev + 2);
+	};
+	useEffect(() => {
+		dispatch(viewCommentsAction(tripId.trip_id, page, limit));
+	}, [limit]);
 
 	return (
 		<>
@@ -153,16 +172,20 @@ const Comments = () => {
 				</>
 			)}
 
-			<div className={classes.main}>
-				<Avatar className={classes.avatar} alt='Author' src={user.profilePicture} />
-				<TextField
-					id='comment'
-					onChange={handleChange}
-					label='Add a comment'
-					value={comment}
-					className={classes.textField}
-				/>
-			</div>
+			<Grid container wrap='nowrap' spacing={2} key='hbfjkdf'>
+				<Grid item>
+					<Avatar className={classes.avatar} alt='Author' src={user.profilePicture} />
+				</Grid>
+				<Grid justifycontent='left' item xs zeroMinWidth>
+					<TextField
+						id='comment'
+						onChange={handleChange}
+						label='Add a comment'
+						value={comment}
+						className={classes.textField}
+					/>
+				</Grid>
+			</Grid>
 			<Button
 				onClick={handleClick}
 				variant='contained'
@@ -173,6 +196,43 @@ const Comments = () => {
 			>
 				{commentsReducer.loading ? <Loading /> : 'Post Comment'}
 			</Button>
+			{allComments.length === 0
+				? ''
+				: allComments.map(commentData => {
+						return (
+							<React.Fragment key={commentData.id}>
+								<Grid container wrap='nowrap' spacing={2}>
+									<Grid item>
+										<Avatar className={classes.avatar} alt='Author' src={user.profilePicture} />
+									</Grid>
+									<Grid justifycontent='left' item xs zeroMinWidth>
+										<h4>
+											{user.firstName}
+											&nbsp;
+											{user.lastName}
+										</h4>
+										<p>{commentData.comment}</p>
+										<span style={{ color: '#c4c4c7', fontSize: '0.9em' }}>
+											{moment(commentData.createdAt).calendar()}
+										</span>
+									</Grid>
+									<Grid style={{ marginTop: 20 }} item>
+										<Button variant='outlined' color='primary'>
+											Delete
+										</Button>
+									</Grid>
+								</Grid>
+								<Divider />
+							</React.Fragment>
+						);
+				  })}
+			{allComments.length >= limit ? (
+				<Button onClick={viewMore} color='primary'>
+					Load more comments
+				</Button>
+			) : (
+				''
+			)}
 		</>
 	);
 };

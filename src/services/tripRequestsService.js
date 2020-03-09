@@ -10,3 +10,8 @@ export const commentService = (tripId, comment) => {
     const result = http.post(`/api/trips/requests/${tripId}/comments`, { comment });
     return result;
 };
+
+export const viewComments = (tripId, page, limit) => {
+    const result = http.get(`/api/trips/request/${tripId}/comments?page=${page}&limit=${limit}`);
+    return result;
+}

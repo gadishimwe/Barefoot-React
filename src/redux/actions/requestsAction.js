@@ -1,7 +1,18 @@
 /* eslint-disable import/prefer-default-export */
 /* eslint-disable prettier/prettier */
-import { FIND_TRIP_REQUESTS, FIND_TRIP_LOCATIONS, COMMENT_ON_TRIP } from './actionTypes';
-import tripRequestsService, { commentService } from '../../services/tripRequestsService';
+import {
+  FIND_TRIP_REQUESTS,
+  FIND_TRIP_LOCATIONS,
+  COMMENT_ON_TRIP,
+  VIEW_COMMENTS
+} from './actionTypes';
+import
+  tripRequestsService,
+  {
+    commentService,
+    viewComments
+  }
+  from '../../services/tripRequestsService';
 import tripLocationsService from '../../services/tripLocationsService';
 
 export const getAllTripRequests = () => {
@@ -22,6 +33,13 @@ export const commentOnTrip = (tripId, comment) => {
   return {
     type: COMMENT_ON_TRIP,
     payload: commentService(tripId, comment)
+  }
+}
+
+export const viewCommentsAction = (tripId, page, limit) => {
+  return {
+    type: VIEW_COMMENTS,
+    payload: viewComments(tripId, page, limit)
   }
 }
 
