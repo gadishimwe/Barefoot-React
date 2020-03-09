@@ -15,6 +15,16 @@ const useStyles = makeStyles(theme => ({
 			backgroundColor: theme.palette.background.default
 		}
 	},
+	listItemUnread: {
+		'&:hover': {
+			backgroundColor: '#ECECEC'
+		},
+		fontWeight: 'bold',
+		backgroundColor: '#DEDEDE'
+	},
+	unreadNotification: {
+		fontWeight: 'bold'
+	},
 	avatarGreen: {
 		backgroundImage: buildGradient(colors.green[400], colors.green[600])
 	},
@@ -43,24 +53,44 @@ const NotificationList = props => {
 
 	return (
 		<List {...rest} className={classes.root} disablePadding>
-			{notifications.map((notification, i) => (
-				<ListItem
-					className={classes.listItem}
-					component={RouterLink}
-					divider={i < notifications.length - 1}
-					key={notification.id}
-					to='#'
-				>
-					<ListItemAvatar>{avatars[notification.type]}</ListItemAvatar>
-					<ListItemText
-						primary={notification.message}
-						primaryTypographyProps={{ variant: 'body2' }}
-						style={{ color: '#000000' }}
-						secondary={moment(notification.createdAt).fromNow()}
-					/>
-					<ArrowForwardIcon className={classes.arrowForwardIcon} />
-				</ListItem>
-			))}
+			{notifications.map((notification, i) =>
+				notification.isRead === false ? (
+					<ListItem
+						className={classes.listItemUnread}
+						component={RouterLink}
+						divider={i < notifications.length - 1}
+						key={notification.id}
+						to='#'
+					>
+						<ListItemAvatar>{avatars[notification.type]}</ListItemAvatar>
+						<ListItemText
+							classes={{ primary: classes.unreadNotification }}
+							primary={notification.message}
+							primaryTypographyProps={{ variant: 'body2', fontWeight: 'bold' }}
+							style={{ color: '#000000' }}
+							secondary={moment(notification.createdAt).fromNow()}
+						/>
+						<ArrowForwardIcon className={classes.arrowForwardIcon} />
+					</ListItem>
+				) : (
+					<ListItem
+						className={classes.listItem}
+						component={RouterLink}
+						divider={i < notifications.length - 1}
+						key={notification.id}
+						to='#'
+					>
+						<ListItemAvatar>{avatars[notification.type]}</ListItemAvatar>
+						<ListItemText
+							primary={notification.message}
+							primaryTypographyProps={{ variant: 'body2' }}
+							style={{ color: '#000000' }}
+							secondary={moment(notification.createdAt).fromNow()}
+						/>
+						<ArrowForwardIcon className={classes.arrowForwardIcon} />
+					</ListItem>
+				)
+			)}
 		</List>
 	);
 };
