@@ -20,23 +20,26 @@ const useStyles = makeStyles(theme => ({
     height: theme.spacing(7),
   },
   accept_button: {
-    backgroundColor: '#24AB11',
-    '&:hover': {
-      backgroundColor: '#24AB11'
-    },
     fontSize: '10px',
     marginRight: '5px',
   },
-  reject_button: {
-    backgroundColor: '#DF2E12',
-    '&:hover': {
-      backgroundColor: '#DF2E12'
-    },
-    fontSize: '10px',
+  link: {
+    color: 'white',
+    textDecoration: 'none'
   }
 }));
 
 export default function ApprovalCard(props) {
+  let statusColor;
+  if (props.status === 'approved') {
+    statusColor = 'green'
+  }
+  if (props.status === 'pending') {
+    statusColor = 'orange'
+  }
+  if (props.status === 'rejected') {
+    statusColor = 'red'
+  }
   const classes = useStyles();
   return (
     <Card className={classes.root}>
@@ -80,51 +83,37 @@ export default function ApprovalCard(props) {
             {props.requesterLname}
           </span>
         </p>
-        <p style={{ paddingLeft: '45px' }}>
+        <p style={{ paddingLeft: '45px', fontSize: '13px' }}>
           <span style={{ fontWeight: 'bold', paddingRight: '5px' }}>
-            Trip Type:
+            Reason:
           </span>
           <span>
-            {props.tripType}
+            {props.trip[0].travelReasons}
           </span>
         </p>
-        <p style={{ paddingLeft:'45px' }}>
+        <p style={{ paddingLeft: '45px', fontSize: '13px' }}>
           <span style={{ fontWeight: 'bold', paddingRight: '5px' }}>
             Status:
           </span>
-          <span>
+          <span style={{ color: `${statusColor}` }}>
             {props.status}
           </span>
         </p>
       </div>
       <Divider />
-      <div style={{ textAlign: 'center' }}>
-        <p style={{ display: 'flex', marginLeft: '70px' }}>
+      <div style={{}}>
+        <a href={`/manager/request-details?request_id=${props.id}`} className={classes.link}>
           <Button
             type='button'
-            disabled={
-              (props.status === 'approved')
-            }
             size="small"
             variant="contained"
             color='primary'
             className={classes.accept_button}
+            style={{ width: '100%', borderRadius: '0px' }}
           >
-            ACCEPT
+            View Details
           </Button>
-          <Button
-            type='button'
-            size="small"
-            variant="contained"
-            color='primary'
-            className={classes.reject_button}
-            disabled={
-              (props.status === 'approved')
-            }
-          >
-            REJECT
-          </Button>
-        </p>
+        </a>
       </div>
     </Card>
   );
