@@ -4,7 +4,8 @@ import {
   FIND_TRIP_REQUESTS,
   FIND_TRIP_LOCATIONS,
   COMMENT_ON_TRIP,
-  VIEW_COMMENTS
+  VIEW_COMMENTS,
+  MANAGER_UPDATE_REQUEST
 } from './actionTypes';
 import
   tripRequestsService,
@@ -14,6 +15,7 @@ import
   }
   from '../../services/tripRequestsService';
 import tripLocationsService from '../../services/tripLocationsService';
+import { updateRequestStatusService } from '../../services/requestService';
 
 export const getAllTripRequests = () => {
   return {
@@ -33,6 +35,13 @@ export const commentOnTrip = (tripId, comment) => {
   return {
     type: COMMENT_ON_TRIP,
     payload: commentService(tripId, comment)
+  }
+};
+
+export const updateRequestStatus = (requestId, status) => {
+  return {
+    type: MANAGER_UPDATE_REQUEST,
+    payload: updateRequestStatusService(requestId, status)
   }
 }
 

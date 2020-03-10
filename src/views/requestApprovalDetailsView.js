@@ -11,7 +11,7 @@ const useStyles = makeStyles(theme => ({
         marginTop: theme.spacing(3)
     }
 }));
-export default function requestDetailsView() {
+export default function RequestDetailsView() {
     const classes = useStyles();
     const handleTabsChange = (event, value) => {
         history.push(value);
