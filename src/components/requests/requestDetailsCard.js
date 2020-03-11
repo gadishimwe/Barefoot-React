@@ -1,3 +1,4 @@
+/* eslint-disable prefer-const */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable no-unused-expressions */
 /* eslint-disable no-self-assign */
@@ -12,6 +13,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Alert from '@material-ui/lab/Alert';
 import Avatar from '@material-ui/core/Avatar';
+import Modal from '@material-ui/core/Modal';
 import { Paper, Divider } from '@material-ui/core';
 import { getManagerRequests } from '../../redux/actions/requestApprovalAction';
 import {
@@ -67,6 +69,37 @@ const RequestDetailsCard = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const requestId = queryString.parse(window.location.search);
+
+  const [open, setOpen] = React.useState(false);
+  let [reqType, setReqType] = React.useState();
+  let [statusToSend, setStatusToSend] = React.useState();
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const handleApproveOpen = (e) => {
+    e.preventDefault();
+    setOpen(true);
+    setReqType('approve');
+    setStatusToSend('approved');
+  };
+
+  const handleRejectOpen = (e) => {
+    e.preventDefault();
+    setOpen(true);
+    setReqType('reject');
+    setStatusToSend('rejected');
+  };
+
+  const approveRequest = (e) => {
+    e.preventDefault();
+    if (statusToSend !== undefined) {
+      dispatch(updateRequestStatus(requestId.request_id, statusToSend));
+      handleClose();
+    }
+  }
+
   useEffect(() => {
     dispatch(getManagerRequests());
     dispatch(getAllTripLocations())
@@ -145,19 +178,6 @@ const RequestDetailsCard = () => {
     } else {
       formattedReturnDate = 'None'
     }
-  }
-
-  const approveStatus = 'approved';
-  const rejectStatus = 'rejected';
-
-  const handleApproveRequest = e => {
-    e.preventDefault();
-    dispatch(updateRequestStatus(requestId.request_id, approveStatus));
-  }
-
-  const handleRejectRequest = e => {
-    e.preventDefault();
-    dispatch(updateRequestStatus(requestId.request_id, rejectStatus));
   }
 
   return (
@@ -314,7 +334,6 @@ const RequestDetailsCard = () => {
                   marginLeft: '100px',
                   textAlign: 'center',
                   minWidth: 'auto'
-                  // backgroundColor: 'red',
                 }}
                 >
                   <p
@@ -364,7 +383,7 @@ const RequestDetailsCard = () => {
                         (myRequest.status === 'approved') ||
                         reqStatus === 'approved'
                       }
-                      onClick={handleApproveRequest}
+                      onClick={handleApproveOpen}
                     >
                       {updateManagerRequestsReducer.loading ? <Loading /> : 'Approve'}
                     </Button>
@@ -377,7 +396,7 @@ const RequestDetailsCard = () => {
                         (myRequest.status === 'approved') ||
                         reqStatus === 'approved'
                       }
-                      onClick={handleRejectRequest}
+                      onClick={handleRejectOpen}
                     >
                       {updateManagerRequestsReducer.loading ? <Loading /> : 'Reject'}
                     </Button>
@@ -412,6 +431,65 @@ const RequestDetailsCard = () => {
                     }
                   </p>
                 </div>
+                <Modal
+                  aria-labelledby="simple-modal-title"
+                  aria-describedby="simple-modal-description"
+                  open={open}
+                  onClose={handleClose}
+                  style={{
+                    color: 'white',
+                    fontWeight: 'bold',
+                    width: '300px',
+                    height: '200px',
+                    margin: 'auto'
+                  }}
+                >
+                  <div
+                    style={{
+                      backgroundColor: 'white',
+                      color: '#000',
+                      textAlign: 'center',
+                      padding: '10px 0px 10px 0px',
+                      borderColor: '#77A8F0'
+                    }}
+                  >
+                    <h5
+                      id="simple-modal-title"
+                      style={{
+                        color: '#000'
+                      }}
+                    >
+                      {`Are you sure you want to ${reqType} this request ?`}
+                    </h5>
+                    <p id="simple-modal-description">
+                      <Button
+                        variant="contained"
+                        size="small"
+                        color="primary"
+                        style={{
+                          marginRight: '5px',
+                          fontSize: '11px'
+                        }}
+                        onClick={approveRequest}
+                      >
+                        Confirm
+                      </Button>
+                      <Button
+                        variant="contained"
+                        size="small"
+                        color="primary"
+                        style={{
+                          fontSize: '11px',
+                          backgroundColor: '#D62020'
+                        }}
+                        onClick={handleClose}
+                      >
+                        Cancel
+                      </Button>
+                    </p>
+                  </div>
+                </Modal>
+
               </Paper>
             </>
           )
