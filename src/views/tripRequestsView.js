@@ -201,9 +201,9 @@ export default function TripRequests({ history} ) {
                 sm={6}
                 xs={12}
                 style={{ marginBottom: '5px' }}
+                key={id}
               >
                 <TripInfoCard
-                  key={Math.random()}
                   id={id}
                   tripType={tripType}
                   originId={originLocationName}

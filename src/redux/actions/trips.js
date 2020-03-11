@@ -2,7 +2,7 @@
 import httpService from '../../services/httpService';
 import { CREATE_TRIP, CREATE_ONE_WAY_TRIP, CREATE_RETURN_TRIP  } from './actionTypes';
 
-const formatDate = dt => {
+export const formatDate = dt => {
   const month = `0${dt.getMonth() + 1}`.slice(-2);
   const date = `0${dt.getDate()}`.slice(-2);
   const formattedDate = `${dt.getFullYear()}-${month}-${date}`;
