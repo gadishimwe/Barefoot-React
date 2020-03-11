@@ -49,6 +49,9 @@ describe('Comment Component', () => {
 			type: 'COMMENT_ON_TRIP_FULFILLED',
 			payload: {
 				data: {
+					data: {
+						comment: 'This is the comment'
+					},
 					message: 'Your comment was submitted successfully'
 				}
 			}
@@ -59,7 +62,16 @@ describe('Comment Component', () => {
 			message: 'Your comment was submitted successfully'
 		};
 
-		expect(commentReducer(undefined, action)).toEqual(initialState);
+		expect(commentReducer(undefined, action)).toEqual({
+			...initialState,
+			data: [
+				{
+					id: initialState.data.length - 1,
+					comment: action.payload.data.data.comment
+				},
+				...initialState.data
+			]
+		});
 		done();
 	});
 
@@ -79,6 +91,42 @@ describe('Comment Component', () => {
 		};
 
 		expect(commentReducer(undefined, action)).toEqual(initialState);
+		done();
+	});
+
+	it('Should show comments when an action is fulfilled', done => {
+		const action = {
+			type: 'VIEW_COMMENTS_FULFILLED',
+			payload: {
+				data: {
+					data: {
+						rows: {
+							id: 1,
+							userId: 2,
+							comment: 'Commenting on trip request'
+						}
+					}
+				}
+			}
+		};
+		const initialState = {
+			data: {
+				data: {
+					rows: {
+						id: 1,
+						userId: 2,
+						comment: 'Commenting on trip request'
+					}
+				}
+			},
+			loading: false,
+			message: ''
+		};
+
+		expect(commentReducer(undefined, action)).toEqual({
+			...initialState,
+			data: action.payload.data.data.rows
+		});
 		done();
 	});
 });

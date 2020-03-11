@@ -1,6 +1,6 @@
 /* eslint-disable no-fallthrough */
 /* eslint-disable prettier/prettier */
-import { COMMENT_ON_TRIP } from '../actions/actionTypes';
+import { COMMENT_ON_TRIP, VIEW_COMMENTS } from '../actions/actionTypes';
 
 import { pending, fulfilled, rejected } from '../../helpers/utils/action.utils';
 
@@ -20,6 +20,13 @@ const commentsReducer = (state = initialState, action) => {
         case fulfilled(COMMENT_ON_TRIP):
             return {
                 ...state,
+                data: [
+                        {
+                            id: state.data.length-1,
+                            comment:action.payload.data.data.comment
+                        },
+                            ...state.data
+                    ],
                 message: action.payload.data.message,
                 loading: false 
             }
@@ -27,7 +34,12 @@ const commentsReducer = (state = initialState, action) => {
             return {
                 ...state,
                 loading: false
-            }     
+            }
+        case fulfilled(VIEW_COMMENTS):
+            return {
+                ...state,
+                data: action.payload.data.data.rows
+            }         
         default:
             return state;
     }
