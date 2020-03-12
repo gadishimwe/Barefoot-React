@@ -14,11 +14,14 @@ import Button from '@material-ui/core/Button';
 import Alert from '@material-ui/lab/Alert';
 import Avatar from '@material-ui/core/Avatar';
 import Modal from '@material-ui/core/Modal';
-import { Paper, Divider } from '@material-ui/core';
+import { Paper, Divider, TextField, Grid } from '@material-ui/core';
+import moment from 'moment';
 import { getManagerRequests } from '../../redux/actions/requestApprovalAction';
 import {
+  commentOnTrip,
   getAllTripLocations,
-  updateRequestStatus
+  updateRequestStatus,
+  viewCommentsAction
 } from '../../redux/actions/requestsAction';
 import Loading from '../common/loading';
 
@@ -62,6 +65,24 @@ const useStyles = makeStyles(theme => ({
   link: {
     fontWeight: 'bold',
     textDecoration: 'underline'
+  },
+  avatar: {
+    float: 'left',
+    marginTop: 10,
+    width: 50,
+    height: 50
+  },
+  textField: {
+    float: 'right',
+    width: '95%',
+    marginBottom: 5
+  },
+  button: {
+    float: 'right',
+    marginBottom: '40px'
+  },
+  main: {
+    marginTop: '40px'
   }
 }));
 
@@ -104,10 +125,58 @@ const RequestDetailsCard = () => {
     dispatch(getManagerRequests());
     dispatch(getAllTripLocations())
   }, []);
+
+  const user = useSelector(state => state.auth.user);
+
   const requestsList = useSelector(state => state.managerRequestsReducer);
   const requests = [...requestsList.data];
 
   const myRequest = requests.find(req => req.id === parseInt(requestId.request_id, 10));
+
+  const commentsReducer = useSelector(state => state.commentsReducer);
+  const [comment, setComment] = React.useState('');
+
+  const [page] = React.useState(1);
+  const [limit, setLimit] = React.useState(5);
+
+  const handleChange = e => {
+    setComment(e.target.value);
+  };
+
+  const handleClick = e => {
+    e.preventDefault();
+    if (myRequest) {
+      dispatch(viewCommentsAction(myRequest.trip[0], page, limit));
+      dispatch(commentOnTrip(myRequest.trip[0].id, comment));
+      dispatch(viewCommentsAction(myRequest.trip[0], page, limit));
+      setComment('');
+    } else {
+      return ''
+    }
+  };
+
+  const viewMore = e => {
+    e.preventDefault();
+    setLimit(prev => prev + 2);
+  };
+  useEffect(() => {
+    if (myRequest) {
+      dispatch(viewCommentsAction(myRequest.trip[0].id, page, limit));
+    } else {
+      return ''
+    }
+  }, [limit]);
+
+  const allCommentsReducer = useSelector(state => state.commentsReducer);
+  const allComments = [...allCommentsReducer.data];
+
+  useEffect(() => {
+    if (myRequest) {
+      dispatch(viewCommentsAction(myRequest.trip[0].id, page, limit));
+    } else {
+      return ''
+    }
+  }, []);
 
   const updateManagerRequestsReducer = useSelector(state => state.updateReqStatusReducer);
 
@@ -401,35 +470,6 @@ const RequestDetailsCard = () => {
                       {updateManagerRequestsReducer.loading ? <Loading /> : 'Reject'}
                     </Button>
                   </p>
-                  <p
-                    style={{
-                      color: 'red',
-                      marginTop: '40px'
-                    }}
-                  >
-                    {
-                      (myRequest.status === 'approved') || reqStatus === 'approved' ?
-                        <>
-                          <a
-                            style={{
-                              color: 'silver',
-                              textDecoration: 'underline',
-                              fontWeight: 'bold'
-                            }}
-                          >
-                            Comment On This Request
-                          </a>
-                        </> :
-                        <>
-                          <a
-                            href={`/comments/?request_id=${myRequest.id}`}
-                            className={classes.link}
-                          >
-                            Comment On This Request
-                          </a>
-                        </>
-                    }
-                  </p>
                 </div>
                 <Modal
                   aria-labelledby="simple-modal-title"
@@ -495,6 +535,68 @@ const RequestDetailsCard = () => {
           )
         }
       </div>
+      <>
+        <div className={classes.main}>
+          {commentsReducer.message && <Alert severity='success'>{commentsReducer.message}</Alert>}
+          <Avatar className={classes.avatar} alt='Author' src={user.profilePicture} />
+          <TextField
+            id='comment'
+            onChange={handleChange}
+            label='Add a comment'
+            value={comment}
+            className={classes.textField}
+          />
+        </div>
+        <Button
+          onClick={handleClick}
+          variant='contained'
+          color='primary'
+          className={classes.button}
+          disabled={!comment}
+          data-test='add-comment'
+          size='small'
+        >
+          {commentsReducer.loading ? <Loading /> : 'Post Comment'}
+        </Button>
+
+        {allComments.length === 0
+          ? ''
+          : allComments.map(commentData => {
+            return (
+              <React.Fragment key={commentData.id}>
+                <Grid container wrap='nowrap' spacing={2}>
+                  <Grid item>
+                    <Avatar className={classes.avatar} alt='Author' src={user.profilePicture} />
+                  </Grid>
+                  <Grid justifycontent='left' item xs zeroMinWidth>
+                    <h4>
+                      {user.firstName}
+                      &nbsp;
+											{user.lastName}
+                    </h4>
+                    <p>{commentData.comment}</p>
+                    <span style={{ color: '#c4c4c7', fontSize: '0.9em' }}>
+                      {moment(commentData.createdAt).calendar()}
+                    </span>
+                  </Grid>
+                  <Grid style={{ marginTop: 20 }} item>
+                    <Button variant='outlined' color='primary'>
+                      Delete
+                    </Button>
+                  </Grid>
+                </Grid>
+                <Divider />
+              </React.Fragment>
+            );
+          })}
+        {allComments.length >= limit ? (
+          <Button onClick={viewMore} color='primary'>
+            Load more comments
+          </Button>
+        ) : (
+            ''
+          )}
+      </>
     </>
   );
 };
