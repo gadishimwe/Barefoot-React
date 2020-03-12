@@ -63,14 +63,7 @@ describe('Comment Component', () => {
 		};
 
 		expect(commentReducer(undefined, action)).toEqual({
-			...initialState,
-			data: [
-				{
-					id: initialState.data.length - 1,
-					comment: action.payload.data.data.comment
-				},
-				...initialState.data
-			]
+			...initialState
 		});
 		done();
 	});
@@ -126,6 +119,28 @@ describe('Comment Component', () => {
 		expect(commentReducer(undefined, action)).toEqual({
 			...initialState,
 			data: action.payload.data.data.rows
+		});
+		done();
+	});
+
+	it('Should delete comment when an action is fulfilled', done => {
+		const action = {
+			type: 'DELETE_COMMENT_FULFILLED',
+			payload: {
+				data: {
+					message: 'Comment was deleted successfully'
+				}
+			}
+		};
+		const initialState = {
+			data: '',
+			loading: false,
+			message: ''
+		};
+
+		expect(commentReducer(undefined, action)).toEqual({
+			...initialState,
+			message: action.payload.data.message
 		});
 		done();
 	});

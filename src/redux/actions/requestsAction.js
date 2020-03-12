@@ -5,13 +5,15 @@ import {
   FIND_TRIP_LOCATIONS,
   COMMENT_ON_TRIP,
   VIEW_COMMENTS,
-  MANAGER_UPDATE_REQUEST
+  MANAGER_UPDATE_REQUEST,
+  DELETE_COMMENT
 } from './actionTypes';
 import
   tripRequestsService,
   {
     commentService,
-    viewComments
+    viewComments,
+    deleteComment
   }
   from '../../services/tripRequestsService';
 import tripLocationsService from '../../services/tripLocationsService';
@@ -49,6 +51,13 @@ export const viewCommentsAction = (tripId, page, limit) => {
   return {
     type: VIEW_COMMENTS,
     payload: viewComments(tripId, page, limit)
+  }
+}
+
+export const deleteCommentAction = (tripId, commentId, subjectType) => {
+  return {
+    type: DELETE_COMMENT,
+    payload: deleteComment(tripId, commentId, subjectType)
   }
 }
 
