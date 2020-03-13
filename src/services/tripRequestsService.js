@@ -15,3 +15,8 @@ export const viewComments = (tripId, page, limit) => {
     const result = http.get(`/api/trips/request/${tripId}/comments?page=${page}&limit=${limit}`);
     return result;
 }
+
+export const deleteComment = async (tripId, commentId, subjectType) => {
+    const result = await http.delete(`/api/trips/${tripId}/comments/${commentId}`, { data: { subjectType } });
+    return result;
+}

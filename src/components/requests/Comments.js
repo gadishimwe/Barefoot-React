@@ -5,19 +5,19 @@ import moment from 'moment';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import Alert from '@material-ui/lab/Alert';
 import Avatar from '@material-ui/core/Avatar';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import { Grid, Divider } from '@material-ui/core';
+import { Grid, Divider, Modal } from '@material-ui/core';
 import {
 	commentOnTrip,
 	getAllTripRequests,
 	getAllTripLocations,
-	viewCommentsAction
+	viewCommentsAction,
+	deleteCommentAction
 } from '../../redux/actions/requestsAction';
 import Loading from '../common/loading';
 
@@ -59,9 +59,12 @@ const Comments = () => {
 	const tripId = queryString.parse(window.location.search);
 
 	const commentsReducer = useSelector(state => state.commentsReducer);
+	const message = useSelector(state => state.commentsReducer.message);
 	const [comment, setComment] = useState('');
 	const [page] = useState(1);
 	const [limit, setLimit] = useState(5);
+	const [open, setOpen] = React.useState(false);
+	const [toDelete, setTodelete] = useState();
 
 	const allCommentsReducer = useSelector(state => state.commentsReducer);
 	const allComments = [...allCommentsReducer.data];
@@ -103,7 +106,7 @@ const Comments = () => {
 		dispatch(getAllTripRequests());
 		dispatch(getAllTripLocations());
 		dispatch(viewCommentsAction(tripId.trip_id, page, limit));
-	}, []);
+	}, [message]);
 
 	const handleChange = e => {
 		setComment(e.target.value);
@@ -117,6 +120,22 @@ const Comments = () => {
 		setComment('');
 	};
 
+	const handleClose = () => {
+		setOpen(false);
+	};
+
+	const handleDelete = id => {
+		setTodelete(id);
+		setOpen(true);
+	};
+
+	const deleteComment = () => {
+		dispatch(viewCommentsAction(tripId.trip_id, page, limit));
+		dispatch(deleteCommentAction(tripId.trip_id, toDelete, 'Trip'));
+		dispatch(viewCommentsAction(tripId.trip_id, page, limit));
+		setOpen(false);
+	};
+
 	const viewMore = e => {
 		e.preventDefault();
 		setLimit(prev => prev + 2);
@@ -127,9 +146,8 @@ const Comments = () => {
 
 	return (
 		<>
-			{commentsReducer.message && <Alert severity='success'>{commentsReducer.message}</Alert>}
 			{trips.length === 0 || allLocations.length === 0 ? (
-				'Loading...'
+				''
 			) : (
 				<>
 					<Table className={classes.table} aria-label='simple table'>
@@ -196,6 +214,7 @@ const Comments = () => {
 			>
 				{commentsReducer.loading ? <Loading /> : 'Post Comment'}
 			</Button>
+
 			{allComments.length === 0
 				? ''
 				: allComments.map(commentData => {
@@ -203,13 +222,21 @@ const Comments = () => {
 							<React.Fragment key={commentData.id}>
 								<Grid container wrap='nowrap' spacing={2}>
 									<Grid item>
-										<Avatar className={classes.avatar} alt='Author' src={user.profilePicture} />
+										<Avatar
+											className={classes.avatar}
+											alt='Author'
+											src={
+												commentData.userId === user.id
+													? user.profilePicture
+													: commentData.User.profilePicture
+											}
+										/>
 									</Grid>
 									<Grid justifycontent='left' item xs zeroMinWidth>
 										<h4>
-											{user.firstName}
+											{commentData.userId === user.id ? user.firstName : commentData.User.firstName}
 											&nbsp;
-											{user.lastName}
+											{commentData.userId === user.id ? user.lastName : commentData.User.lastName}
 										</h4>
 										<p>{commentData.comment}</p>
 										<span style={{ color: '#c4c4c7', fontSize: '0.9em' }}>
@@ -217,9 +244,73 @@ const Comments = () => {
 										</span>
 									</Grid>
 									<Grid style={{ marginTop: 20 }} item>
-										<Button variant='outlined' color='primary'>
-											Delete
-										</Button>
+										{commentData.userId === user.id && (
+											<Button
+												onClick={() => handleDelete(commentData.id)}
+												variant='outlined'
+												color='primary'
+											>
+												Delete
+											</Button>
+										)}
+										<Modal
+											aria-labelledby='simple-modal-title'
+											aria-describedby='simple-modal-description'
+											open={open}
+											onClose={handleClose}
+											style={{
+												color: 'white',
+												fontWeight: 'bold',
+												width: '300px',
+												height: '200px',
+												margin: 'auto'
+											}}
+										>
+											<div
+												style={{
+													backgroundColor: 'white',
+													color: '#000',
+													textAlign: 'center',
+													padding: '10px 0px 10px 0px',
+													borderColor: '#77A8F0'
+												}}
+											>
+												<h5
+													id='simple-modal-title'
+													style={{
+														color: '#000'
+													}}
+												>
+													Are you sure you want to delete this comment?
+												</h5>
+												<p id='simple-modal-description'>
+													<Button
+														variant='contained'
+														size='small'
+														color='primary'
+														style={{
+															marginRight: '5px',
+															fontSize: '11px'
+														}}
+														onClick={deleteComment}
+													>
+														Confirm
+													</Button>
+													<Button
+														variant='contained'
+														size='small'
+														color='primary'
+														style={{
+															fontSize: '11px',
+															backgroundColor: '#D62020'
+														}}
+														onClick={handleClose}
+													>
+														Cancel
+													</Button>
+												</p>
+											</div>
+										</Modal>
 									</Grid>
 								</Grid>
 								<Divider />
