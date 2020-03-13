@@ -86,23 +86,40 @@ exports[`Test On ProfilePicture Component render() Should Render ProfilePicture 
       </span>
       <span />
     </p>
+    <p>
+      <span
+        style={
+          Object {
+            "fontWeight": "bold",
+            "paddingRight": "5px",
+          }
+        }
+      >
+        Status:
+      </span>
+      <span
+        style={
+          Object {
+            "color": "#C62828",
+          }
+        }
+      />
+    </p>
   </div>
   <WithStyles(ForwardRef(Divider)) />
-  <p
+  <WithStyles(ForwardRef(Button))
+    color="primary"
+    disabled={true}
+    onClick={[Function]}
     style={
       Object {
-        "textAlign": "center",
+        "alignSelf": "center",
+        "margin": 10,
       }
     }
+    variant="contained"
   >
-    <span
-      style={
-        Object {
-          "color": "#C62828",
-          "fontWeight": "bold",
-        }
-      }
-    />
-  </p>
+    Book accommodation
+  </WithStyles(ForwardRef(Button))>
 </ForwardRef(Card)>
 `;

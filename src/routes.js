@@ -17,6 +17,7 @@ import Trips from './components/trips/trips';
 import ApprovalsTable from './views/approvalsView';
 import commentsView from './views/CommentsView';
 import RequestDetailsView from './views/requestApprovalDetailsView';
+import Accommodations from './components/accommodation/booking/index';
 
 const routes = [
 	{
@@ -107,6 +108,11 @@ const routes = [
 				path: '/manager/request-details',
 				exact: true,
 				component: RequestDetailsView
+			},
+			{
+				path: '/accommodations/:tab',
+				exact: true,
+				component: Accommodations
 			},
 			{
 				component: () => <Redirect to='/errors/error-404' />

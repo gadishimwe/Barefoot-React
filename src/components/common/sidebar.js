@@ -72,6 +72,7 @@ const Sidebar = ({ handleLogout, isLoading, image, handleProfilePictureChange })
 	) {
 		type = location.pathname.slice(7);
 	}
+	const tab = 'all';
 	return (
 		<div className={classes.sideBar}>
 			<div className={classes.toolbar} />
@@ -102,12 +103,6 @@ const Sidebar = ({ handleLogout, isLoading, image, handleProfilePictureChange })
 						icon: <FlightTakeoffIcon />,
 						text: 'Book a trip',
 						id: 3
-					},
-					{
-						path: '/accommodations',
-						icon: <HomeWorkOutlinedIcon />,
-						text: 'Accommodations',
-						id: 4
 					},
 					{
 						path: '/trips',

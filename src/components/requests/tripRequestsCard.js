@@ -4,7 +4,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
-import { Divider, Typography } from '@material-ui/core';
+import { Divider, Typography, Button } from '@material-ui/core';
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -78,18 +78,25 @@ export default function TripInfoCard(props) {
             {props.returnDate}
           </span>
         </p>
+        <p>
+          <span style={{ fontWeight: 'bold', paddingRight: '5px'}}>
+            Status:
+          </span>
+          <span style={{color: `${tripStatusColor}`}}>
+            {props.status}
+          </span>
+        </p>
       </div>
       <Divider />
-      <p style={{ textAlign: 'center' }}>
-        <span
-          style={{
-            color: `${tripStatusColor}`,
-            fontWeight: 'bold'
-          }}
-        >
-          {props.status}
-        </span>
-      </p>
+      <Button
+       style={{ margin: 10, alignSelf: 'center' }}
+        color='primary'
+         onClick={() => window.location.assign(`/accommodations/all?destination=${props.destinationId}`)}
+         variant='contained'
+         disabled={props.status !== 'approved'}
+      >
+										Book accommodation
+      </Button>
     </Card>
   );
 }
