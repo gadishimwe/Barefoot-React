@@ -8,14 +8,12 @@ export const initialState = {
 		{
 			origin: '',
 			destination: '',
-			accommodation: '',
 			travelReasons: '',
 			departureDate: new Date()
 		},
 		{
 			origin: '',
 			destination: '',
-			accommodation: '',
 			travelReasons: '',
 			departureDate: new Date()
 		}

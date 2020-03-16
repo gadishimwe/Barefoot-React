@@ -17,12 +17,6 @@ export const createMultiCityTrip = values => {
       departureDate: formatDate(trip.departureDate),
       travelReasons: trip.travelReasons
     };
-    if (trip.accommodation !== '') {
-      return {
-        ...request,
-        accommodationId: trip.accommodation.id
-      };
-    }
     return request;
   });
   return {
@@ -38,42 +32,22 @@ export const createOneWayTrip = values => {
     departureDate: formatDate(values.departureDate),
     travelReasons: values.travelReasons
   }
-  let request;
-  if (values.accommodation !== '') {
-    request = {
-      ...oneWayTripRequest,
-      accommodationId: values.accommodation.id
-    };
-
-  } else {
-    request = { ...oneWayTripRequest }
-  }
   return {
     type: CREATE_ONE_WAY_TRIP,
-    payload: httpService.post('/api/trips/one-way', request)
+    payload: httpService.post('/api/trips/one-way', oneWayTripRequest)
   };
 };
 
 export const createReturnTrip = values => {
-  const oneWayTripRequest = {
+  const returnTripRequest = {
     originId: values.origin.id,
     destinationId: values.destination.id,
     returnDate: formatDate(values.returnDate),
     departureDate: formatDate(values.departureDate),
     travelReasons: values.travelReasons,
   }
-  let request;
-  if (values.accommodation !== '') {
-    request = {
-      ...oneWayTripRequest,
-      accommodationId: values.accommodation.id
-    };
-
-  } else {
-    request = { ...oneWayTripRequest }
-  }
   return {
     type: CREATE_RETURN_TRIP,
-    payload: httpService.post('/api/trips/return', request)
+    payload: httpService.post('/api/trips/return', returnTripRequest)
   };
 };
