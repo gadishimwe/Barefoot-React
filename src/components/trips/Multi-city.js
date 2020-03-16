@@ -3,7 +3,7 @@
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable no-nested-ternary */
 /* eslint-disable react/jsx-one-expression-per-line */
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { TextField, Button, Grid, IconButton } from '@material-ui/core';
 import { KeyboardDatePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
@@ -15,7 +15,6 @@ import { Formik, Form, FieldArray } from 'formik';
 import * as Yup from 'yup';
 import { useSelector, useDispatch } from 'react-redux';
 import getLocations from '../../redux/actions/getLocations';
-import getAccommodations from '../../redux/actions/getAccommodations';
 import { createMultiCityTrip } from '../../redux/actions/trips';
 import Loading from '../common/loading';
 
@@ -79,20 +78,10 @@ const Multicity = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getLocations());
-    dispatch(getAccommodations());
   }, []);
 
   const state = useSelector(statee => statee.multiCityReducer);
   const countries = state.locations;
-
-  const [accommodations, setAccommodations] = useState([])
-  const allAccommodations = useSelector(accommodationState => accommodationState.getAccommodationsReducer.accommodations);
-
-  useEffect(()=> {
-    if( allAccommodations !== undefined || allAccommodations.length !== 0){
-      setAccommodations(allAccommodations)
-    }
-  }, [allAccommodations])
   
   const { messages } = state;
   return (
@@ -233,28 +222,6 @@ const Multicity = () => {
                                 }
                               />
                             </MuiPickersUtilsProvider>
-                          </Grid>
-                          <Grid item xs>
-                          <Autocomplete
-                            size='small'
-                            id='combo-box-demo'
-                            options={accommodations}
-                            getOptionLabel={option => option.name}
-                            onChange={(event, value) =>
-                              props.setFieldValue('accommodation', value)
-                            }
-                            style={{ minWidth: 220 }}
-                            name='accommodation'
-                            renderInput={params => (
-                              <TextField
-                                {...params}
-                                label='Accommodation'
-                                variant='outlined'
-                                fullWidth
-                                value={props.values.accommodation}
-                              />
-                            )}
-                          />
                           </Grid>
                           <Grid item xs>
                             <TextField

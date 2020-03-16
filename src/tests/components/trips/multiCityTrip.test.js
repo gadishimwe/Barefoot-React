@@ -30,14 +30,12 @@ describe('Test multi city trip', () => {
 				{
 					origin: { id: 1, code: 'AD', country: 'Andorra' },
 					destination: { id: 2, code: 'AE', country: 'United Arab Emirates' },
-					accommodation: '',
 					travelReasons: 'travvatat',
 					departureDate: new Date()
 				},
 				{
 					origin: { id: 2, code: 'AE', country: 'United Arab Emirates' },
 					destination: { id: 5, code: 'AI', country: 'Anguilla' },
-					accommodation: '',
 					travelReasons: 'deygdyegd',
 					departureDate: new Date()
 				}
@@ -53,14 +51,12 @@ describe('Test multi city trip', () => {
 				{
 					origin: { id: 1, code: 'AD', country: 'Andorra' },
 					destination: { id: 2, code: 'AE', country: 'United Arab Emirates' },
-					accommodation: { id: 1 },
 					travelReasons: 'travvatat',
 					departureDate: new Date()
 				},
 				{
 					origin: { id: 2, code: 'AE', country: 'United Arab Emirates' },
 					destination: { id: 5, code: 'AI', country: 'Anguilla' },
-					accommodation: { id: 2 },
 					travelReasons: 'deygdyegd',
 					departureDate: new Date()
 				}
@@ -83,36 +79,29 @@ describe('Test multi city trip', () => {
 					{
 						origin: '',
 						destination: '',
-						accommodation: '',
 						travelReasons: '',
 						departureDate: new Date()
 					},
 					{
 						origin: '',
 						destination: '',
-						accommodation: '',
 						travelReasons: '',
 						departureDate: new Date()
 					},
 					{
 						origin: '',
 						destination: '',
-						accommodation: '',
 						travelReasons: '',
 						departureDate: new Date()
 					},
 					{
 						origin: '',
 						destination: '',
-						accommodation: '',
 						travelReasons: '',
 						departureDate: new Date()
 					}
 				],
 				locations: []
-			},
-			getAccommodationsReducer: {
-				accommodations: []
 			}
 		});
 		const component2 = mount(
@@ -150,22 +139,17 @@ describe('Test validations', () => {
 					{
 						origin: '',
 						destination: '',
-						accommodation: '',
 						travelReasons: '',
 						departureDate: new Date()
 					},
 					{
 						origin: '',
 						destination: '',
-						accommodation: '',
 						travelReasons: '',
 						departureDate: new Date()
 					}
 				],
 				locations: []
-			},
-			getAccommodationsReducer: {
-				accommodations: []
 			}
 		});
 		const component = mount(
@@ -184,22 +168,17 @@ describe('Test validations', () => {
 					{
 						origin: '',
 						destination: '',
-						accommodation: '',
 						travelReasons: '',
 						departureDate: new Date()
 					},
 					{
 						origin: '',
 						destination: '',
-						accommodation: '',
 						travelReasons: '',
 						departureDate: new Date()
 					}
 				],
 				locations: []
-			},
-			getAccommodationsReducer: {
-				accommodations: []
 			}
 		});
 		const component = mount(
@@ -218,22 +197,17 @@ describe('Test validations', () => {
 					{
 						origin: '',
 						destination: '',
-						accommodation: '',
 						travelReasons: '',
 						departureDate: new Date()
 					},
 					{
 						origin: '',
 						destination: '',
-						accommodation: '',
 						travelReasons: '',
 						departureDate: new Date()
 					}
 				],
 				locations: []
-			},
-			getAccommodationsReducer: {
-				accommodations: []
 			}
 		});
 		const component = mount(

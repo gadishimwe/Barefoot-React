@@ -8,19 +8,12 @@ import mockConfigureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import Alert from '@material-ui/lab/Alert';
 import { mount } from 'enzyme';
-// import { BrowserRouter } from 'react-router-dom';
-import configureStore from '../../../redux/store';
 import OneWay, { countryToFlag, disabledHandler } from '../../../components/trips/Oneway';
-// import Trips, { handleTabsChange } from '../../../components/trips/trips';
-// import Return from '../../../components/trips/Return';
 
 describe('Test one way trip', () => {
     let component;
     beforeEach(() => {
         const store = mockConfigureStore([thunk])({
-            getAccommodationsReducer:{
-                accommodations: []
-            },
             oneWayTripReducer:{
                 locations:[]
             }
@@ -38,7 +31,6 @@ describe('Test one way trip', () => {
             {
              origin: { id: 1, code: 'AD', country: 'Andorra' },
              destination: { id: 2, code: 'AE', country: 'United Arab Emirates' },
-             accommodation: '',
              travelReasons: 'Visiting Friends',
              departureDate: new Date()
             }
@@ -63,9 +55,6 @@ describe('Test one way trip', () => {
 describe('Test on inputs validations', () => {
     it('should validate trip inputs', () => {
         const store = mockConfigureStore([thunk])({
-            getAccommodationsReducer:{
-                accommodations: []
-            },
             oneWayTripReducer:{
                 locations:[],
                 messages:'Trip request is successfully created'
