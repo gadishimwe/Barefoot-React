@@ -21,7 +21,8 @@ import {
   commentOnTrip,
   getAllTripLocations,
   updateRequestStatus,
-  viewCommentsAction
+  viewCommentsAction,
+  deleteCommentAction
 } from '../../redux/actions/requestsAction';
 import Loading from '../common/loading';
 
@@ -95,6 +96,18 @@ const RequestDetailsCard = () => {
   let [reqType, setReqType] = React.useState();
   let [statusToSend, setStatusToSend] = React.useState();
 
+  const user = useSelector(state => state.auth.user);
+
+  const commentsReducer = useSelector(state => state.commentsReducer);
+  const [comment, setComment] = React.useState('');
+  const locationsList = useSelector(state => state.tripLocationsReducer);
+  const allLocations = [...locationsList.data];
+
+
+  const [page] = React.useState(1);
+  const [limit, setLimit] = React.useState(5);
+  const [toDelete, setTodelete] = React.useState();
+
   const handleClose = () => {
     setOpen(false);
   };
@@ -121,23 +134,19 @@ const RequestDetailsCard = () => {
     }
   }
 
-  useEffect(() => {
-    dispatch(getManagerRequests());
-    dispatch(getAllTripLocations())
-  }, []);
-
-  const user = useSelector(state => state.auth.user);
-
   const requestsList = useSelector(state => state.managerRequestsReducer);
   const requests = [...requestsList.data];
+  let myRequest;
+  if (allLocations.length > 0 && requests.length > 0) {
+    myRequest = requests.find(req => req.id === parseInt(requestId.request_id, 10));
+    dispatch(viewCommentsAction(myRequest.trip[0].id || 0, page, limit));
+  }
 
-  const myRequest = requests.find(req => req.id === parseInt(requestId.request_id, 10));
-
-  const commentsReducer = useSelector(state => state.commentsReducer);
-  const [comment, setComment] = React.useState('');
-
-  const [page] = React.useState(1);
-  const [limit, setLimit] = React.useState(5);
+  useEffect(() => {
+    dispatch(getManagerRequests());
+    dispatch(getAllTripLocations());
+         
+  }, []);
 
   const handleChange = e => {
     setComment(e.target.value);
@@ -146,43 +155,37 @@ const RequestDetailsCard = () => {
   const handleClick = e => {
     e.preventDefault();
     if (myRequest) {
-      dispatch(viewCommentsAction(myRequest.trip[0], page, limit));
+      dispatch(viewCommentsAction(myRequest.trip[0].id, page, limit));
       dispatch(commentOnTrip(myRequest.trip[0].id, comment));
-      dispatch(viewCommentsAction(myRequest.trip[0], page, limit));
+      dispatch(viewCommentsAction(myRequest.trip[0].id, page, limit));
       setComment('');
     } else {
       return ''
     }
   };
 
-  const viewMore = e => {
-    e.preventDefault();
+	const handleDelete = id => {
+		setTodelete(id);
+		setOpen(true);
+	};
+
+	const deleteComment = () => {
+		dispatch(viewCommentsAction(myRequest.trip[0].id, page, limit));
+		dispatch(deleteCommentAction(myRequest.trip[0].id, toDelete, 'Trip'));
+		dispatch(viewCommentsAction(myRequest.trip[0].id, page, limit));
+		setOpen(false);
+	};
+
+	const viewMore = e => {
+		e.preventDefault();
     setLimit(prev => prev + 2);
   };
-  useEffect(() => {
-    if (myRequest) {
-      dispatch(viewCommentsAction(myRequest.trip[0].id, page, limit));
-    } else {
-      return ''
-    }
-  }, [limit]);
 
   const allCommentsReducer = useSelector(state => state.commentsReducer);
   const allComments = [...allCommentsReducer.data];
 
-  useEffect(() => {
-    if (myRequest) {
-      dispatch(viewCommentsAction(myRequest.trip[0].id, page, limit));
-    } else {
-      return ''
-    }
-  }, []);
-
   const updateManagerRequestsReducer = useSelector(state => state.updateReqStatusReducer);
-
-  const locationsList = useSelector(state => state.tripLocationsReducer);
-  const allLocations = [...locationsList.data];
-
+  
   let originCountry;
   let destinationCountry;
   if (allLocations.length > 0 && requests.length > 0) {
@@ -566,13 +569,13 @@ const RequestDetailsCard = () => {
               <React.Fragment key={commentData.id}>
                 <Grid container wrap='nowrap' spacing={2}>
                   <Grid item>
-                    <Avatar className={classes.avatar} alt='Author' src={user.profilePicture} />
+                    <Avatar className={classes.avatar} alt='Author' src={commentData.userId === user.id ? user.profilePicture : commentData.User.profilePicture} />
                   </Grid>
                   <Grid justifycontent='left' item xs zeroMinWidth>
                     <h4>
-                      {user.firstName}
+                      {commentData.userId === user.id ? user.firstName : commentData.User.firstName}
                       &nbsp;
-											{user.lastName}
+											{commentData.userId === user.id ? user.lastName : commentData.User.lastName}
                     </h4>
                     <p>{commentData.comment}</p>
                     <span style={{ color: '#c4c4c7', fontSize: '0.9em' }}>
@@ -580,9 +583,73 @@ const RequestDetailsCard = () => {
                     </span>
                   </Grid>
                   <Grid style={{ marginTop: 20 }} item>
-                    <Button variant='outlined' color='primary'>
-                      Delete
-                    </Button>
+                  {commentData.userId === user.id && (
+											<Button
+												onClick={() => handleDelete(commentData.id)}
+												variant='outlined'
+												color='primary'
+											>
+												Delete
+											</Button>
+										)}
+                    <Modal
+											aria-labelledby='simple-modal-title'
+											aria-describedby='simple-modal-description'
+											open={open}
+											onClose={handleClose}
+											style={{
+												color: 'white',
+												fontWeight: 'bold',
+												width: '300px',
+												height: '200px',
+												margin: 'auto'
+											}}
+                    >
+											<div
+												style={{
+													backgroundColor: 'white',
+													color: '#000',
+													textAlign: 'center',
+													padding: '10px 0px 10px 0px',
+													borderColor: '#77A8F0'
+												}}
+											>
+												<h5
+													id='simple-modal-title'
+													style={{
+														color: '#000'
+													}}
+												>
+													Are you sure you want to delete this comment?
+												</h5>
+												<p id='simple-modal-description'>
+													<Button
+														variant='contained'
+														size='small'
+														color='primary'
+														style={{
+															marginRight: '5px',
+															fontSize: '11px'
+														}}
+														onClick={deleteComment}
+													>
+														Confirm
+													</Button>
+													<Button
+														variant='contained'
+														size='small'
+														color='primary'
+														style={{
+															fontSize: '11px',
+															backgroundColor: '#D62020'
+														}}
+														onClick={handleClose}
+													>
+														Cancel
+													</Button>
+												</p>
+											</div>
+                    </Modal>
                   </Grid>
                 </Grid>
                 <Divider />
