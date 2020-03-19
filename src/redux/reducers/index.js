@@ -16,6 +16,7 @@ import commentsReducer from './commentReducer';
 import getAccommodationsReducer from './getAccommodationsReducer';
 import updateReqStatusReducer from './updateRequestStatusReducer';
 import bookAccommodation from './bookAccommodation';
+import updateTripReducer from './editTripReducer';
 
 export default combineReducers({
 	auth: loginReducer,
@@ -34,5 +35,6 @@ export default combineReducers({
 	commentsReducer,
 	getAccommodationsReducer,
 	updateReqStatusReducer,
-	bookAccommodation
+	bookAccommodation,
+	updateTripReducer
 });

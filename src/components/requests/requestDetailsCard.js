@@ -453,7 +453,9 @@ const RequestDetailsCard = () => {
                       className={classes.approveBtn}
                       disabled={
                         (myRequest.status === 'approved') ||
-                        reqStatus === 'approved'
+                        (myRequest.status === 'rejected') ||
+                        reqStatus === 'approved' ||
+                        reqStatus === 'rejected'
                       }
                       onClick={handleApproveOpen}
                     >
@@ -466,7 +468,9 @@ const RequestDetailsCard = () => {
                       className={classes.rejectBtn}
                       disabled={
                         (myRequest.status === 'approved') ||
-                        reqStatus === 'approved'
+                        (myRequest.status === 'rejected') ||
+                        reqStatus === 'approved' ||
+                        reqStatus === 'rejected'
                       }
                       onClick={handleRejectOpen}
                     >

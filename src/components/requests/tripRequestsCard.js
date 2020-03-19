@@ -10,7 +10,8 @@ const useStyles = makeStyles(() => ({
   root: {
     width: '97%',
     textAlign: 'left',
-    height: '100%'
+    height: '100%',
+    marginBottom: '10px'
   },
   link: {
     color: 'white',
@@ -42,12 +43,12 @@ export default function TripInfoCard(props) {
       >
         <a href={`/comments/?trip_id=${props.id}`} className={classes.link}>{props.tripType}</a>
       </Typography>
-      
+
       <div
-        style={{ marginLeft: '20px', marginRight: '20px'}}
+        style={{ marginLeft: '20px', marginRight: '20px' }}
       >
         <p>
-          <span style={{ fontWeight: 'bold', paddingRight: '5px'}}>
+          <span style={{ fontWeight: 'bold', paddingRight: '5px' }}>
             Origin:
           </span>
           <span>
@@ -79,23 +80,56 @@ export default function TripInfoCard(props) {
           </span>
         </p>
         <p>
-          <span style={{ fontWeight: 'bold', paddingRight: '5px'}}>
+          <span style={{ fontWeight: 'bold', paddingRight: '5px' }}>
             Status:
           </span>
-          <span style={{color: `${tripStatusColor}`}}>
+          <span
+            style={{
+              color: `${tripStatusColor}`
+            }}
+          >
             {props.status}
           </span>
+          <Button
+            size='small'
+            color='primary'
+            variant='contained'
+            disabled={
+              props.status === 'approved' ||
+              props.status === 'rejected'
+            }
+            style={{
+              marginLeft: '45px'
+            }}
+            onClick={
+              () => window.location.assign(`/trip/edit?tripId=${
+                props.id
+                }`
+              )
+            }
+          >
+            Edit Trip
+          </Button>
         </p>
       </div>
       <Divider />
       <Button
-       style={{ margin: 10, alignSelf: 'center' }}
+        style={{
+          margin: 10,
+          alignSelf: 'center',
+          width: '90%'
+        }}
         color='primary'
-         onClick={() => window.location.assign(`/accommodations/all?destination=${props.destinationId}`)}
-         variant='contained'
-         disabled={props.status !== 'approved'}
+        onClick={
+          () => window.location.assign(`/accommodations/all?destination=${
+            props.destinationId
+            }`
+          )
+        }
+        variant='contained'
+        disabled={props.status !== 'approved'}
       >
-										Book accommodation
+        Book accommodation
       </Button>
     </Card>
   );
