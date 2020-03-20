@@ -10,26 +10,26 @@ export const formatDate = dt => {
   return formattedDate;
 };
 
-export const editTripRequest = (tripId, values) => {
-  let editTripRequestValue;
-  if (values.returnDate) {
-    editTripRequestValue = {
-      originId: values.origin.id,
-      destinationId: values.destination.id,
-      returnDate: formatDate(values.returnDate),
-      departureDate: formatDate(values.departureDate),
-      travelReasons: values.travelReasons,
+  export const editTripRequest = (tripId, values) =>{
+    let editTripRequestValue;
+    if (values.returnDate) {
+      editTripRequestValue = {
+        originId: values.origin.id,
+        destinationId: values.destination.id,
+        returnDate: formatDate(values.returnDate),
+        departureDate: formatDate(values.departureDate),
+        travelReasons: values.travelReasons,
+      }
+    } else {
+      editTripRequestValue = {
+        originId: values.origin.id,
+        destinationId: values.destination.id,
+        departureDate: formatDate(values.departureDate),
+        travelReasons: values.travelReasons,
+      }
     }
-  } else {
-    editTripRequestValue = {
-      originId: values.origin.id,
-      destinationId: values.destination.id,
-      departureDate: formatDate(values.departureDate),
-      travelReasons: values.travelReasons,
-    }
+    return {
+      type: UPDATE_TRIP,
+      payload: updateTripService(tripId, editTripRequestValue)
+    };
   }
-  return {
-    type: UPDATE_TRIP,
-    payload: updateTripService(tripId, editTripRequestValue)
-  };
-};

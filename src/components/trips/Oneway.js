@@ -40,7 +40,6 @@ export const disabledHandler = (props, state) => {
 // ⚠️ No support for IE 11
 export const countryToFlag = isoCode =>
   isoCode.toUpperCase().replace(/./g, char => String.fromCodePoint(char.charCodeAt(0) + 127397));
-
 const OneWay = () => {
   const oneWayTripSchema = Yup.object({
     origin: Yup.string().required('Origin is required'),

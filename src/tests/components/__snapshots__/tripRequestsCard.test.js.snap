@@ -104,6 +104,20 @@ exports[`Test On ProfilePicture Component render() Should Render ProfilePicture 
           }
         }
       />
+      <WithStyles(ForwardRef(Button))
+        color="primary"
+        disabled={false}
+        onClick={[Function]}
+        size="small"
+        style={
+          Object {
+            "marginLeft": "45px",
+          }
+        }
+        variant="contained"
+      >
+        Edit Trip
+      </WithStyles(ForwardRef(Button))>
     </p>
   </div>
   <WithStyles(ForwardRef(Divider)) />
@@ -115,6 +129,7 @@ exports[`Test On ProfilePicture Component render() Should Render ProfilePicture 
       Object {
         "alignSelf": "center",
         "margin": 10,
+        "width": "90%",
       }
     }
     variant="contained"

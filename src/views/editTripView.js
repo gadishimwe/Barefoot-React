@@ -11,7 +11,7 @@ const useStyles = makeStyles(theme => ({
     marginTop: theme.spacing(3)
   }
 }));
-export default function editTripView() {
+export default function EditTripView() {
   const classes = useStyles();
   const handleTabsChange = (event, value) => {
     history.push(value);

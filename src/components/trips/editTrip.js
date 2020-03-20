@@ -1,3 +1,4 @@
+/* eslint-disable no-sequences */
 /* eslint-disable no-unused-expressions */
 /* eslint-disable no-unused-vars */
 /* eslint-disable max-len */
@@ -27,14 +28,24 @@ import { getAllTripRequests, getAllTripLocations } from '../../redux/actions/req
 import Loading from '../common/loading';
 
 export const disabledHandler = (props, state) => {
+  const formatDate = dt => {
+    const month = `0${dt.getMonth() + 1}`.slice(-2);
+    const date = `0${dt.getDate()}`.slice(-2);
+    const formattedDate = `${dt.getFullYear()}-${month}-${date}`;
+    return formattedDate;
+  };
+  const date1 = formatDate(props.values.departureDate)
+  const date2 = formatDate(new Date());
+  const date4 = formatDate(new Date(props.values.returnDate));
+  const date3 = formatDate(new Date(new Date().setDate(new Date().getDate() + 1)));
   if (
-    !props.values.origin ||
-    !props.values.destination ||
-    !props.values.departureDate ||
-    // !props.values.returnDate ||
-    !props.values.travelReasons ||
-    state.loading ||
-    Object.keys(props.errors).length !== 0
+    props.values.origin.country === undefined &&
+    props.values.destination.country === undefined &&
+    date1 === date2 &&
+    props.values.travelReasons === '' ||
+    state.loading &&
+    Object.keys(props.errors).length !== 0 ||
+    state.message === 'Trip Updated successfully'
   ) {
     return true;
   }
@@ -83,7 +94,7 @@ const EditTrip = () => {
   const tripReqId = queryString.parse(window.location.search);
   useEffect(() => {
     dispatch(getAllTripRequests());
-    // dispatch(getAllTripLocations());
+    dispatch(getAllTripLocations());
     dispatch(getLocations());
     dispatch(getAccommodations());
   }, []);
@@ -97,29 +108,6 @@ const EditTrip = () => {
       setMyTrip(findTrip)
     }
   }, [trips])
-
-  const locationsList = useSelector(state => state.tripLocationsReducer);
-  const allLocations = [...locationsList.data];
-
-  const [myOriginLocation, setMyOriginLocation] = useState([]);
-  React.useEffect(() => {
-    if (allLocations.length > 0) {
-      const findOriginLocation = allLocations.find(loc => loc.id === myTrip.originId);
-      setMyOriginLocation(findOriginLocation)
-    }
-  }, [allLocations])
-
-  const originCountry = myOriginLocation.country;
-
-  const [myDestinationLocation, setMyestinationLocation] = useState([]);
-  React.useEffect(() => {
-    if (allLocations.length > 0) {
-      const findDestinationLocation = allLocations.find(loc => loc.id === myTrip.destinationId);
-      setMyestinationLocation(findDestinationLocation)
-    }
-  }, [allLocations])
-
-  const destinationCountry = myDestinationLocation.country;
 
   const statee = useSelector(statees => statees.returnTripReducer);
   const countries = statee.locations
@@ -141,12 +129,11 @@ const EditTrip = () => {
     <div>
       <Formik
         initialValues={{
-          origin: myOriginLocation,
-          destination: myDestinationLocation,
+          origin: '',
+          destination: '',
           accommodation: '',
-          travelReasons: myTrip.travelReasons || '',
-          departureDate: new Date(),
-          // returnDate: new Date().setDate(new Date().getDate() + 1)
+          travelReasons: '',
+          departureDate: new Date()
         }}
         validationSchema={TripSchema}
         onSubmit={values => dispatch(editTripRequest(tripIds, values))}
@@ -167,9 +154,7 @@ const EditTrip = () => {
                       }}
                       name='origin'
                       autoHighlight
-                      onChange={(event, value) =>
-                        props.setFieldValue('origin', value)
-                      }
+                      onChange={(event, value) => props.setFieldValue('origin', value)}
                       getOptionLabel={option => option.country}
                       renderOption={option => (
                         <div data-test='locations'>
@@ -293,28 +278,6 @@ const EditTrip = () => {
                         helperText={props.values.departureDate !== '' && props.errors.departureDate}
                       />
                     </MuiPickersUtilsProvider>
-                  </Grid>
-                  <Grid item xs>
-                    <Autocomplete
-                      size='small'
-                      id='combo-box-demo'
-                      options={accommodations}
-                      getOptionLabel={option => option.name}
-                      onChange={(event, value) =>
-                        props.setFieldValue('accommodation', value)
-                      }
-                      style={{ minWidth: 220 }}
-                      name='accommodation'
-                      renderInput={params => (
-                        <TextField
-                          {...params}
-                          label='Accommodation'
-                          variant='outlined'
-                          fullWidth
-                          value={props.values.accommodation}
-                        />
-                      )}
-                    />
                   </Grid>
                   <Grid item xs>
                     <TextField
