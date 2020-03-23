@@ -22,7 +22,8 @@ export default function AppLayout(props) {
 		root: {
 			display: 'flex',
 			flexGrow: 1,
-			textAlign: 'center'
+			textAlign: 'center',
+			backgroundColor: 'rgba(220, 220, 220,0.3)'
 		},
 		container: {
 			backgroundPosition: 'center',
@@ -157,7 +158,7 @@ export default function AppLayout(props) {
 					<Grid lg={12} item sm={12} md={12} xs={12}>
 						<div className={classes.toolbar} />
 						{auth.isAuthenticated ? (
-							renderRoutes(route.routes, { uploadingProfile, image })
+							renderRoutes(route.routes, { uploadingProfile, image, userRole: auth.user.role })
 						) : (
 							<Redirect to={{ pathname: '/login' }} />
 						)}

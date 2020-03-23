@@ -19,6 +19,7 @@ import commentsView from './views/CommentsView';
 import RequestDetailsView from './views/requestApprovalDetailsView';
 import Accommodations from './components/accommodation/booking/index';
 import EditTripView from './views/editTripView';
+import AccommodationsView from './views/AccommodationsView';
 
 const routes = [
 	{
@@ -109,6 +110,11 @@ const routes = [
 				path: '/manager/request-details',
 				exact: true,
 				component: RequestDetailsView
+			},
+			{
+				path: '/management/accommodations',
+				exact: true,
+				component: AccommodationsView
 			},
 			{
 				path: '/accommodations/:tab',

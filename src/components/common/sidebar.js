@@ -21,6 +21,7 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import NotificationsActiveIcon from '@material-ui/icons/NotificationsActive';
 import FlightTakeoffIcon from '@material-ui/icons/FlightTakeoff';
+import { useSelector } from 'react-redux';
 import ProfilePicture from '../profilePicture';
 
 const useStyles = makeStyles(theme => ({
@@ -61,6 +62,8 @@ const Sidebar = ({ handleLogout, isLoading, image, handleProfilePictureChange })
 	const classes = useStyles();
 	const [openCollapse, setOpenCollapse] = React.useState(false);
 
+	const { role } = useSelector(state => state.auth.user);
+
 	function handleOpenSettings() {
 		setOpenCollapse(!openCollapse);
 	}
@@ -72,7 +75,7 @@ const Sidebar = ({ handleLogout, isLoading, image, handleProfilePictureChange })
 	) {
 		type = location.pathname.slice(7);
 	}
-	const tab = 'all';
+
 	return (
 		<div className={classes.sideBar}>
 			<div className={classes.toolbar} />
@@ -90,49 +93,106 @@ const Sidebar = ({ handleLogout, isLoading, image, handleProfilePictureChange })
 						path: '/dashboard',
 						icon: <DashboardIcon />,
 						text: 'Dashboard',
+						accessPermission: [
+							'requester',
+							'manager',
+							'super_admin',
+							'travel_team_member',
+							'travel_admin'
+						],
 						id: 1
 					},
 					{
 						path: '/chat',
 						icon: <MailOutlineIcon />,
 						text: 'Messages',
+						accessPermission: [
+							'requester',
+							'manager',
+							'super_admin',
+							'travel_team_member',
+							'travel_admin'
+						],
 						id: 2
 					},
 					{
 						path: `/trips/${type}`,
 						icon: <FlightTakeoffIcon />,
 						text: 'Book a trip',
+						accessPermission: [
+							'requester',
+							'manager',
+							'super_admin',
+							'travel_team_member',
+							'travel_admin'
+						],
 						id: 3
+					},
+					{
+						path: '/management/accommodations',
+						icon: <HomeWorkOutlinedIcon />,
+						text: 'Accommodations',
+						accessPermission: ['travel_team_member', 'travel_admin'],
+						id: 4
 					},
 					{
 						path: '/trips',
 						icon: <CardTravelIcon />,
 						text: 'Trip Requests',
+						accessPermission: [
+							'requester',
+							'manager',
+							'super_admin',
+							'travel_team_member',
+							'travel_admin'
+						],
 						id: 5
 					},
 					{
 						path: '/bookings',
 						icon: <BallotOutlinedIcon />,
 						text: 'My Bookings',
+						accessPermission: [
+							'requester',
+							'manager',
+							'super_admin',
+							'travel_team_member',
+							'travel_admin'
+						],
 						id: 6
 					},
 					{
 						path: '/manager/requests',
 						icon: <LoyaltyOutlinedIcon />,
 						text: 'My Approvals',
+						accessPermission: [
+							'requester',
+							'manager',
+							'super_admin',
+							'travel_team_member',
+							'travel_admin'
+						],
 						id: 7
 					}
-				].map(item => (
-					<Link href={item.path} key={item.id} style={{ textDecoration: 'none', color: 'black' }}>
-						<ListItem
-							button
-							className={window.location.pathname === item.path ? classes.isActive : 'null'}
-						>
-							<ListItemIcon>{item.icon}</ListItemIcon>
-							<ListItemText primary={item.text} />
-						</ListItem>
-					</Link>
-				))}
+				].map(item => {
+					if (item.accessPermission.includes(role)) {
+						return (
+							<Link
+								href={item.path}
+								key={item.id}
+								style={{ textDecoration: 'none', color: 'black' }}
+							>
+								<ListItem
+									button
+									className={window.location.pathname === item.path ? classes.isActive : 'null'}
+								>
+									<ListItemIcon>{item.icon}</ListItemIcon>
+									<ListItemText primary={item.text} />
+								</ListItem>
+							</Link>
+						);
+					}
+				})}
 
 				<Divider />
 				<ListItem button onClick={handleOpenSettings}>
@@ -162,40 +222,64 @@ const Sidebar = ({ handleLogout, isLoading, image, handleProfilePictureChange })
 							path: '/settings/edit-profile',
 							icon: <AccountCircleIcon />,
 							text: 'Account Settings',
+							accessPermission: [
+								'requester',
+								'manager',
+								'super_admin',
+								'travel_team_member',
+								'travel_admin'
+							],
 							id: 1
 						},
 						{
 							path: '/settings/user-role',
 							icon: <AccountCircleIcon />,
 							text: 'Update User Role',
+							accessPermission: ['super_admin'],
 							id: 2
 						},
 						{
 							path: '/settings/notifications',
 							icon: <NotificationsActiveIcon />,
 							text: 'Notifications',
+							accessPermission: [
+								'requester',
+								'manager',
+								'super_admin',
+								'travel_team_member',
+								'travel_admin'
+							],
 							id: 3
 						},
 						{
 							path: '/settings/assign-manager',
 							icon: <AccountCircleIcon />,
 							text: 'Assign Manager',
+							accessPermission: ['super_admin'],
 							id: 4
 						}
-					].map(menu => (
-						<Link href={menu.path} key={menu.id} style={{ textDecoration: 'none', color: 'black' }}>
-							<List
-								component='div'
-								disablePadding
-								className={window.location.pathname === menu.path ? classes.isActive : 'null'}
-							>
-								<ListItem button className={classes.nested}>
-									<ListItemIcon>{menu.icon}</ListItemIcon>
-									<ListItemText primary={menu.text} />
-								</ListItem>
-							</List>
-						</Link>
-					))}
+					].map(menu => {
+						if (menu.accessPermission.includes(role)) {
+							return (
+								<Link
+									href={menu.path}
+									key={menu.id}
+									style={{ textDecoration: 'none', color: 'black' }}
+								>
+									<List
+										component='div'
+										disablePadding
+										className={window.location.pathname === menu.path ? classes.isActive : 'null'}
+									>
+										<ListItem button className={classes.nested}>
+											<ListItemIcon>{menu.icon}</ListItemIcon>
+											<ListItemText primary={menu.text} />
+										</ListItem>
+									</List>
+								</Link>
+							);
+						}
+					})}
 				</Collapse>
 				<Divider />
 				<ListItem button onClick={handleLogout}>
