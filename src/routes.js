@@ -20,6 +20,7 @@ import RequestDetailsView from './views/requestApprovalDetailsView';
 import Accommodations from './components/accommodation/booking/index';
 import EditTripView from './views/editTripView';
 import AccommodationsView from './views/AccommodationsView';
+import Chat from './components/chat/Chat';
 
 const routes = [
 	{
@@ -125,6 +126,11 @@ const routes = [
 				path: '/trip/edit',
 				exact: true,
 				component: EditTripView
+			},
+			{
+				path: '/chat',
+				exact: true,
+				component: Chat
 			},
 			{
 				component: () => <Redirect to='/errors/error-404' />

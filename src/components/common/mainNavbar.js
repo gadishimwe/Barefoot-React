@@ -8,10 +8,12 @@ import MenuIcon from '@material-ui/icons/Menu';
 import socketIOClient from 'socket.io-client';
 import MuiAlert from '@material-ui/lab/Alert';
 import Snackbar from '@material-ui/core/Snackbar';
+import { useDispatch } from 'react-redux';
 import BarefootLogo from '../../../public/images/logos/barefoot-logo.svg';
 
 import http from '../../services/httpService';
 import NotificationsPopover from '../Notification/NotificationsPopover';
+import { handleNewMessage } from '../../redux/actions/getMessagesActions';
 
 const useStyles = makeStyles(theme => ({
 	root: {
@@ -42,6 +44,8 @@ const useStyles = makeStyles(theme => ({
 function Alert(props) {
 	return <MuiAlert elevation={6} variant='filled' {...props} />;
 }
+const endPoint = `${process.env.API_URL}`;
+export const socket = socketIOClient(endPoint);
 const TopBar = props => {
 	const classes = useStyles();
 	const notificationsRef = useRef(null);
@@ -50,12 +54,10 @@ const TopBar = props => {
 	const [openNotifications, setOpenNotifications] = useState(false);
 	const [open, setOpen] = React.useState(false);
 	const [snackBarMessage, setSnackBarMessage] = useState('');
-
-	const endPoint = `${process.env.API_URL}`;
+	const dispatch = useDispatch();
 
 	const connect = () => {
 		const token = localStorage.getItem('token');
-		const socket = socketIOClient(endPoint);
 
 		socket.on('connect', () => {
 			socket
@@ -69,6 +71,9 @@ const TopBar = props => {
 						setUnreadNotifications(prevUnread => prevUnread + 1);
 						setSnackBarMessage(data.message);
 						setOpen(true);
+					});
+					socket.on('newMessage', message => {
+						dispatch(handleNewMessage(message));
 					});
 				});
 		});

@@ -1,13 +1,19 @@
 class Helpers {
-	static setAuth(token, user) {
-		if (localStorage.token && localStorage.user) {
+	static setAuth(token) {
+		if (localStorage.token) {
 			localStorage.removeItem('token');
-			localStorage.removeItem('user');
 			localStorage.setItem('token', token);
-			localStorage.setItem('user', JSON.stringify(user));
 		} else {
 			localStorage.setItem('token', token);
-			localStorage.setItem('user', JSON.stringify(user));
+		}
+	}
+
+	static setUSer(user) {
+		if (localStorage.user) {
+			localStorage.removeItem('user');
+			localStorage.setItem('user', user.email);
+		} else {
+			localStorage.setItem('user', user.email);
 		}
 	}
 }

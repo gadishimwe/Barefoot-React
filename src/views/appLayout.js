@@ -43,7 +43,8 @@ export default function AppLayout(props) {
 		toolbar: theme.mixins.toolbar,
 		content: {
 			padding: theme.spacing(1),
-			minHeight: '100%'
+			minHeight: '100%',
+			maxWidth: '100vw'
 		},
 		loader: {
 			color: 'white'
@@ -152,7 +153,7 @@ export default function AppLayout(props) {
 				<Grid
 					container
 					spacing={0}
-					style={{ maxHeight: '100%', textAlign: 'left', padding: '2%' }}
+					style={{ maxHeight: '100%', textAlign: 'left', padding: '2% 2% 0' }}
 					className={classes.content}
 				>
 					<Grid lg={12} item sm={12} md={12} xs={12}>

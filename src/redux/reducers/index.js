@@ -18,6 +18,7 @@ import updateReqStatusReducer from './updateRequestStatusReducer';
 import bookAccommodation from './bookAccommodation';
 import updateTripReducer from './editTripReducer';
 import accommodationReducer from './AccommodationReducer';
+import chatReducer from './chatReducer';
 
 export default combineReducers({
 	auth: loginReducer,
@@ -38,5 +39,6 @@ export default combineReducers({
 	updateReqStatusReducer,
 	bookAccommodation,
 	updateTripReducer,
-	accommodationReducer
+	accommodationReducer,
+	chatReducer
 });

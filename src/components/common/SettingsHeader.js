@@ -18,11 +18,11 @@ const useStyles = makeStyles(() => ({
 	}
 }));
 
-const Header = ({ title, subtitle }) => {
+const Header = ({ title, subtitle, className }) => {
 	const classes = useStyles();
 
 	return (
-		<div style={{ margin: '17px 0' }}>
+		<div style={{ margin: '17px 0' }} className={className}>
 			<Typography className={classes.overline} component='h2' gutterBottom>
 				{title}
 			</Typography>
