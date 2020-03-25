@@ -19,6 +19,7 @@ import bookAccommodation from './bookAccommodation';
 import updateTripReducer from './editTripReducer';
 import accommodationReducer from './AccommodationReducer';
 import chatReducer from './chatReducer';
+import searchReducer from './searchReducer';
 
 export default combineReducers({
 	auth: loginReducer,
@@ -40,5 +41,6 @@ export default combineReducers({
 	bookAccommodation,
 	updateTripReducer,
 	accommodationReducer,
-	chatReducer
+	chatReducer,
+	searchReducer
 });

@@ -10,7 +10,7 @@ const useStyles = makeStyles(() => ({
   root: {
     width: '97%',
     textAlign: 'left',
-    height: '100%',
+    height: '300px',
     marginBottom: '10px'
   },
   link: {
@@ -99,7 +99,7 @@ export default function TripInfoCard(props) {
               props.status === 'rejected'
             }
             style={{
-              marginLeft: '45px'
+              float: 'right'
             }}
             onClick={
               () => window.location.assign(`/trip/edit?tripId=${
