@@ -39,6 +39,9 @@ const useStyles = makeStyles(theme => ({
 	},
 	logoutIcon: {
 		marginRight: theme.spacing(1)
+	},
+	snackbar: {
+		top: 90
 	}
 }));
 function Alert(props) {
@@ -131,8 +134,9 @@ const TopBar = props => {
 			<Snackbar
 				open={open}
 				autoHideDuration={10000}
+				className={classes.snackbar}
 				onClose={handleClose}
-				anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+				anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
 			>
 				<Alert severity='info' id='feedback' onClose={handleClose}>
 					{snackBarMessage}

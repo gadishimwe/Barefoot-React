@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import { makeStyles } from '@material-ui/styles';
-import { Popover, CardHeader, Divider, colors } from '@material-ui/core';
+import { Popover, CardHeader, colors } from '@material-ui/core';
 import IconButton from '@material-ui/core/IconButton';
 import DoneAllIcon from '@material-ui/icons/DoneAll';
 import SettingsIcon from '@material-ui/icons/Settings';
@@ -68,9 +68,7 @@ const NotificationsPopover = props => {
 						</>
 					}
 				/>
-				<Divider />
 				<NotificationList notifications={notifications} />
-				<Divider />
 			</div>
 		</Popover>
 	);

@@ -2,10 +2,22 @@ import React from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import moment from 'moment';
 import { makeStyles } from '@material-ui/styles';
-import { Avatar, List, ListItem, ListItemAvatar, ListItemText, colors } from '@material-ui/core';
+import {
+	Avatar,
+	List,
+	ListItem,
+	ListItemAvatar,
+	Divider,
+	ListItemText,
+	colors
+} from '@material-ui/core';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import CommentIcon from '@material-ui/icons/Comment';
 import StoreIcon from '@material-ui/icons/Store';
+import EditRoundedIcon from '@material-ui/icons/EditRounded';
+import CheckCircleRoundedIcon from '@material-ui/icons/CheckCircleRounded';
+
+import { useSelector } from 'react-redux';
 
 const buildGradient = (start, end) => `linear-gradient(180deg, ${start} 0%, ${end} 100%)`;
 const useStyles = makeStyles(theme => ({
@@ -20,7 +32,9 @@ const useStyles = makeStyles(theme => ({
 			backgroundColor: '#ECECEC'
 		},
 		fontWeight: 'bold',
-		backgroundColor: '#DEDEDE'
+		backgroundColor: '#DEDEDE',
+		borderBottom: '1px solid rgba(255, 255, 255);',
+		backgroundClip: 'padding-box'
 	},
 	unreadNotification: {
 		fontWeight: 'bold'
@@ -30,13 +44,30 @@ const useStyles = makeStyles(theme => ({
 	},
 	avatarOrange: {
 		backgroundImage: buildGradient(colors.orange[400], colors.orange[700])
+	},
+	avatarBlue: {
+		backgroundImage: buildGradient(colors.blue[700], colors.blue[900])
+	},
+	avatarIndigo: {
+		backgroundImage: buildGradient(colors.indigo[400], colors.indigo[600])
+	},
+	dividerColor: {
+		backgroundColor: 'white'
 	}
 }));
 
 const NotificationList = props => {
 	const { notifications, className, ...rest } = props;
 
+	const auth = useSelector(state => state.auth);
+
 	const classes = useStyles();
+	const NotificationLink = notification => {
+		if (auth.user.role !== 'manager') {
+			return `/trips`;
+		}
+		return `/manager/request-details?request_id=${notification.requestId}`;
+	};
 
 	const avatars = {
 		new_request: (
@@ -44,9 +75,19 @@ const NotificationList = props => {
 				<StoreIcon />
 			</Avatar>
 		),
-		comment: (
+		new_comment: (
 			<Avatar className={classes.avatarGreen}>
 				<CommentIcon />
+			</Avatar>
+		),
+		request_status: (
+			<Avatar className={classes.avatarBlue}>
+				<CheckCircleRoundedIcon />
+			</Avatar>
+		),
+		request_update: (
+			<Avatar className={classes.avatarIndigo}>
+				<EditRoundedIcon />
 			</Avatar>
 		)
 	};
@@ -58,10 +99,10 @@ const NotificationList = props => {
 					<ListItem
 						className={classes.listItemUnread}
 						component={RouterLink}
-						divider={i < notifications.length - 1}
 						key={notification.id}
-						to='#'
+						to={NotificationLink(notification)}
 					>
+						<Divider classes={{ root: classes.dividerColor }} />
 						<ListItemAvatar>{avatars[notification.type]}</ListItemAvatar>
 						<ListItemText
 							classes={{ primary: classes.unreadNotification }}
@@ -78,7 +119,7 @@ const NotificationList = props => {
 						component={RouterLink}
 						divider={i < notifications.length - 1}
 						key={notification.id}
-						to='#'
+						to={NotificationLink(notification)}
 					>
 						<ListItemAvatar>{avatars[notification.type]}</ListItemAvatar>
 						<ListItemText
