@@ -39,6 +39,7 @@ return (
           onClick={() => paginate(number)}
           className={[classes.paginationBtn, (number == currentPage) && classes.active ]}
           id='btn'
+          test-data='button'
         >
           {number}
         </Button>

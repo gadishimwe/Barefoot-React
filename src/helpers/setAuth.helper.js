@@ -9,7 +9,7 @@ class Helpers {
 	}
 
 	static setUSer(user) {
-		if (localStorage.user) {
+		if (localStorage.getItem('user')) {
 			localStorage.removeItem('user');
 			localStorage.setItem('user', user.email);
 		} else {

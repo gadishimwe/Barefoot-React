@@ -58,7 +58,7 @@ const useStyles = makeStyles(theme => ({
 	}
 }));
 
-const Sidebar = ({ handleLogout, isLoading, image, handleProfilePictureChange }) => {
+const Sidebar = ({ handleLogout, isLoading, image, handleProfilePictureChange, location }) => {
 	const classes = useStyles();
 	const [openCollapse, setOpenCollapse] = React.useState(false);
 
@@ -195,7 +195,7 @@ const Sidebar = ({ handleLogout, isLoading, image, handleProfilePictureChange })
 				})}
 
 				<Divider />
-				<ListItem button onClick={handleOpenSettings}>
+				<ListItem button onClick={handleOpenSettings} test-data='list-item'>
 					<ListItemIcon>
 						<SettingsIcon />
 					</ListItemIcon>

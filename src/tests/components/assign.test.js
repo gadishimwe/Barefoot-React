@@ -29,7 +29,6 @@ const setUp = () => {
 	);
 	return wrapper;
 };
-
 describe('AssignManager Component', () => {
 	let component;
 	beforeEach(() => {
@@ -79,5 +78,21 @@ describe('AssignManager Component', () => {
 		const newState = userReducer({}, action);
 		expect(newState).toEqual(response);
 		done();
+	});
+	it('Should render assign manager view', () => {
+		const paginate = jest.spyOn(component.find('[test-data="pagination"]').props(), 'paginate');
+		component
+			.find('[test-data="pagination"]')
+			.props()
+			.paginate(3);
+		expect(paginate).toBeCalled();
+	});
+	it('Should render assign manager view', () => {
+		const handleChange = jest.spyOn(component.find('[test-data="select"]').props(), 'onChange');
+		component
+			.find('[test-data="select"]')
+			.props()
+			.onChange({ preventDefault: () => 'prevented', target: { name: 'name', value: 'value' } });
+		expect(handleChange).toBeCalled();
 	});
 });

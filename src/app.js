@@ -14,28 +14,8 @@ import http from './services/httpService';
 import routes from './routes';
 import Helpers from './helpers/setAuth.helper';
 
-
 library.add(fab);
 const store = configureStore();
-
-const func = async () => {
-	if (localStorage.token) {
-		const user = jwtDecode(localStorage.token);
-		if (window.location.pathname === '/login') {
-			window.location.href = '/dashboard';
-			store.dispatch(setCurrentUser(http.get('/api/users/view-profile')));
-		}
-		const userr = await store.dispatch(setCurrentUser(http.get('/api/users/view-profile')));
-		Helpers.setUSer(userr.action.payload.data.data);
-		const currentTime = Date.now() / 1000;
-		if (user.exp < currentTime) {
-			localStorage.removeItem('token');
-			localStorage.removeItem('user');
-			window.location.href = '/login';
-		}
-	}
-};
-func();
 
 const theme = createMuiTheme({
 	palette: {
@@ -59,6 +39,23 @@ const theme = createMuiTheme({
 });
 
 const App = () => {
+	(async () => {
+		if (localStorage.getItem('token')) {
+			const user = jwtDecode(localStorage.token);
+			if (window.location.pathname === '/login') {
+				window.location.href = '/dashboard';
+				store.dispatch(setCurrentUser(http.get('/api/users/view-profile')));
+			}
+			const userr = await store.dispatch(setCurrentUser(http.get('/api/users/view-profile')));
+			Helpers.setUSer(userr.action.payload.data.data);
+			const currentTime = Date.now() / 1000;
+			if (user.exp < currentTime) {
+				localStorage.removeItem('token');
+				localStorage.removeItem('user');
+				window.location.href = '/login';
+			}
+		}
+	})();
 	return (
 		<Provider store={store} id='component-App'>
 			<ThemeProvider theme={theme}>

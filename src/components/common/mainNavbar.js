@@ -44,7 +44,7 @@ const useStyles = makeStyles(theme => ({
 		top: 90
 	}
 }));
-function Alert(props) {
+export function Alert(props) {
 	return <MuiAlert elevation={6} variant='filled' {...props} />;
 }
 const endPoint = `${process.env.API_URL}`;
@@ -148,7 +148,7 @@ const TopBar = props => {
 						<img alt='Logo' src={BarefootLogo} />
 					</RouterLink>
 					<div className={classes.flexGrow} />
-					<Hidden smDown>
+					<Hidden smDown test-data='notification'>
 						<IconButton
 							className={classes.notificationsButton}
 							color='inherit'
@@ -167,6 +167,7 @@ const TopBar = props => {
 							className={classes.logoutButton}
 							color='inherit'
 							onClick={() => props.handleLogout()}
+							test-data='logout'
 						>
 							<InputIcon className={classes.logoutIcon} />
 							Sign out
@@ -186,6 +187,7 @@ const TopBar = props => {
 					markAllAsRead={markAllAsRead}
 					onClose={handleNotificationsClose}
 					open={openNotifications}
+					test-data='notificationClose'
 				/>
 			</AppBar>
 		</div>

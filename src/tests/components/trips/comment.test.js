@@ -1,9 +1,12 @@
 /* eslint-disable no-undef */
 /* eslint-disable react/react-in-jsx-scope */
 import { Provider } from 'react-redux';
+import { BrowserRouter as Router } from 'react-router-dom';
+import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import Comments from '../../../components/requests/Comments';
 import configureStore from '../../../redux/store';
 import commentReducer from '../../../redux/reducers/commentReducer';
+import CommentsView from '../../../views/CommentsView';
 
 const setUp = () => {
 	const store = configureStore();
@@ -143,5 +146,37 @@ describe('Comment Component', () => {
 			message: action.payload.data.message
 		});
 		done();
+	});
+});
+describe('Comments view', () => {
+	it('Should render the Comments view', () => {
+		const theme = createMuiTheme({
+			palette: {
+				primary: {
+					main: '#0074D9'
+				}
+			},
+			overrides: {
+				MuiOutlinedInput: {
+					input: {
+						'&:-webkit-autofill': {
+							WebkitBoxShadow: '0 0 0 100px #fff inset',
+							WebkitTextFillColor: '#000000'
+						}
+					}
+				}
+			}
+		});
+		const store = configureStore();
+		const component = mount(
+			<Provider store={store}>
+				<ThemeProvider theme={theme}>
+					<Router>
+						<CommentsView userRole='travel_admin' />
+					</Router>
+				</ThemeProvider>
+			</Provider>
+		);
+		expect(component.length).toEqual(1);
 	});
 });

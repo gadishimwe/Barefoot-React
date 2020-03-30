@@ -45,8 +45,9 @@ const ConversationList = ({
 					placeholder='Search contacts'
 					value={value}
 					onChange={handleChange}
+					test-data='input'
 				/>
-				<IconButton onClick={() => search(value)}>
+				<IconButton onClick={() => search(value)} test-data='search'>
 					<SearchIcon />
 				</IconButton>
 			</Toolbar>
@@ -63,6 +64,7 @@ const ConversationList = ({
 						divider={i < conversationList.length - 1}
 						key={conversation.chatUser.id}
 						onClick={() => dispatch(selectConversation(conversation, i))}
+						test-data='conversation'
 					/>
 				))}
 			</List>

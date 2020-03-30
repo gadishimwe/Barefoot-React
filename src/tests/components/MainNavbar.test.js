@@ -6,8 +6,10 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import { act } from 'react-dom/test-utils';
 import moxios from 'moxios';
 import axios from 'axios';
+import MuiAlert from '@material-ui/lab/Alert';
+import io from 'socket.io-client';
 import configureStore from '../../redux/store';
-import NavBar from '../../components/common/mainNavbar';
+import NavBar, { Alert } from '../../components/common/mainNavbar';
 
 describe('Test Not found view', () => {
 	beforeEach(() => {
@@ -65,38 +67,62 @@ describe('Test Not found view', () => {
 				}
 			});
 		});
-		// const expectedActions = [
-		// 	{
-		// 		type: LOGOUT_USER,
-		// 		payload: {}
-		// 	}
-		// ];
-		// const mockStore = configureStore([thunk]);
-		// const store = mockStore({});
-		// return store.dispatch(logoutUser(), () => {
-		// 	expect(store.getActions()).toEqual(expectedActions);
-		// });
+		const alert = Alert({ props: 'props' });
+		const handleNotificationsClose = jest.spyOn(
+			component
+				.find('[test-data="notificationClose"]')
+				.at(1)
+				.props(),
+			'onClose'
+		);
+		component
+			.find('[test-data="notificationClose"]')
+			.at(1)
+			.props()
+			.onClose();
+		expect(handleNotificationsClose).toBeCalled();
+		expect(alert).toEqual(<MuiAlert elevation={6} variant='filled' {...{ props: 'props' }} />);
 		expect(component.length).toEqual(1);
 	});
 });
-// jest.mock('setNotifications', () => ({
-// 	setNotifications: jest.fn()
-// }));
 
-// describe('setNotifications', () => {
-// 	const Comp = () => {
-// 		TopBar('new title');
-// 		return <div />;
-// 	};
-
-// 	const wrapper = mount(<Comp />);
-
-// 	it('sets Notifications', () => {
-// 		expect(setNotifications).toHaveBeenLastCalledWith('new title');
-// 	});
-// 	it('restores title on unmount', () => {
-// 		wrapper.unmount();
-
-// 		expect(setNotifications).toHaveBeenLastCalledWith([]);
-// 	});
-// });
+describe('Test socket.io', () => {
+	jest.mock('socket.io-client', () => {
+		const socket = {
+			on: jest.fn()
+		};
+		return jest.fn(() => socket);
+	});
+	let wrapper;
+	beforeEach(() => {
+		const theme = createMuiTheme({
+			palette: {
+				primary: {
+					main: '#0074D9'
+				}
+			},
+			overrides: {
+				MuiOutlinedInput: {
+					input: {
+						'&:-webkit-autofill': {
+							WebkitBoxShadow: '0 0 0 100px #fff inset',
+							WebkitTextFillColor: '#000000'
+						}
+					}
+				}
+			}
+		});
+		wrapper = shallow(
+			<ThemeProvider theme={theme}>
+				<NavBar />
+			</ThemeProvider>
+		);
+		jest.restoreAllMocks();
+	});
+	it('should mount component and register socket event', () => {
+		//   const instance = wrapper.instance() as any;
+		const socket = io();
+		// expect(wrapper.text()).toBe('some component');
+		// expect(socket.on).toBeCalledWith('numOfPlayersChanged', instance.handleNumOfPlayersChanged);
+	});
+});

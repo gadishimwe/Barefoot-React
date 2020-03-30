@@ -84,14 +84,7 @@ export default function TripRequests({ history} ) {
   }));
 
   const classes = useStyles();
-  const theme = useTheme();
-  
-  const [mobileOpen, setMobileOpen] = React.useState(false);
-  const handleDrawerToggle = () => {
-    setMobileOpen(!mobileOpen);
-  };
-
-  const { isAuthenticated, loading } = useSelector(state => state.logoutReducer);
+  const { isAuthenticated } = useSelector(state => state.logoutReducer);
   useEffect(() => {
     if (!isAuthenticated) {
       localStorage.removeItem('token');
@@ -101,10 +94,6 @@ export default function TripRequests({ history} ) {
   }, [isAuthenticated]);
 
   const dispatch = useDispatch();
-  const handleLogout = () => {
-    dispatch(logoutUser());
-  };
-
   useEffect(() => {
     dispatch(getAllTripLocations());
   }, []);
@@ -129,14 +118,6 @@ export default function TripRequests({ history} ) {
   const paginate = PageNumber => {
     setCurrentPage(PageNumber);
   };
-  const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
-  const handleClick = () => {
-
-  }
-  const handleTabsChange = (event, value) => {
-		history.push(value);
-  };
-
   const searchReducer = useSelector(state => state.searchReducer);
   const allResults = [...searchReducer.data];
 
@@ -180,12 +161,12 @@ export default function TripRequests({ history} ) {
 							onChange={handleChange}
 							className={classes.searchInput}
 							disableUnderline
-							placeholder='Search trip by country, departure date or status...'
+              placeholder='Search trip by country, departure date or status...'
+              test-data='search'
 						/>
-						<SearchIcon onClick={handleclick} className={classes.searchIcon} />
+						<SearchIcon onClick={handleclick} className={classes.searchIcon} test-data='search-icon' />
         </Paper>
         <Tabs
-                onChange={handleTabsChange}
                 value='trips'
                 variant='scrollable'
                 indicatorColor='primary'
@@ -338,6 +319,7 @@ export default function TripRequests({ history} ) {
                     paginate={paginate}
                     style={{ margin: 'auto' }}
                     currentPage={currentPage}
+                    test-data='pagination'
                   />
                 </Grid>
               </>  
@@ -356,6 +338,7 @@ export default function TripRequests({ history} ) {
                     paginate={paginateSearch}
                     style={{ margin: 'auto' }}
                     currentPage={currentSearchPage}
+                    test-data='pagination-search'
                   />
               </Grid>
             )

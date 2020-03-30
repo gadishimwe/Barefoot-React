@@ -114,6 +114,7 @@ const Multicity = () => {
                                 option: classes.option
                               }}
                               name={`trips[${index}].origin`}
+                              test-data='origin'
                               autoHighlight
                               onChange={(event, value) =>
                                 props.setFieldValue(`trips[${index}].origin`, value)
@@ -162,6 +163,7 @@ const Multicity = () => {
                                 option: classes.option
                               }}
                               name={`trips[${index}].destination`}
+                              test-data='destination'
                               onChange={(event, value) =>
                                 props.setFieldValue(`trips[${index}].destination`, value)
                               }
@@ -208,6 +210,7 @@ const Multicity = () => {
                                 className={classes.formControl}
                                 id='departureDate'
                                 name={`trips[${index}].departureDate`}
+                                test-data='departureDate'
                                 size='small'
                                 autoOk
                                 variant='inline'

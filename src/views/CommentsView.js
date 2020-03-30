@@ -10,16 +10,12 @@ const useStyles = makeStyles(theme => ({
 		marginTop: theme.spacing(3)
 	}
 }));
-export default function commentsView() {
+export default function CommentsView() {
 	const classes = useStyles();
-	const handleTabsChange = (event, value) => {
-		history.push(value);
-	};
 	return (
 		<>
 			<Header title='Trip Request' subtitle='View trip request or comment on trip request' />
 			<Tabs
-				onChange={handleTabsChange}
 				value='trips'
 				variant='scrollable'
 				indicatorColor='primary'

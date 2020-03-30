@@ -7,11 +7,13 @@ import { Formik } from 'formik';
 import 'regenerator-runtime/runtime';
 import { DropzoneDialog } from 'material-ui-dropzone';
 import ChipInput from 'material-ui-chip-input';
-import configureStore from '../../../redux/store';
-import AccommodationComponent from '../../../components/accommodation/create/Accommodation';
-import AddOnServiceForm from '../../../components/accommodation/create/AddOnServiceForm';
-import AmenitiesForm from '../../../components/accommodation/create/AmenitiesForm';
-import RoomsForm from '../../../components/accommodation/create/RoomsForm';
+import { act } from 'react-dom/test-utils';
+import configureStore from '../../../../redux/store';
+import AccommodationComponent from '../../../../components/accommodation/create/Accommodation';
+import AddOnServiceForm from '../../../../components/accommodation/create/AddOnServiceForm';
+import AmenitiesForm from '../../../../components/accommodation/create/AmenitiesForm';
+import RoomsForm from '../../../../components/accommodation/create/RoomsForm';
+import AccommodationsView from '../../../../views/AccommodationsView';
 
 describe('Test Not found view', () => {
 	const theme = createMuiTheme({
@@ -35,7 +37,9 @@ describe('Test Not found view', () => {
 	it('Should render Accommodation view', () => {
 		const setState = jest.fn();
 		const useStateMock = initState => [initState, setState];
-		jest.spyOn(React, 'useState').mockImplementation(useStateMock);
+		act(() => {
+			jest.spyOn(React, 'useState').mockImplementation(useStateMock);
+		});
 
 		const component = mount(
 			<Provider store={store}>
@@ -48,39 +52,40 @@ describe('Test Not found view', () => {
 		);
 		const form = component.find(Formik);
 		const onSubmitSpy = jest.spyOn(form.props(), 'onSubmit');
+		act(() => {
+			form
+				.find(DropzoneDialog)
+				.props()
+				.onSave([
+					{
+						name: '2.jpeg',
+						lastModified: 1584733590427,
+						webkitRelativePath: '',
+						size: 11676,
+						type: 'image/jpeg'
+					}
+				]);
 
-		form
-			.find(DropzoneDialog)
-			.props()
-			.onSave([
-				{
-					name: '2.jpeg',
-					lastModified: 1584733590427,
-					webkitRelativePath: '',
-					size: 11676,
-					type: 'image/jpeg'
-				}
-			]);
-
-		form.props().onSubmit({
-			name: 'HotelTest',
-			typeId: 1,
-			locationId: 1,
-			rating: 3,
-			description: 'Hotel',
-			accommodationPictures: [
-				{
-					imageUrl: 'www.link.tw',
-					subjectType: 'Hotel'
-				}
-			],
-			addOnServices: [
-				{
-					serviceName: 'Hello',
-					description: 'Tues',
-					price: 20
-				}
-			]
+			form.props().onSubmit({
+				name: 'HotelTest',
+				typeId: 1,
+				locationId: 1,
+				rating: 3,
+				description: 'Hotel',
+				accommodationPictures: [
+					{
+						imageUrl: 'www.link.tw',
+						subjectType: 'Hotel'
+					}
+				],
+				addOnServices: [
+					{
+						serviceName: 'Hello',
+						description: 'Tues',
+						price: 20
+					}
+				]
+			});
 		});
 		expect(onSubmitSpy).toBeCalled();
 	});
@@ -107,15 +112,16 @@ describe('Test Not found view', () => {
 		);
 		const form = component.find(Formik);
 		const onSubmitSpy = jest.spyOn(form.props(), 'onSubmit');
-
-		form.props().onSubmit({
-			addOnServices: [
-				{
-					serviceName: 'Hello',
-					description: 'Tues',
-					price: 20
-				}
-			]
+		act(() => {
+			form.props().onSubmit({
+				addOnServices: [
+					{
+						serviceName: 'Hello',
+						description: 'Tues',
+						price: 20
+					}
+				]
+			});
 		});
 		expect(onSubmitSpy).toBeCalled();
 	});
@@ -142,15 +148,16 @@ describe('Test Not found view', () => {
 		);
 		const form = component.find(Formik);
 		const onSubmitSpy = jest.spyOn(form.props(), 'onSubmit');
-
-		form.props().onSubmit({
-			addOnServices: [
-				{
-					serviceName: '12233',
-					description: 'T1',
-					price: 'bbb'
-				}
-			]
+		act(() => {
+			form.props().onSubmit({
+				addOnServices: [
+					{
+						serviceName: '12233',
+						description: 'T1',
+						price: 'bbb'
+					}
+				]
+			});
 		});
 		expect(onSubmitSpy).toBeCalled();
 	});
@@ -178,15 +185,16 @@ describe('Test Not found view', () => {
 		);
 		const form = component.find(Formik);
 		const onSubmitSpy = jest.spyOn(form.props(), 'onSubmit');
-
-		form.props().onSubmit({
-			addOnServices: [
-				{
-					serviceName: 'Hello',
-					description: 'Tues',
-					price: 20
-				}
-			]
+		act(() => {
+			form.props().onSubmit({
+				addOnServices: [
+					{
+						serviceName: 'Hello',
+						description: 'Tues',
+						price: 20
+					}
+				]
+			});
 		});
 		expect(onSubmitSpy).toBeCalled();
 	});
@@ -220,9 +228,10 @@ describe('Test Not found view', () => {
 			.find(ChipInput)
 			.props()
 			.onDelete('Hello');
-
-		form.props().onSubmit({
-			amenities: [{ amenity: 'swimming' }]
+		act(() => {
+			form.props().onSubmit({
+				amenities: [{ amenity: 'swimming' }]
+			});
 		});
 		expect(onSubmitSpy).toBeCalled();
 	});
@@ -256,22 +265,23 @@ describe('Test Not found view', () => {
 		);
 		const form = component.find(Formik);
 		const onSubmitSpy = jest.spyOn(form.props(), 'onSubmit');
-
-		form.props().onSubmit({
-			rooms: [
-				{
-					roomType: 'Double',
-					numberOfPeople: 2,
-					roomPictures: [
-						{
-							imageUrl: 'www.link.lnk',
-							subjectType: 'Rooms'
-						}
-					],
-					roomPrice: 6,
-					numberOfRooms: 2
-				}
-			]
+		act(() => {
+			form.props().onSubmit({
+				rooms: [
+					{
+						roomType: 'Double',
+						numberOfPeople: 2,
+						roomPictures: [
+							{
+								imageUrl: 'www.link.lnk',
+								subjectType: 'Rooms'
+							}
+						],
+						roomPrice: 6,
+						numberOfRooms: 2
+					}
+				]
+			});
 		});
 		form
 			.find(DropzoneDialog)
@@ -286,5 +296,29 @@ describe('Test Not found view', () => {
 				}
 			]);
 		expect(onSubmitSpy).toBeCalled();
+	});
+	it('Should render the AccommodationsView', () => {
+		const component = mount(
+			<Provider store={store}>
+				<ThemeProvider theme={theme}>
+					<Router>
+						<AccommodationsView />
+					</Router>
+				</ThemeProvider>
+			</Provider>
+		);
+		expect(component.length).toEqual(1);
+	});
+	it('Should render the AccommodationsView', () => {
+		const component = mount(
+			<Provider store={store}>
+				<ThemeProvider theme={theme}>
+					<Router>
+						<AccommodationsView userRole='travel_admin' />
+					</Router>
+				</ThemeProvider>
+			</Provider>
+		);
+		expect(component.length).toEqual(1);
 	});
 });

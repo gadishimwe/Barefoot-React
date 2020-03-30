@@ -153,6 +153,7 @@ const EditTrip = () => {
                         option: classes.option
                       }}
                       name='origin'
+                      test-data='origin'
                       autoHighlight
                       onChange={(event, value) => props.setFieldValue('origin', value)}
                       getOptionLabel={option => option.country}
@@ -192,6 +193,7 @@ const EditTrip = () => {
                         option: classes.option
                       }}
                       name='destination'
+                      test-data='destination'
                       onChange={(event, value) =>
                         props.setFieldValue('destination', value)
                       }

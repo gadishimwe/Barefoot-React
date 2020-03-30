@@ -5,7 +5,11 @@ import configureStore from 'redux-mock-store';
 import moxios from 'moxios';
 import axios from 'axios';
 import { FIND_TRIP_REQUESTS, FIND_TRIP_LOCATIONS } from '../../redux/actions/actionTypes';
-import { getAllTripRequests, getAllTripLocations } from '../../redux/actions/requestsAction';
+import { getAllTripRequests,
+     getAllTripLocations,
+      updateRequestStatus,
+      deleteCommentAction } from '../../redux/actions/requestsAction';
+import { updateStatus } from '../../redux/actions/getChatUsersAction';
 
 const tripsInputData = {
     status: 200,
@@ -143,5 +147,19 @@ describe('Test on trip locations actions', () => {
                 expect(store.getActions()).toEqual(expectedActions);
             },
         );
+    });
+});
+describe('Test request actions', () => {
+    it('should return changed status', () => {
+        expect(updateRequestStatus(1, 'status')).toEqual({
+            type: 'MANAGER_UPDATE_REQUEST',
+            payload: new Promise(() => 'hello')
+        });
+    });
+    it('should return deleted comment', () => {
+        expect(deleteCommentAction(1, 'status')).toEqual({
+            type: 'DELETE_COMMENT',
+            payload: new Promise(() => 'hello')
+        });
     });
 });

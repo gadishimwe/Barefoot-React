@@ -110,6 +110,7 @@ const OneWay = () => {
                         option: classes.option
                       }}
                       name='origin'
+                      test-data='origin'
                       autoHighlight
                       onChange={(event, value) =>
                         props.setFieldValue('origin', value)
@@ -151,6 +152,7 @@ const OneWay = () => {
                         option: classes.option
                       }}
                       name='destination'
+                      test-data='destination'
                       onChange={(event, value) =>
                         props.setFieldValue('destination', value)
                       }

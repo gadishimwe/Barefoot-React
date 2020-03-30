@@ -458,6 +458,7 @@ const RequestDetailsCard = () => {
                         reqStatus === 'rejected'
                       }
                       onClick={handleApproveOpen}
+                      test-data='approve'
                     >
                       {updateManagerRequestsReducer.loading ? <Loading /> : 'Approve'}
                     </Button>
@@ -473,6 +474,7 @@ const RequestDetailsCard = () => {
                         reqStatus === 'rejected'
                       }
                       onClick={handleRejectOpen}
+                      test-data='reject'
                     >
                       {updateManagerRequestsReducer.loading ? <Loading /> : 'Reject'}
                     </Button>
@@ -518,6 +520,7 @@ const RequestDetailsCard = () => {
                           fontSize: '11px'
                         }}
                         onClick={approveRequest}
+                        test-data='confirm'
                       >
                         Confirm
                       </Button>
@@ -530,6 +533,7 @@ const RequestDetailsCard = () => {
                           backgroundColor: '#D62020'
                         }}
                         onClick={handleClose}
+                        test-data='cancel'
                       >
                         Cancel
                       </Button>
@@ -552,6 +556,7 @@ const RequestDetailsCard = () => {
             label='Add a comment'
             value={comment}
             className={classes.textField}
+            test-data='input'
           />
         </div>
         <Button
@@ -560,7 +565,7 @@ const RequestDetailsCard = () => {
           color='primary'
           className={classes.button}
           disabled={!comment}
-          data-test='add-comment'
+          test-data='add-comment'
           size='small'
         >
           {commentsReducer.loading ? <Loading /> : 'Post Comment'}
@@ -591,7 +596,8 @@ const RequestDetailsCard = () => {
 											<Button
 												onClick={() => handleDelete(commentData.id)}
 												variant='outlined'
-												color='primary'
+                        color='primary'
+                        test-data='delete'
 											>
 												Delete
 											</Button>
@@ -635,7 +641,9 @@ const RequestDetailsCard = () => {
 															marginRight: '5px',
 															fontSize: '11px'
 														}}
-														onClick={deleteComment}
+                            onClick={deleteComment}
+                            test-data='confirm-delete'
+                            
 													>
 														Confirm
 													</Button>
@@ -661,7 +669,7 @@ const RequestDetailsCard = () => {
             );
           })}
         {allComments.length >= limit ? (
-          <Button onClick={viewMore} color='primary'>
+          <Button onClick={viewMore} color='primary' test-data='more'>
             Load more comments
           </Button>
         ) : (

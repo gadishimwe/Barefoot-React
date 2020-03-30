@@ -53,6 +53,7 @@ const NotificationsPopover = props => {
 								color='primary'
 								className={classes.markAsRead}
 								onClick={() => markAllAsRead()}
+								test-data='button'
 							>
 								<DoneAllIcon />
 							</IconButton>

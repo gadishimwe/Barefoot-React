@@ -5,10 +5,11 @@ import { mount } from 'enzyme';
 import mockConfigureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import { Formik } from 'formik';
-import configureStore from '../../../redux/store';
-import Accommodation from '../../../components/accommodation/booking/Accommodation';
-import AccommodationCard from '../../../components/accommodation/booking/AccommodationCard';
-import AccTabs from '../../../components/accommodation/booking/index';
+import { act } from 'react-dom/test-utils';
+import configureStore from '../../../../redux/store';
+import Accommodation from '../../../../components/accommodation/booking/Accommodation';
+import AccommodationCard from '../../../../components/accommodation/booking/AccommodationCard';
+import AccTabs from '../../../../components/accommodation/booking/index';
 
 describe('Test rendering accommodations', () => {
 	let component;
@@ -257,10 +258,12 @@ describe('Test rendering accommodations', () => {
 		done();
 	});
 	it('Should select an accommodation on click', done => {
-		component
-			.find('[test-data="acc-card"]')
-			.at(1)
-			.simulate('click');
+		act(() => {
+			component
+				.find('[test-data="acc-card"]')
+				.at(1)
+				.simulate('click');
+		});
 		expect(
 			component
 				.find('[test-data="name"]')
@@ -289,7 +292,9 @@ describe('Test rendering accommodations', () => {
 			.simulate('click');
 		const checkIn = component.find('[test-data="check-in"]').at(1);
 		const onSubmitSpy = jest.spyOn(checkIn.props().DateInputProps, 'onChange');
-		checkIn.props().DateInputProps.onChange();
+		act(() => {
+			checkIn.props().DateInputProps.onChange();
+		});
 		expect(onSubmitSpy).toBeCalled();
 		done();
 	});
@@ -300,7 +305,9 @@ describe('Test rendering accommodations', () => {
 			.simulate('click');
 		const checkOut = component.find('[test-data="check-out"]').at(1);
 		const onSubmitSpy = jest.spyOn(checkOut.props().DateInputProps, 'onChange');
-		checkOut.props().DateInputProps.onChange();
+		act(() => {
+			checkOut.props().DateInputProps.onChange();
+		});
 		expect(onSubmitSpy).toBeCalled();
 		done();
 	});
@@ -311,9 +318,11 @@ describe('Test rendering accommodations', () => {
 			.simulate('click');
 		const form = component.find(Formik);
 		const onSubmitSpy = jest.spyOn(form.props(), 'onSubmit');
-		form.props().onSubmit({
-			checkIn: new Date('2020-04-23'),
-			checkOut: new Date('2020-04-25')
+		act(() => {
+			form.props().onSubmit({
+				checkIn: new Date('2020-04-23'),
+				checkOut: new Date('2020-04-25')
+			});
 		});
 		expect(onSubmitSpy).toBeCalled();
 		done();
@@ -431,7 +440,9 @@ describe('Test accommodation tabs', () => {
 		);
 		const tabs = component.find('[test-data="tabs"]').at(1);
 		const onSubmitSpy = jest.spyOn(tabs.props(), 'onChange');
-		tabs.props().onChange();
+		act(() => {
+			tabs.props().onChange();
+		});
 		expect(onSubmitSpy).toBeCalled();
 	});
 });

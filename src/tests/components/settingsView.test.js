@@ -67,6 +67,59 @@ describe('Test Settings view', () => {
 		);
 		expect(component.length).toEqual(1);
 	});
+	it('Should render the assign-manager view', () => {
+		const match = {
+			path: '/settings/:tab',
+			url: '/settings/assign-manager',
+			isExact: true,
+			params: { tab: 'assign-manager' }
+		};
+		const history = {};
+		const store = configureStore();
+		const component = mount(
+			<Provider store={store}>
+				<ThemeProvider theme={theme}>
+					<Router>
+						<Settings history={history} match={match} />
+					</Router>
+				</ThemeProvider>
+			</Provider>
+		);
+		expect(component.length).toEqual(1);
+	});
+	it('Should render the user-role view', () => {
+		const match = {
+			path: '/settings/:tab',
+			url: '/settings/user-role',
+			isExact: true,
+			params: { tab: 'user-role' }
+		};
+		const history = [];
+		const store = configureStore();
+		const component = mount(
+			<Provider store={store}>
+				<ThemeProvider theme={theme}>
+					<Router>
+						<Settings history={history} match={match} />
+					</Router>
+				</ThemeProvider>
+			</Provider>
+		);
+		const handleTabsChange = jest.spyOn(
+			component
+				.find('[test-data="tabs"]')
+				.at(1)
+				.props(),
+			'onChange'
+		);
+		component
+			.find('[test-data="tabs"]')
+			.at(1)
+			.props()
+			.onChange();
+		expect(handleTabsChange).toBeCalled();
+		expect(component.length).toEqual(1);
+	});
 	it('Should set default settings to set profile', () => {
 		const match = {
 			path: '/settings/:tab',

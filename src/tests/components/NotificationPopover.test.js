@@ -36,11 +36,25 @@ describe('Test Not found view', () => {
 							unreadNotifications={2}
 							notifications={[]}
 							open
+							markAllAsRead={() => 'hello'}
 						/>
 					</Router>
 				</ThemeProvider>
 			</Provider>
 		);
+		const markAllAsRead = jest.spyOn(
+			component
+				.find('[test-data="button"]')
+				.at(1)
+				.props(),
+			'onClick'
+		);
+		component
+			.find('[test-data="button"]')
+			.at(1)
+			.props()
+			.onClick(1, 'other');
+		expect(markAllAsRead).toBeCalled();
 		expect(component.length).toEqual(1);
 	});
 });

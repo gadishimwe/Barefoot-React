@@ -55,7 +55,7 @@ const SendField = ({ open, setOpen, currentUser, chatUser }) => {
 
 	return (
 		<div className={classes.root}>
-			<IconButton color='primary' onClick={openEmojis}>
+			<IconButton color='primary' onClick={openEmojis} test-data='emoji'>
 				<EmojiIcon />
 			</IconButton>
 			<Paper className={classes.paper} elevation={1}>
@@ -66,9 +66,15 @@ const SendField = ({ open, setOpen, currentUser, chatUser }) => {
 					onChange={handleChange}
 					onKeyDown={ev => (ev.key === 'Enter' ? send() : null)}
 					placeholder='Type a message'
+					test-data='input'
 				/>
 			</Paper>
-			<IconButton disabled={inputValue.length === 0} color='primary' onClick={send}>
+			<IconButton
+				disabled={inputValue.length === 0}
+				color='primary'
+				onClick={send}
+				test-data='send'
+			>
 				<SendIcon />
 			</IconButton>
 		</div>

@@ -106,7 +106,11 @@ export default function AppLayout(props) {
 
 	return (
 		<>
-			<Navbar handleDrawerToggle={handleDrawerToggle} handleLogout={handleLogout} />
+			<Navbar
+				handleDrawerToggle={handleDrawerToggle}
+				handleLogout={handleLogout}
+				test-data='navbar'
+			/>
 			<div className={classes.root}>
 				<nav className={classes.drawer}>
 					<Hidden smUp implementation='css'>
@@ -130,6 +134,7 @@ export default function AppLayout(props) {
 								isLoading={uploadPic}
 								image={image}
 								handleProfilePictureChange={handleProfilePictureChange}
+								{...props}
 							/>
 						</Drawer>
 					</Hidden>
@@ -146,6 +151,8 @@ export default function AppLayout(props) {
 								isLoading={uploadPic}
 								image={image}
 								handleProfilePictureChange={handleProfilePictureChange}
+								test-data='sidebar'
+								{...props}
 							/>
 						</Drawer>
 					</Hidden>

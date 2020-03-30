@@ -257,6 +257,7 @@ const RoomsForm = allProps => {
 																			color='default'
 																			onClick={handleOpen}
 																			startIcon={<CloudUploadIcon />}
+																			test-data='button'
 																		>
 																			Images
 																		</Button>
@@ -305,7 +306,7 @@ const RoomsForm = allProps => {
 																		<IconButton
 																			style={{ marginLeft: '3px', marginTop: '0', padding: '2px' }}
 																			onClick={() => arrayHelpers.remove(index)}
-																			data-test='removeAddOnButton'
+																			test-data='removeAddOnButton'
 																		>
 																			<HighlightOffIcon fontSize='large' style={{ color: 'red' }} />
 																		</IconButton>
@@ -344,6 +345,7 @@ const RoomsForm = allProps => {
 																	]
 																})
 															}
+															test-data='add'
 														>
 															Add More
 														</Button>
@@ -362,6 +364,7 @@ const RoomsForm = allProps => {
 											className={classes.button1}
 											variant='contained'
 											color='default'
+											test-data='back'
 										>
 											Back
 										</Button>

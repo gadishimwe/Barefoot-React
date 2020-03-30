@@ -153,6 +153,7 @@ const AssignRole = () => {
 														id='assign-role'
 														name={requester.id}
 														onChange={handleChange}
+														test-data='select'
 													>
 														<option value='0'>
 															{ownManager.length === 0
@@ -199,6 +200,7 @@ const AssignRole = () => {
 					totalItems={requesters.length}
 					paginate={paginate}
 					currentPage={currentPage}
+					test-data='pagination'
 				/>
 			</div>
 		</>

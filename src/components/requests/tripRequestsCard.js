@@ -107,6 +107,7 @@ export default function TripInfoCard(props) {
                 }`
               )
             }
+            test-data='edit'
           >
             Edit Trip
           </Button>
@@ -126,6 +127,7 @@ export default function TripInfoCard(props) {
             }`
           )
         }
+        test-data='book-accommodation'
         variant='contained'
         disabled={props.status !== 'approved'}
       >

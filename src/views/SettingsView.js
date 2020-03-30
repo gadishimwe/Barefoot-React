@@ -55,6 +55,7 @@ const Settings = props => {
 				variant='scrollable'
 				indicatorColor='primary'
 				textColor='primary'
+				test-data='tabs'
 			>
 				{tabs.map(tabContent => (
 					<Tab key={tabContent.value} label={tabContent.label} value={tabContent.value} />

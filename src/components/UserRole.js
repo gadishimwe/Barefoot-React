@@ -137,6 +137,7 @@ const UserRole = () => {
 						open={open && message !== ''}
 						onClose={handleClose}
 						autoHideDuration={6000}
+						test-data='close'
 					>
 						<Alert severity='success' onClose={handleClose}>
 							{message}
@@ -183,6 +184,7 @@ const UserRole = () => {
 												id='role'
 												onChange={onChange}
 												defaultValue={user.email == newUserRole.email ? newUserRole.value : ''}
+												test-data='form'
 											>
 												<option value='0'>Select User Role</option>
 												<option value={values.manager}>Manager</option>
@@ -215,6 +217,7 @@ const UserRole = () => {
 					totalItems={users.length}
 					paginate={paginate}
 					currentPage={currentPage}
+					test-data='pagination'
 				/>
 			</div>
 		</div>

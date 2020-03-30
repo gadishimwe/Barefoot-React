@@ -211,11 +211,12 @@ const AccommodationForm = React.memo(allProps => {
 												option: classes.option
 											}}
 											name='locationId'
+											test-data='location'
 											autoHighlight
 											onChange={(event, value) => props.setFieldValue(`locationId`, value.id)}
 											getOptionLabel={option => option.country}
 											renderOption={option => (
-												<div data-test='locationId'>
+												<div>
 													<span>{countryToFlag(option.code)}</span>
 													{option.country}
 												</div>
@@ -261,6 +262,7 @@ const AccommodationForm = React.memo(allProps => {
 												color='default'
 												onClick={handleOpen}
 												startIcon={<CloudUploadIcon />}
+												test-data='button'
 											>
 												Upload Images
 											</Button>
@@ -294,6 +296,7 @@ const AccommodationForm = React.memo(allProps => {
 												setOpen(false);
 											}}
 											onClose={handleClose}
+											test-data='upload'
 										/>
 									</Grid>
 									<Grid item xs={12}>
@@ -304,6 +307,7 @@ const AccommodationForm = React.memo(allProps => {
 											onChange={(event, newValue) => {
 												props.setFieldValue('rating', newValue);
 											}}
+											test-data='rating'
 										/>
 									</Grid>
 								</Grid>

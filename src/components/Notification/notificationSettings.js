@@ -82,6 +82,7 @@ const Notifications = props => {
 				open={setNotifications.status === 'OK' && open}
 				autoHideDuration={6000}
 				onClose={handleClose}
+				test-data='snackbar'
 			>
 				<Alert severity='success' id='feedback' onClose={handleClose}>
 					Successfully updated your notification preferences.
@@ -106,6 +107,7 @@ const Notifications = props => {
 											color='primary'
 											onChange={onChangeInApp}
 											checked={String(inAppPrefs) === 'true'}
+											test-data='change-inapp'
 										/>
 									}
 									label='In-App Notifications'
@@ -116,6 +118,7 @@ const Notifications = props => {
 											color='primary'
 											onChange={onChangeEmail}
 											checked={String(emailPrefs) === 'true'}
+											test-data='change-email'
 										/>
 									}
 									label='Email Notification'
@@ -131,6 +134,7 @@ const Notifications = props => {
 						color='primary'
 						variant='contained'
 						disabled={setNotifications.loading}
+						test-data='save'
 					>
 						{setNotifications.loading ? (
 							<Loading color='secondary' thickness={6} id='loading' />

@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-import accommodationReducer from '../../../redux/reducers/AccommodationReducer';
+import accommodationReducer from '../../../../redux/reducers/AccommodationReducer';
 
 describe('Create accommodation reducer test', () => {
 	it('Get Locations is fulfilled', () => {

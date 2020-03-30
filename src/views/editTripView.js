@@ -13,14 +13,10 @@ const useStyles = makeStyles(theme => ({
 }));
 export default function EditTripView() {
   const classes = useStyles();
-  const handleTabsChange = (event, value) => {
-    history.push(value);
-  };
   return (
     <>
       <Header title='' subtitle='Edit Trip' />
       <Tabs
-        onChange={handleTabsChange}
         value='/trip/edit'
         variant='scrollable'
         indicatorColor='primary'

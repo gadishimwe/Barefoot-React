@@ -113,6 +113,7 @@ const AccommodationComponent = () => {
 						handleBack={handleBack}
 						handleNext={handleNext}
 						isLastStep={isLastStep}
+						test-data='accommodation-form'
 					/>
 				);
 			case 1:
@@ -174,7 +175,9 @@ const AccommodationComponent = () => {
 						);
 					})}
 				</Stepper>
-				<Grid className={classes.content}>{getStepContent(activeStep)}</Grid>
+				<Grid className={classes.content} test-data='steps'>
+					{getStepContent(activeStep)}
+				</Grid>
 			</div>
 		</>
 	);

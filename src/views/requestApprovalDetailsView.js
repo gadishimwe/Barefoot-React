@@ -13,14 +13,10 @@ const useStyles = makeStyles(theme => ({
 }));
 export default function RequestDetailsView() {
     const classes = useStyles();
-    const handleTabsChange = (event, value) => {
-        history.push(value);
-    };
     return (
         <>
             <Header title='' subtitle='Request Details' />
             <Tabs
-                onChange={handleTabsChange}
                 value='/manager/request-details'
                 variant='scrollable'
                 indicatorColor='primary'

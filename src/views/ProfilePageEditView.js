@@ -161,7 +161,7 @@ export default function ProfilePageEditView(props) {
             ''
           )}
         <br />
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} test-data='form'>
           <div style={{ display: 'flex', textAlign: 'center', marginBottom: '10px' }}>
             <div style={{ width: '100%', margin: 'auto' }}>
               <TextField
@@ -211,6 +211,7 @@ export default function ProfilePageEditView(props) {
                   native
                   label='gender-input'
                   className='gender'
+                  test-data='gender'
                   onChange={handleGenderChange}
                   labelWidth={labelWidth}
                   inputProps={{
@@ -245,6 +246,7 @@ export default function ProfilePageEditView(props) {
                 <Select
                   native
                   className='currency'
+                  test-data='currency'
                   onChange={handleCurrencyChange}
                   labelWidth={labelWidth}
                   inputProps={{
@@ -279,6 +281,7 @@ export default function ProfilePageEditView(props) {
                 <Select
                   native
                   className='language'
+                  test-data='language'
                   onChange={handleLanguageChange}
                   labelWidth={labelWidth}
                   inputProps={{
@@ -309,6 +312,7 @@ export default function ProfilePageEditView(props) {
               <CountrySelect
                 size='small'
                 className='countries'
+                test-data='countries'
                 countryChangeFn={handleResidenceChange}
                 inputProps={{
                   name: 'residence',
@@ -322,6 +326,7 @@ export default function ProfilePageEditView(props) {
               style={{ width: '100%', margin: 'auto' }}
               className='birthDate'
               onChange={handleBirthDateChange}
+              test-data='birthday'
             >
               <TextField
                 label='Birthday'

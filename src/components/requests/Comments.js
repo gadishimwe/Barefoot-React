@@ -201,6 +201,7 @@ const Comments = () => {
 						label='Add a comment'
 						value={comment}
 						className={classes.textField}
+						test-data='input'
 					/>
 				</Grid>
 			</Grid>
@@ -249,6 +250,7 @@ const Comments = () => {
 												onClick={() => handleDelete(commentData.id)}
 												variant='outlined'
 												color='primary'
+												test-data='delete'
 											>
 												Delete
 											</Button>
@@ -265,6 +267,7 @@ const Comments = () => {
 												height: '200px',
 												margin: 'auto'
 											}}
+											test-data='close'
 										>
 											<div
 												style={{
@@ -293,6 +296,7 @@ const Comments = () => {
 															fontSize: '11px'
 														}}
 														onClick={deleteComment}
+														test-data='confirm-delete'
 													>
 														Confirm
 													</Button>
@@ -318,7 +322,7 @@ const Comments = () => {
 						);
 				  })}
 			{allComments.length >= limit ? (
-				<Button onClick={viewMore} color='primary'>
+				<Button onClick={viewMore} color='primary' test-data='more'>
 					Load more comments
 				</Button>
 			) : (

@@ -64,4 +64,37 @@ describe('Update Profile Reducer Test ', () => {
 			loading: true
 		});
 	});
+	it('should return updated profile', () => {
+		expect(
+			profileReducer(undefined, {
+				type: 'UPDATE_PROFILE_REJECTED',
+				payload: { response: { message: 'error' } }
+			})
+		).toEqual({
+			userData: {
+				gender: 'M',
+				residence: 'Rwanda',
+				preferredLanguage: 'english',
+				preferredCurrency: 'Dollar',
+				birthDate: '1990-01-01',
+				profilePicture: 'dnjsfhbnjdsfhbfdjnskdjshj'
+			},
+			error: 'error',
+			loading: false,
+			message: ''
+		});
+	});
+	it('should return updated profile', () => {
+		expect(
+			profileReducer(undefined, {
+				type: 'UPDATE_PROFILE_FULFILLED',
+				payload: { data: { data: { data: 'data' }, message: 'message' } }
+			})
+		).toEqual({
+			userData: { data: 'data' },
+			error: {},
+			loading: false,
+			message: 'message'
+		});
+	});
 });

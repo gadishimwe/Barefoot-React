@@ -57,7 +57,7 @@ describe('Test on inputs validations', () => {
         const store = mockConfigureStore([thunk])({
             oneWayTripReducer:{
                 locations:[],
-                messages:'Trip request is successfully created'
+                messages:['Trip request is successfully created']
             }
         });
         const component = mount(
@@ -65,6 +65,84 @@ describe('Test on inputs validations', () => {
                 <OneWay />
             </Provider>
         );
+        const handleChange = jest.spyOn(
+			component
+				.find('[test-data="origin"]')
+				.at(1)
+				.props(),
+			'onChange'
+		);
+		component
+			.find('[test-data="origin"]')
+			.at(1)
+			.props()
+			.onChange();
+		const getOptionLabel = jest.spyOn(
+			component
+				.find('[test-data="origin"]')
+				.at(1)
+				.props(),
+			'getOptionLabel'
+		);
+		component
+			.find('[test-data="origin"]')
+			.at(1)
+			.props()
+			.getOptionLabel({ country: 'country' });
+		const renderOption = jest.spyOn(
+			component
+				.find('[test-data="origin"]')
+				.at(1)
+				.props(),
+			'renderOption'
+		);
+		component
+			.find('[test-data="origin"]')
+			.at(1)
+			.props()
+			.renderOption({ code: 'RW' });
+		const handleChange2 = jest.spyOn(
+			component
+				.find('[test-data="destination"]')
+				.at(1)
+				.props(),
+			'onChange'
+		);
+		component
+			.find('[test-data="destination"]')
+			.at(1)
+			.props()
+			.onChange();
+		const getOptionLabel2 = jest.spyOn(
+			component
+				.find('[test-data="destination"]')
+				.at(1)
+				.props(),
+			'getOptionLabel'
+		);
+		component
+			.find('[test-data="destination"]')
+			.at(1)
+			.props()
+			.getOptionLabel({ country: 'country' });
+		const renderOption2 = jest.spyOn(
+			component
+				.find('[test-data="destination"]')
+				.at(1)
+				.props(),
+			'renderOption'
+		);
+		component
+			.find('[test-data="destination"]')
+			.at(1)
+			.props()
+			.renderOption({ code: 'RW' });
+		expect(handleChange).toBeCalled();
+		expect(renderOption).toBeCalled();
+		expect(getOptionLabel).toBeCalled();
+		expect(handleChange2).toBeCalled();
+		expect(renderOption2).toBeCalled();
+		expect(getOptionLabel2).toBeCalled();
         expect(component.find(Alert).text()).toEqual('*Trip request is successfully created');
     });
 })

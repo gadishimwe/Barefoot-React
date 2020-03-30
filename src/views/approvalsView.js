@@ -82,11 +82,6 @@ export default function ApprovalsTable({ history }) {
   }));
 
   const classes = useStyles();
-  const theme = useTheme();
-
-  const handleTabsChange = (event, value) => {
-    history.push(value);
-  };
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getManagerRequests());
@@ -143,8 +138,9 @@ export default function ApprovalsTable({ history }) {
           className={classes.searchInput}
           disableUnderline
           placeholder='Search request by name or status...'
+          test-data='search'
         />
-        <SearchIcon onClick={handleclick} className={classes.searchIcon} />
+        <SearchIcon onClick={handleclick} className={classes.searchIcon} test-data='search-icon' />
       </Paper>
       {
         searchReducer.error && (
@@ -152,7 +148,6 @@ export default function ApprovalsTable({ history }) {
         )
       }
       <Tabs
-        onChange={handleTabsChange}
         value='manager/requests'
         variant='scrollable'
         indicatorColor='primary'
@@ -257,6 +252,7 @@ export default function ApprovalsTable({ history }) {
               paginate={paginate}
               style={{ margin: 'auto' }}
               currentPage={currentPage}
+              test-data='pagination'
             />
           </Grid>
         ) : (
@@ -274,6 +270,7 @@ export default function ApprovalsTable({ history }) {
               paginate={paginateSearch}
               style={{ margin: 'auto' }}
               currentPage={currentSearchPage}
+              test-data='pagination-search'
             />
           </Grid>
         )

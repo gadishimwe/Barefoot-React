@@ -47,4 +47,15 @@ describe('Test the reducers and actions', () => {
       messages: 'trip created'
     });
   });
+  it('should display errors from backend', () => {
+    expect(
+      reducer(undefined, {
+        type: 'CREATE_ONE_WAY_TRIP_PENDING'
+      })
+    ).toEqual({
+      ...initialState,
+      messages: '',
+      loading: true
+    });
+  });
 });

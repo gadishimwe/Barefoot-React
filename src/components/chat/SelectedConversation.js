@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-expressions */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { useEffect, useState } from 'react';
@@ -98,7 +99,9 @@ const useStyles = makeStyles(theme => ({
 	}
 }));
 const scrollBottom = () => {
-	document.querySelector('#conv').scrollIntoView({ behavior: 'smooth', block: 'end' });
+	document.querySelector('#conv')
+		? document.querySelector('#conv').scrollIntoView({ behavior: 'smooth', block: 'end' })
+		: null;
 };
 const emojis = {
 	smileys:
@@ -169,7 +172,11 @@ const SelectedConversation = ({ conversation, currentUser, className, ...rest })
 	return (
 		<div {...rest} className={clsx(classes.root, className)}>
 			<Toolbar {...rest} className={classes.toolbar}>
-				<IconButton className={classes.backButton} onClick={() => dispatch(resetSelected())}>
+				<IconButton
+					className={classes.backButton}
+					onClick={() => dispatch(resetSelected())}
+					test-data='back'
+				>
 					<KeyboardBackspaceIcon />
 				</IconButton>
 				<div className={classes.user}>
@@ -234,7 +241,7 @@ const SelectedConversation = ({ conversation, currentUser, className, ...rest })
 					<p className={classes.emojiTitle}>Smileys</p>
 					<div className={classes.emojiWrapper}>
 						{[...Array.from(emojis.smileys)].map((emoji, i) => (
-							<span key={i} className={classes.emojis} onClick={insertEmoji}>
+							<span key={i} className={classes.emojis} onClick={insertEmoji} test-data='emoji'>
 								{ReactEmoji.emojify(emoji)}
 							</span>
 						))}
