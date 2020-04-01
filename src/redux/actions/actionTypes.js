@@ -40,3 +40,4 @@ export const SET_INPUT = 'SET_INPUT';
 export const UNSET_INPUT = 'UNSET_INPUT';
 export const SEARCH = 'SEARCH';
 export const UPDATE_STATUS = 'UPDATE_STATUS';
+export const TRIP_STATS = 'TRIP_STATS';

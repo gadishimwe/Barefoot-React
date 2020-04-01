@@ -20,3 +20,8 @@ export const deleteComment = async (tripId, commentId, subjectType) => {
     const result = await http.delete(`/api/trips/${tripId}/comments/${commentId}`, { data: { subjectType } });
     return result;
 }
+
+export const getTripStats = () => {
+    const result = http.get('/api/trips/stats');
+    return result;
+}

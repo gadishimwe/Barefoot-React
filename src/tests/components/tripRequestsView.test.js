@@ -72,7 +72,10 @@ describe('Test Not found view', () => {
       },
       searchReducer: {
         data: []
-      }
+      },
+      tripStatsReducer: {
+        data: []
+      } 
 		});
     const component = mount(
       <Provider store={store}>
@@ -118,6 +121,14 @@ describe('Test Not found view', () => {
         }]}],
         error: 'error',
         loading: true
+      },
+      tripStatsReducer: {
+        data: [
+          {
+            tripType: 'one-way',
+            count: 1
+          }
+        ]
       }
 		});
     const component = mount(

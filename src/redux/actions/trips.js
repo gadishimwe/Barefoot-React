@@ -1,6 +1,7 @@
 /* eslint-disable prettier/prettier */
 import httpService from '../../services/httpService';
-import { CREATE_TRIP, CREATE_ONE_WAY_TRIP, CREATE_RETURN_TRIP  } from './actionTypes';
+import { CREATE_TRIP, CREATE_ONE_WAY_TRIP, CREATE_RETURN_TRIP, TRIP_STATS  } from './actionTypes';
+import { getTripStats } from '../../services/tripRequestsService';
 
 export const formatDate = dt => {
   const month = `0${dt.getMonth() + 1}`.slice(-2);
@@ -51,3 +52,10 @@ export const createReturnTrip = values => {
     payload: httpService.post('/api/trips/return', returnTripRequest)
   };
 };
+
+export const tripStatsAction = () => {
+  return {
+    type: TRIP_STATS,
+    payload: getTripStats()
+  }
+}

@@ -20,6 +20,7 @@ import updateTripReducer from './editTripReducer';
 import accommodationReducer from './AccommodationReducer';
 import chatReducer from './chatReducer';
 import searchReducer from './searchReducer';
+import tripStatsReducer from './tripStatsReducer';
 
 export default combineReducers({
 	auth: loginReducer,
@@ -42,5 +43,6 @@ export default combineReducers({
 	updateTripReducer,
 	accommodationReducer,
 	chatReducer,
-	searchReducer
+	searchReducer,
+	tripStatsReducer
 });

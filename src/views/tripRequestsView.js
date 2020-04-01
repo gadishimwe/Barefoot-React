@@ -18,6 +18,7 @@ import Pagination from '../components/common/Pagination';
 import Header from '../components/common/SettingsHeader';
 import searchAction from '../redux/actions/searchAction';
 import Loading from '../components/common/loading';
+import { tripStatsAction } from '../redux/actions/trips';
 
 const drawerWidth = 240;
 export default function TripRequests({ history} ) {
@@ -80,6 +81,32 @@ export default function TripRequests({ history} ) {
     },
     searchButton: {
       marginLeft: theme.spacing(2)
+    },
+    statsGrid: {
+      minHeight: 70,
+      margin: 'auto',
+      marginBottom: 10,
+      display: 'Grid',
+      gridTemplateColumns: 'auto auto auto',
+      gridGap: 10
+    },
+    statsOneWay: {
+      textAlign: 'center',
+      backgroundColor: '#348722',
+      color: 'white',
+      fontWeight: 'bold'
+    },
+    statsReturn: {
+      textAlign: 'center',
+      backgroundColor: '#ba983a',
+      color: 'white',
+      fontWeight: 'bold'
+    },
+    statsMultiCity: {
+      textAlign: 'center',
+      backgroundColor: '#3a8dba',
+      color: 'white',
+      fontWeight: 'bold'
     }
   }));
 
@@ -100,7 +127,40 @@ export default function TripRequests({ history} ) {
 
   useEffect(() => {
     dispatch(getAllTripRequests());
+    dispatch(tripStatsAction());
   }, []);
+
+  const tripStats = useSelector(state => state.tripStatsReducer);
+  const stats = [...tripStats.data];
+  
+  let oneWayExist;
+  let returnExist;
+  let multiCityExist;
+  if (stats.length > 0) {
+    oneWayExist = stats.some(trip => trip.tripType === 'one-way');
+    returnExist = stats.some(trip => trip.tripType === 'return-trip');
+    multiCityExist = stats.some(trip => trip.tripType === 'multi-city');
+  }
+
+  let oneWayTrip;
+  let returnTrip; 
+  let multiCityTrip; 
+  if (stats.length > 0) {
+    if (oneWayExist) {
+      const oneWay = stats.find(trip => trip.tripType === 'one-way');
+      oneWayTrip = oneWay.count;
+    }
+
+    if (returnExist) {
+      const retur = stats.find(trip => trip.tripType === 'return-trip');
+      returnTrip = retur.count;
+    }
+
+    if (multiCityExist) {
+      const multiCity = stats.find(trip => trip.tripType === 'multi-city');
+      multiCityTrip = multiCity.count;
+    }
+  }
 
   const locationsList = useSelector(state => state.tripLocationsReducer);
   const allLocations = [...locationsList.data];
@@ -161,7 +221,7 @@ export default function TripRequests({ history} ) {
 							onChange={handleChange}
 							className={classes.searchInput}
 							disableUnderline
-              placeholder='Search trip by country, departure date or status...'
+              placeholder='Search trip by country, departure date (YYYY-MM-DD) or status...'
               test-data='search'
 						/>
 						<SearchIcon onClick={handleclick} className={classes.searchIcon} test-data='search-icon' />
@@ -180,6 +240,34 @@ export default function TripRequests({ history} ) {
         {
           searchReducer.loading ? <Loading /> : '' 
         }
+        <h4>Trips made by Trip Type</h4>
+        <Grid className={classes.statsGrid}>
+          <Paper className={classes.statsOneWay}>
+            <span>One Way Trip</span>
+            <p>
+              Number of Trips:
+              &nbsp;
+              {!oneWayTrip ? 0 : oneWayTrip}
+            </p>
+          </Paper>
+          <Paper className={classes.statsReturn}>
+            <span>Return Trip</span>
+            <p>
+              Number of Trips:
+              &nbsp;
+              {!returnTrip ? 0 : returnTrip}
+            </p>
+          </Paper>
+          <Paper className={classes.statsMultiCity}>
+            <span>Multi city Trip</span>
+            <p>
+              Number of Trips:
+              &nbsp;
+              {!multiCityTrip ? 0 : multiCityTrip}
+            </p>
+          </Paper>
+        </Grid>
+        
         <Grid
           container
           direction="row"
