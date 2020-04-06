@@ -1,7 +1,7 @@
 # Barefoot Nomad(The Spinners) -- frontend
 
 [![Coverage Status](https://coveralls.io/repos/github/gadishimwe/Barefoot-React/badge.svg?branch=develop)](https://coveralls.io/github/gadishimwe/Barefoot-React?branch=develop)
-[![Build Status](https://travis-ci.org/Barefoot-React.svg?branch=develop)](https://travis-ci.org/Barefoot-React)
+[![Build Status](https://travis-ci.org/gadishimwe/Barefoot-React.svg?branch=develop)](https://travis-ci.org/gadishimwe/Barefoot-React)
 ## Usage example
 
 >This App will be the center piece for travelling. 
