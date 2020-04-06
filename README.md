@@ -1,7 +1,7 @@
 # Barefoot Nomad(the Spinners) -- frontend
 
 [![Coverage Status](https://coveralls.io/repos/github/andela/the_spinners-frontend/badge.svg?branch=develop)](https://coveralls.io/github/andela/the_spinners-frontend?branch=develop)
-[![Build Status](https://travis-ci.org/andela/the_spinners-frontend.svg?branch=develop)](https://travis-ci.org/andela/the_spinners-frontend)
+[![Build Status](https://travis-ci.org/andela/Barefoot-React.svg?branch=develop)](https://travis-ci.org/Barefoot-React)
 ## Usage example
 
 >This App will be the center piece for travelling. 
