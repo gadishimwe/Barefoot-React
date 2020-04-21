@@ -2,6 +2,9 @@
 
 [![Coverage Status](https://coveralls.io/repos/github/gadishimwe/Barefoot-React/badge.svg?branch=develop)](https://coveralls.io/github/gadishimwe/Barefoot-React?branch=develop)
 [![Build Status](https://travis-ci.org/gadishimwe/Barefoot-React.svg?branch=develop)](https://travis-ci.org/gadishimwe/Barefoot-React)
+[![Maintainability](https://api.codeclimate.com/v1/badges/2b824b136b305fcc893e/maintainability)](https://codeclimate.com/github/gadishimwe/Barefoot-React/maintainability)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+
 ## Usage example
 
 >This App will be the center piece for travelling. 
