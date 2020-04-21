@@ -7,6 +7,5 @@ cache:
 install:
   - npm install
 script:
-  - npm test -- --coverage -u
-after_script:
-  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
+  - npm test -- -u
+  - npm run coveralls
